@@ -13,8 +13,9 @@ import path from 'path';
 class ExternalDataService {
   
   constructor() {
-    this.weatherApiKey = 'e0c1e33b4fd3829c32efac10c80642c3';
-    this.weatherApiUrl = 'https://weatherstack.com/dashboard';
+    // Switch to OpenWeatherMap API
+    this.weatherApiKey = process.env.WEATHER_API_KEY || '1efecea6037395ce7bd137b9113cbe3a';
+    this.weatherApiUrl = 'http://api.openweathermap.org/data/2.5/weather';
     this.cyberjayanTransportData = null; // Cache for transport data
   }
 
@@ -28,17 +29,17 @@ class ExternalDataService {
       
       const response = await axios.get(this.weatherApiUrl, {
         params: {
-          q: 'Cyberjaya,my',
+          q: 'Cyberjaya,Malaysia',
           appid: this.weatherApiKey,
-          units: 'metric'
+          units: 'metric' // Get temperature in Celsius
         },
         timeout: 5000
       });
 
       const weatherData = response.data;
-      const temp = weatherData.main.temp;
+      const temp = Math.round(weatherData.main.temp);
       const humidity = weatherData.main.humidity;
-      const condition = weatherData.weather[0].main;
+      const condition = weatherData.weather[0].description;
       const description = weatherData.weather[0].description;
 
       // Calculate weather impact score (0-100)
@@ -149,7 +150,12 @@ class ExternalDataService {
         congestionLevel: congestionLevel,
         impactScore: impactScore,
         peakHour: this.isPeakHour(currentHour),
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        // Include data source information from Kaggle integration
+        dataSource: transportData.dataSource || { provider: 'simulated', isRealData: false },
+        // Include enhanced data for Prophet integration
+        realTimeMetrics: transportData.realTimeMetrics || null,
+        busRoutes: transportData.busRoutes || []
       };
 
     } catch (error) {
@@ -161,10 +167,113 @@ class ExternalDataService {
   }
 
   /**
-   * Load or simulate Cyberjaya transportation data
-   * @returns {Object} Transportation patterns and data
+   * Load real Cyberjaya transportation data from Kaggle API
+   * @returns {Object} Real transportation patterns and data
    */
   async loadCyberjayanTransportData() {
+    try {
+      console.log('⚡ Fetching real transportation data from Kaggle API...');
+      
+      // Call the Python Kaggle service
+      const { exec } = await import('child_process');
+      const path = await import('path');
+      const { fileURLToPath } = await import('url');
+      
+      const __filename = fileURLToPath(import.meta.url);
+      const __dirname = path.dirname(__filename);
+      const pythonServicePath = path.join(__dirname, '..', 'python', 'kaggle_transport_service.py');
+      
+      return new Promise((resolve, reject) => {
+        exec(`python "${pythonServicePath}" --action=fetch --format=json`, {
+          cwd: path.join(__dirname, '..', 'python'),
+          timeout: 30000 // 30 second timeout
+        }, (error, stdout, stderr) => {
+          if (error) {
+            console.error('❌ Kaggle transport service error:', error.message);
+            console.error('stderr:', stderr);
+            // Fallback to simulated data if Kaggle fails
+            resolve(this.getSimulatedTransportData());
+            return;
+          }
+          
+          try {
+            const kaggleData = JSON.parse(stdout);
+            console.log('✅ Successfully loaded Kaggle transportation data');
+            console.log(`   📊 Data Summary: Bus ${kaggleData.bus_availability}%, Congestion ${kaggleData.congestion_level}%`);
+            
+            // Convert Kaggle data format to ProfitHive format
+            const transformedData = this.transformKaggleData(kaggleData);
+            resolve(transformedData);
+            
+          } catch (parseError) {
+            console.error('❌ Failed to parse Kaggle service output:', parseError.message);
+            console.error('Raw output:', stdout);
+            resolve(this.getSimulatedTransportData());
+          }
+        });
+      });
+      
+    } catch (error) {
+      console.error('❌ Error loading Kaggle transportation data:', error.message);
+      return this.getSimulatedTransportData();
+    }
+  }
+  
+  /**
+   * Transform Kaggle API data to ProfitHive format
+   * @param {Object} kaggleData - Raw data from Kaggle service
+   * @returns {Object} Transformed data in ProfitHive format
+   */
+  transformKaggleData(kaggleData) {
+    try {
+      const currentHour = new Date().getHours();
+      
+      return {
+        busRoutes: kaggleData.bus_routes || [],
+        busAvailability: kaggleData.bus_availability || 75,
+        trainServices: kaggleData.ride_sharing_stats || {},
+        congestionLevel: kaggleData.congestion_level || 35,
+        impactScore: kaggleData.impact_score || 75,
+        isPeakHour: kaggleData.peak_hour || false,
+        peakHours: kaggleData.peak_patterns?.all_peaks || [7, 8, 9, 12, 13, 17, 18, 19],
+        realTimeMetrics: {
+          busServiceLevel: kaggleData.bus_availability,
+          rideServiceLevel: kaggleData.train_frequency, // Using ride-sharing as proxy
+          congestionIndex: kaggleData.congestion_level,
+          overallScore: kaggleData.impact_score
+        },
+        dataSource: {
+          provider: 'kaggle_api',
+          dataset: kaggleData.dataset || 'shahmirvarqha/transportation-in-cyberjaya-malaysia',
+          isRealData: kaggleData.real_data || false,
+          timestamp: kaggleData.timestamp,
+          recordsProcessed: kaggleData.data_summary || {}
+        },
+        // Legacy format for backward compatibility
+        trainLines: [
+          { line: 'KLIA_Ekspres', frequency: 20, reliability: 95 },
+          { line: 'KLIA_Transit', frequency: 30, reliability: 92 }
+        ],
+        peakHours: {
+          morning: { start: 7, end: 9, congestionMultiplier: 1.8 },
+          evening: { start: 17, end: 19, congestionMultiplier: 1.6 },
+          lunch: { start: 12, end: 14, congestionMultiplier: 1.3 }
+        },
+        weekendReduction: 0.7,
+        techWorkerPatterns: true
+      };
+      
+    } catch (error) {
+      console.error('❌ Error transforming Kaggle data:', error.message);
+      return this.getSimulatedTransportData();
+    }
+  }
+  
+  /**
+   * Fallback simulated transportation data (used when Kaggle API fails)
+   * @returns {Object} Simulated transportation patterns and data
+   */
+  getSimulatedTransportData() {
     // Since we can't access the Kaggle dataset directly, we'll simulate
     // realistic Cyberjaya transportation patterns based on known characteristics
     
@@ -184,14 +293,26 @@ class ExternalDataService {
         lunch: { start: 12, end: 14, congestionMultiplier: 1.3 }
       },
       weekendReduction: 0.7, // 30% less traffic on weekends
-      techWorkerPatterns: true // Cyberjaya-specific tech worker commute patterns
+      techWorkerPatterns: true, // Cyberjaya-specific tech worker commute patterns
+      dataSource: {
+        provider: 'simulated',
+        isRealData: false,
+        note: 'Using fallback simulated data'
+      }
     };
   }
 
   /**
-   * Calculate bus availability percentage based on time and patterns
+   * Calculate bus availability percentage based on time and patterns (Enhanced for Kaggle data)
    */
   calculateBusAvailability(hour, day, transportData) {
+    // If we have real Kaggle data, use it directly
+    if (transportData.busAvailability !== undefined) {
+      console.log(`🚌 Using real Kaggle bus availability data: ${transportData.busAvailability}%`);
+      return Math.round(transportData.busAvailability);
+    }
+    
+    // Fallback to calculated method for simulated data
     let baseAvailability = 75; // Base availability percentage
     
     // Peak hour adjustments
@@ -210,9 +331,16 @@ class ExternalDataService {
   }
 
   /**
-   * Calculate train frequency percentage
+   * Calculate train frequency percentage (Enhanced for Kaggle data)
    */
   calculateTrainFrequency(hour, day, transportData) {
+    // If we have real Kaggle data, use the ride-sharing service level as proxy for train frequency
+    if (transportData.realTimeMetrics && transportData.realTimeMetrics.rideServiceLevel !== undefined) {
+      console.log(`🚊 Using real Kaggle ride service data as train proxy: ${transportData.realTimeMetrics.rideServiceLevel}%`);
+      return Math.round(transportData.realTimeMetrics.rideServiceLevel);
+    }
+    
+    // Fallback to calculated method for simulated data
     let baseFrequency = 80; // Base frequency percentage
     
     // Peak hour adjustments
@@ -231,9 +359,16 @@ class ExternalDataService {
   }
 
   /**
-   * Calculate traffic congestion level
+   * Calculate traffic congestion level (Enhanced for Kaggle data)
    */
   calculateCongestionLevel(hour, day, transportData) {
+    // If we have real Kaggle data, use it directly
+    if (transportData.congestionLevel !== undefined) {
+      console.log(`🚗 Using real Kaggle congestion data: ${transportData.congestionLevel}%`);
+      return Math.round(transportData.congestionLevel);
+    }
+    
+    // Fallback to calculated method for simulated data
     let baseCongestion = 30; // Base congestion level
     
     // Peak hour impacts

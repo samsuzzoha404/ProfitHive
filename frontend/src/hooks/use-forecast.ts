@@ -242,7 +242,8 @@ export const useForecast = (): UseForecastReturn => {
       predictions,
       summary, 
       weather_impact_summary, 
-      transport_impact_summary 
+      transport_impact_summary,
+      ai_insights 
     } = state.data;
 
     // Handle both legacy 'forecast' and new 'predictions' field names
@@ -266,8 +267,20 @@ export const useForecast = (): UseForecastReturn => {
     }));
 
     // Enhanced insights with weather and transport correlations
-    const baseInsights = forecastData.map(entry => entry.short_insight || 'Forecast generated');
-    const enhancedInsights = [summary || 'Demand forecast completed'];
+    const baseInsights = forecastData.map(entry => entry.short_insight || 'Forecast generated').filter(Boolean);
+    const enhancedInsights: string[] = [];
+    
+    // Handle different response formats
+    if (typeof summary === 'string') {
+      enhancedInsights.push(summary);
+    } else if (summary && typeof summary === 'object') {
+      enhancedInsights.push('Demand forecast completed');
+    }
+
+    // Add AI insights if available (Prophet format)
+    if (ai_insights && ai_insights.detailed && Array.isArray(ai_insights.detailed)) {
+      enhancedInsights.push(...ai_insights.detailed.filter(insight => typeof insight === 'string'));
+    }
     
     // Add weather impact insights
     if (weather_impact_summary && weather_impact_summary.trim()) {
@@ -280,8 +293,8 @@ export const useForecast = (): UseForecastReturn => {
     }
     
     // Add specific correlation insights
-    const weatherImpact = forecastData[0]?.weather_impact || 0;
-    const transportImpact = forecastData[0]?.transport_impact || 0;
+    const weatherImpact = state.data.weatherImpact?.impactScore || 0;
+    const transportImpact = state.data.transportImpact?.impactScore || 0;
     
     if (Math.abs(weatherImpact) > 5) {
       if (weatherImpact > 0) {
@@ -316,9 +329,9 @@ export const useForecast = (): UseForecastReturn => {
     const avgCustomers = Math.round(forecastData.reduce((sum, entry) => sum + getCustomersValue(entry), 0) / forecastData.length);
     const avgConfidence = Math.round(forecastData.reduce((sum, entry) => sum + entry.confidence, 0) / forecastData.length);
     
-    // Calculate impact KPIs from enhanced forecast data
-    const avgWeatherImpact = forecastData[0]?.weather_impact || 0;
-    const avgTransportImpact = forecastData[0]?.transport_impact || 0;
+    // Calculate impact KPIs from enhanced forecast data - get from root level response
+    const avgWeatherImpact = state.data.weatherImpact?.impactScore || 0;
+    const avgTransportImpact = state.data.transportImpact?.impactScore || 0;
     
     // Find peak sales day
     const peakEntry = forecastData.length > 0 ? forecastData.reduce((peak, entry) => {

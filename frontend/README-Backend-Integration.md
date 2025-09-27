@@ -294,6 +294,327 @@ if (result.success) {
 }
 ```
 
+## 🔮 Facebook Prophet Time Series Forecasting
+
+The platform now includes advanced **Facebook Prophet** time-series forecasting integration for superior prediction accuracy with external regressors.
+
+### 🌟 Prophet Features
+
+- ✅ **Advanced Time Series**: Facebook Prophet for professional-grade forecasting
+- ✅ **External Regressors**: Weather, transport, and foot traffic impact integration
+- ✅ **Model Persistence**: Trained models saved per retailer for performance
+- ✅ **Intelligent Caching**: 10-minute forecast caching with automatic invalidation
+- ✅ **Fallback System**: Automatic fallback to enhanced AI if Prophet fails
+- ✅ **Performance Optimized**: Concurrent processing with timeout handling
+
+### 🛠️ Prophet Setup
+
+#### 1. Install Python Dependencies
+
+```bash
+# Navigate to backend directory
+cd backend
+
+# Install required Python packages
+pip install prophet pandas numpy joblib
+
+# Or using conda (recommended)
+conda install -c conda-forge prophet pandas numpy joblib
+```
+
+#### 2. Environment Configuration
+
+```bash
+# Set Python executable path (optional)
+export PYTHON_PATH="python3"  # or "conda run -n your_env python" for conda
+
+# For Windows PowerShell
+$env:PYTHON_PATH = "python3"
+```
+
+### 📊 Prophet API Usage
+
+#### Basic Prophet Forecast
+
+```javascript
+// POST /api/forecast with Prophet enabled
+const prophetRequest = {
+  store: "Tech Cafe Prophet",
+  city: "Cyberjaya",
+  retailerId: "prophet_001",
+  records: [
+    { date: "2025-09-01", sales_rm: 2100, customers: 105 },
+    { date: "2025-09-02", sales_rm: 2350, customers: 118 },
+    // ... at least 10 historical records
+  ],
+  use_prophet: true,        // Force Prophet usage
+  predict_periods: 14       // Forecast 14 days
+};
+
+const response = await fetch('/api/forecast', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(prophetRequest)
+});
+
+const forecast = await response.json();
+console.log('Prophet Forecast:', forecast);
+```
+
+#### Prophet with External Regressors
+
+```javascript
+// Enhanced forecast with external impacts
+const enhancedRequest = {
+  store: "Smart Mall Cafe",
+  city: "Cyberjaya",
+  retailerId: "prophet_enhanced_001",
+  records: [...], // Historical sales data
+  
+  // Weather impact regressor
+  weatherImpact: {
+    impact: {
+      temperature: 32,
+      condition: 'sunny',
+      score: 0.85
+    }
+  },
+  
+  // Transport accessibility regressor
+  transportImpact: {
+    impact: {
+      accessibility: 90,
+      score: 0.90
+    }
+  },
+  
+  // Foot traffic regressor
+  footTrafficImpact: {
+    impact: {
+      level: 85,
+      popular_times: [
+        { hour: 12, level: 95 },
+        { hour: 13, level: 90 },
+        { hour: 18, level: 80 }
+      ]
+    }
+  },
+  
+  use_prophet: true,
+  predict_periods: 7
+};
+```
+
+#### Manual Model Training
+
+```javascript
+// POST /api/prophet/train - Admin endpoint
+const trainingRequest = {
+  retailerId: "my_retailer_001",
+  history: [
+    { date: "2025-01-01", sales_rm: 2000, customers: 100 },
+    { date: "2025-01-02", sales_rm: 2150, customers: 108 },
+    // ... minimum 10 records for training
+  ]
+};
+
+const trainingResult = await fetch('/api/prophet/train', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(trainingRequest)
+});
+```
+
+### 🗄️ Cache Management
+
+```javascript
+// Get cache statistics
+const cacheStats = await fetch('/api/prophet/cache/stats');
+console.log(await cacheStats.json());
+
+// Clear Prophet cache
+const clearResult = await fetch('/api/prophet/cache', { method: 'DELETE' });
+console.log(await clearResult.json());
+```
+
+### 🧪 Testing Prophet Integration
+
+#### Run Integration Tests
+
+```bash
+# Navigate to backend
+cd backend
+
+# Run Prophet integration tests
+node services/test_prophet_integration.js
+```
+
+#### Run API Examples
+
+```bash
+# Start the server first
+npm start
+
+# In another terminal, run examples
+node prophet_api_examples.js
+```
+
+#### Test Data Format
+
+```json
+{
+  "retailer_id": "test_retailer_001",
+  "history": [
+    {
+      "ds": "2025-09-01",
+      "y": 2100.50,
+      "weather_score": 0.8,
+      "transport_score": 0.9,
+      "foot_traffic_score": 0.7
+    }
+  ],
+  "predict_periods": 14,
+  "freq": "D"
+}
+```
+
+### 🏗️ Prophet File Structure
+
+```
+backend/
+├── python/
+│   └── prophet_service.py          # Python Prophet service
+├── services/
+│   ├── prophet-wrapper.js          # Node.js Prophet wrapper
+│   ├── enhanced-ai-service.js      # Updated with Prophet integration
+│   └── test_prophet_integration.js # Integration tests
+├── data/
+│   ├── prophet_model_*.joblib      # Trained Prophet models
+│   ├── forecast_cache.json         # Prophet forecast cache
+│   └── temp/                       # Temporary files
+├── test_prophet_input.json         # Test data
+└── prophet_api_examples.js         # API usage examples
+```
+
+### ⚙️ Prophet Configuration
+
+#### Hyperparameters (in prophet_service.py)
+
+```python
+model = Prophet(
+    daily_seasonality=True,           # Daily patterns
+    weekly_seasonality=True,          # Weekly patterns
+    yearly_seasonality=True,          # Yearly patterns
+    changepoint_prior_scale=0.05,     # Trend flexibility
+    interval_width=0.8                # 80% confidence interval
+)
+
+# External regressors
+model.add_regressor('weather_score')
+model.add_regressor('transport_score')
+model.add_regressor('foot_traffic_score')
+```
+
+#### Caching Configuration (in prophet-wrapper.js)
+
+```javascript
+const CACHE_TTL_MS = 10 * 60 * 1000;  // 10 minutes
+const TIMEOUT_MS = 120000;             // 2 minutes timeout
+const MAX_RETRIES = 3;                 // Retry attempts
+```
+
+### 🔍 Prophet Troubleshooting
+
+#### Common Issues
+
+1. **Prophet Installation Issues**
+   ```bash
+   # For Windows users with conda
+   conda install -c conda-forge prophet
+   
+   # For macOS users
+   brew install gcc
+   pip install prophet
+   
+   # For Linux users
+   sudo apt-get install python3-dev
+   pip install prophet
+   ```
+
+2. **Python Path Issues**
+   ```bash
+   # Check Python executable
+   which python3
+   
+   # Set environment variable
+   export PYTHON_PATH="/usr/local/bin/python3"
+   ```
+
+3. **Insufficient Training Data**
+   - Prophet requires minimum 10 historical data points
+   - Ensure consistent date format (YYYY-MM-DD)
+   - Check for missing values in regressors
+
+4. **Performance Issues**
+   - Use model caching for repeated forecasts
+   - Train models manually for heavy usage retailers
+   - Monitor cache hit rates via `/api/prophet/cache/stats`
+
+#### Debug Mode
+
+```bash
+# Enable debug logging
+export NODE_ENV=development
+
+# Check Prophet service logs
+tail -f backend/data/prophet_service.log
+```
+
+### 📈 Prophet vs Enhanced AI Comparison
+
+| Feature | Enhanced AI | Facebook Prophet |
+|---------|-------------|------------------|
+| Setup Complexity | Low | Medium |
+| Prediction Accuracy | Good | Excellent |
+| External Regressors | Basic | Advanced |
+| Seasonality Detection | Manual | Automatic |
+| Training Time | Fast | Medium |
+| Memory Usage | Low | Medium |
+| Scalability | High | Medium |
+
+### 🚀 Production Deployment
+
+#### Docker Configuration
+
+```dockerfile
+# Add to your Dockerfile
+RUN pip install prophet pandas numpy joblib
+COPY backend/python/ /app/backend/python/
+```
+
+#### Environment Variables
+
+```bash
+PYTHON_PATH=/usr/local/bin/python3
+PROPHET_CACHE_TTL=600000
+PROPHET_TIMEOUT=120000
+PROPHET_MAX_RETRIES=3
+```
+
+#### CI/CD Pipeline
+
+```yaml
+# Add to your CI pipeline
+- name: Install Prophet
+  run: |
+    pip install prophet pandas numpy joblib
+    
+- name: Test Prophet Integration
+  run: |
+    cd backend
+    node services/test_prophet_integration.js
+```
+
 ---
 
-**🎉 Congratulations!** You now have a fully integrated AI-powered demand forecasting platform with modern frontend and robust backend APIs. The system is production-ready with proper error handling, validation, and fallback mechanisms.
+**🎉 Congratulations!** You now have a fully integrated AI-powered demand forecasting platform with **Facebook Prophet time-series forecasting**, modern frontend, and robust backend APIs. The system includes advanced external regressor support, intelligent caching, and comprehensive fallback mechanisms for production-grade reliability.

@@ -40,7 +40,10 @@ const ForecastCharts: React.FC<ForecastChartsProps> = ({
 }) => {
   // Prepare foot traffic data for the chart
   const footTrafficData = React.useMemo(() => {
+    console.log('🔍 ForecastCharts - footTrafficImpact:', footTrafficImpact);
+    
     if (!footTrafficImpact?.popularTimes) {
+      console.log('⚠️ No popularTimes data, using fallback');
       // Default peak hours data for Cyberjaya (fallback)
       return [
         { hour: '8AM', hourValue: 8, trafficLevel: 45, sales: 900, isCurrentHour: false },
@@ -54,14 +57,22 @@ const ForecastCharts: React.FC<ForecastChartsProps> = ({
       ];
     }
 
+    console.log('✅ Processing popularTimes data:', footTrafficImpact.popularTimes);
+    
     const currentHour = new Date().getHours();
-    return footTrafficImpact.popularTimes.map(data => ({
-      hour: data.hour < 12 ? `${data.hour || 12}AM` : data.hour === 12 ? '12PM' : `${data.hour - 12}PM`,
+    const processedData = footTrafficImpact.popularTimes.map(data => ({
+      hour: data.hour === 0 ? '12AM' : 
+            data.hour < 12 ? `${data.hour}AM` : 
+            data.hour === 12 ? '12PM' : 
+            `${data.hour - 12}PM`,
       hourValue: data.hour,
       trafficLevel: data.trafficLevel,
       sales: Math.round(data.trafficLevel * 20), // Estimate sales based on traffic
       isCurrentHour: data.hour === currentHour
     }));
+    
+    console.log('📊 Processed chart data:', processedData);
+    return processedData;
   }, [footTrafficImpact]);
 
   // Peak hours data for Cyberjaya (keeping original for backward compatibility)

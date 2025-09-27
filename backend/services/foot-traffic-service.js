@@ -11,7 +11,7 @@ import axios from 'axios';
 class FootTrafficService {
   
   constructor() {
-    this.googleMapsApiKey = 'AIzaSyAzI03sJax4sxCLYTLm2Drle85k1cpN9r8';
+    this.googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY || 'AIzaSyAzI03sJax4sxCLYTLm2Drle85k1cpN9r8';
     this.cyberjayanPlaceId = 'ChIJG_yUGCIjzTERhJgdAYGpilg'; // Example place ID for Cyberjaya
     this.placesApiUrl = 'https://maps.googleapis.com/maps/api/place/details/json';
   }

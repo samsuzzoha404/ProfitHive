@@ -39,9 +39,10 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
   }
 
   // Weather icon mapping
-  const getWeatherIcon = (condition: string) => {
+  const getWeatherIcon = (condition: string | undefined) => {
     const iconClass = "h-8 w-8";
-    switch (condition.toLowerCase()) {
+    const conditionLower = condition?.toLowerCase() || '';
+    switch (conditionLower) {
       case 'clear':
       case 'sunny':
         return <Sun className={`${iconClass} text-yellow-500`} />;

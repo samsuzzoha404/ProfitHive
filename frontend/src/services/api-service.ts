@@ -53,6 +53,11 @@ export interface ForecastResponse {
   confidence?: number;                // Unified AI confidence score
   confidence_note?: string;           // Additional confidence information
   insights?: string[];               // Unified AI insights array
+  ai_insights?: {                     // Prophet-specific insights
+    detailed?: string[];
+    prophet_confidence?: number;
+    model_metadata?: Record<string, unknown>;
+  };
   weather_impact_summary?: string;    // Weather impact insights
   transport_impact_summary?: string;  // Transport impact insights
   weatherImpact?: {                   // Weather impact data
