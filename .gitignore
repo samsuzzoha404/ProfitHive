@@ -7,6 +7,9 @@ pnpm-debug.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# Data directories (backend data should be in backend/data/)
+data/
+
 # Environment files
 .env
 .env.local
