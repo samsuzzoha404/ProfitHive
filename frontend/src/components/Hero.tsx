@@ -31,7 +31,7 @@ const Hero = () => {
           {/* Enhanced Badge */}
           <div className="inline-flex items-center px-4 py-2 md:px-6 md:py-3 rounded-full glass border border-primary/30 glow-primary mb-6 md:mb-8 backdrop-blur-md">
             <Zap className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 text-primary animate-pulse" />
-            <span className="text-xs md:text-sm font-medium text-primary tracking-wide">InnoJam GenAI Sprint 2025</span>
+            <span className="text-xs md:text-sm font-medium text-primary tracking-wide">Smart Data, Shared Prosperity</span>
           </div>
 
           {/* Enhanced Main Headline */}
