@@ -1,0 +1,282 @@
+[
+  {
+    "date": "2025-08-01",
+    "customers": 153,
+    "sales_rm": 3060
+  },
+  {
+    "date": "2025-08-02",
+    "customers": 193,
+    "sales_rm": 3860
+  },
+  {
+    "date": "2025-08-03",
+    "customers": 137,
+    "sales_rm": 2740
+  },
+  {
+    "date": "2025-08-04",
+    "customers": 194,
+    "sales_rm": 3880
+  },
+  {
+    "date": "2025-08-05",
+    "customers": 168,
+    "sales_rm": 3360
+  },
+  {
+    "date": "2025-08-06",
+    "customers": 197,
+    "sales_rm": 3940
+  },
+  {
+    "date": "2025-08-07",
+    "customers": 133,
+    "sales_rm": 2660
+  },
+  {
+    "date": "2025-08-08",
+    "customers": 172,
+    "sales_rm": 3440
+  },
+  {
+    "date": "2025-08-09",
+    "customers": 186,
+    "sales_rm": 3720
+  },
+  {
+    "date": "2025-08-10",
+    "customers": 155,
+    "sales_rm": 3100
+  },
+  {
+    "date": "2025-08-11",
+    "customers": 141,
+    "sales_rm": 2820
+  },
+  {
+    "date": "2025-08-12",
+    "customers": 188,
+    "sales_rm": 3760
+  },
+  {
+    "date": "2025-08-13",
+    "customers": 147,
+    "sales_rm": 2940
+  },
+  {
+    "date": "2025-08-14",
+    "customers": 168,
+    "sales_rm": 3360
+  },
+  {
+    "date": "2025-08-15",
+    "customers": 154,
+    "sales_rm": 3080
+  },
+  {
+    "date": "2025-08-16",
+    "customers": 136,
+    "sales_rm": 2720
+  },
+  {
+    "date": "2025-08-17",
+    "customers": 184,
+    "sales_rm": 3680
+  },
+  {
+    "date": "2025-08-18",
+    "customers": 136,
+    "sales_rm": 2720
+  },
+  {
+    "date": "2025-08-19",
+    "customers": 167,
+    "sales_rm": 3340
+  },
+  {
+    "date": "2025-08-20",
+    "customers": 153,
+    "sales_rm": 3060
+  },
+  {
+    "date": "2025-08-21",
+    "customers": 177,
+    "sales_rm": 3540
+  },
+  {
+    "date": "2025-08-22",
+    "customers": 158,
+    "sales_rm": 3160
+  },
+  {
+    "date": "2025-08-23",
+    "customers": 204,
+    "sales_rm": 4080
+  },
+  {
+    "date": "2025-08-24",
+    "customers": 170,
+    "sales_rm": 3400
+  },
+  {
+    "date": "2025-08-25",
+    "customers": 155,
+    "sales_rm": 3100
+  },
+  {
+    "date": "2025-08-26",
+    "customers": 141,
+    "sales_rm": 2820
+  },
+  {
+    "date": "2025-08-27",
+    "customers": 131,
+    "sales_rm": 2620
+  },
+  {
+    "date": "2025-08-28",
+    "customers": 204,
+    "sales_rm": 4080
+  },
+  {
+    "date": "2025-08-29",
+    "customers": 193,
+    "sales_rm": 3860
+  },
+  {
+    "date": "2025-08-30",
+    "customers": 168,
+    "sales_rm": 3360
+  },
+  {
+    "date": "2025-08-31",
+    "customers": 139,
+    "sales_rm": 2780
+  },
+  {
+    "date": "2025-09-01",
+    "customers": 209,
+    "sales_rm": 4180
+  },
+  {
+    "date": "2025-09-02",
+    "customers": 160,
+    "sales_rm": 3200
+  },
+  {
+    "date": "2025-09-03",
+    "customers": 184,
+    "sales_rm": 3680
+  },
+  {
+    "date": "2025-09-04",
+    "customers": 200,
+    "sales_rm": 4000
+  },
+  {
+    "date": "2025-09-05",
+    "customers": 203,
+    "sales_rm": 4060
+  },
+  {
+    "date": "2025-09-06",
+    "customers": 163,
+    "sales_rm": 3260
+  },
+  {
+    "date": "2025-09-07",
+    "customers": 201,
+    "sales_rm": 4020
+  },
+  {
+    "date": "2025-09-08",
+    "customers": 208,
+    "sales_rm": 4160
+  },
+  {
+    "date": "2025-09-09",
+    "customers": 179,
+    "sales_rm": 3580
+  },
+  {
+    "date": "2025-09-10",
+    "customers": 189,
+    "sales_rm": 3780
+  },
+  {
+    "date": "2025-09-11",
+    "customers": 166,
+    "sales_rm": 3320
+  },
+  {
+    "date": "2025-09-12",
+    "customers": 163,
+    "sales_rm": 3260
+  },
+  {
+    "date": "2025-09-13",
+    "customers": 152,
+    "sales_rm": 3040
+  },
+  {
+    "date": "2025-09-14",
+    "customers": 205,
+    "sales_rm": 4100
+  },
+  {
+    "date": "2025-09-15",
+    "customers": 172,
+    "sales_rm": 3440
+  },
+  {
+    "date": "2025-09-16",
+    "customers": 195,
+    "sales_rm": 3900
+  },
+  {
+    "date": "2025-09-17",
+    "customers": 133,
+    "sales_rm": 2660
+  },
+  {
+    "date": "2025-09-18",
+    "customers": 168,
+    "sales_rm": 3360
+  },
+  {
+    "date": "2025-09-19",
+    "customers": 162,
+    "sales_rm": 3240
+  },
+  {
+    "date": "2025-09-20",
+    "customers": 137,
+    "sales_rm": 2740
+  },
+  {
+    "date": "2025-09-21",
+    "customers": 205,
+    "sales_rm": 4100
+  },
+  {
+    "date": "2025-09-22",
+    "customers": 209,
+    "sales_rm": 4180
+  },
+  {
+    "date": "2025-09-23",
+    "customers": 194,
+    "sales_rm": 3880
+  },
+  {
+    "date": "2025-09-24",
+    "customers": 176,
+    "sales_rm": 3520
+  },
+  {
+    "date": "2025-09-25",
+    "customers": 184,
+    "sales_rm": 3680
+  }
+]
