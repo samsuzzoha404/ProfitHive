@@ -1,0 +1,585 @@
+{
+  "created": "2025-09-26T10:06:52.740Z",
+  "entries": [
+    {
+      "id": "cafe-cyber-2025-09-27-123618",
+      "timestamp": "2025-09-27T04:36:18.683Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 9,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-010004",
+      "timestamp": "2025-09-26T17:00:04.630Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 6,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-005954",
+      "timestamp": "2025-09-26T16:59:54.434Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 6,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-005732",
+      "timestamp": "2025-09-26T16:57:32.640Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 5,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-26-005450",
+      "timestamp": "2025-09-26T16:54:50.990Z",
+      "store": "Uploaded Data",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 10,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-005122",
+      "timestamp": "2025-09-26T16:51:22.430Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 5,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-26-005115",
+      "timestamp": "2025-09-26T16:51:15.161Z",
+      "store": "Uploaded Data",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 14,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-26-004733",
+      "timestamp": "2025-09-26T16:47:33.998Z",
+      "store": "Uploaded Data",
+      "method": "enhanced_ai_fallback",
+      "forecast_days": 7,
+      "input_records": 56,
+      "processing_time_ms": 3431,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-26-004247",
+      "timestamp": "2025-09-26T16:42:47.497Z",
+      "store": "Uploaded Data",
+      "method": "enhanced_ai_fallback",
+      "forecast_days": 7,
+      "input_records": 56,
+      "processing_time_ms": 2343,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-004217",
+      "timestamp": "2025-09-26T16:42:17.739Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai_fallback",
+      "forecast_days": 7,
+      "input_records": 30,
+      "processing_time_ms": 2677,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-003550",
+      "timestamp": "2025-09-26T16:35:50.153Z",
+      "store": "Cafe Cyber",
+      "method": "fallback_unified",
+      "forecast_days": 7,
+      "input_records": 30,
+      "processing_time_ms": 2354,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-003237",
+      "timestamp": "2025-09-26T16:32:37.946Z",
+      "store": "Cafe Cyber",
+      "method": "fallback_unified",
+      "forecast_days": 7,
+      "input_records": 30,
+      "processing_time_ms": 2373,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-26-003232",
+      "timestamp": "2025-09-26T16:32:32.773Z",
+      "store": "Uploaded Data",
+      "method": "fallback_unified",
+      "forecast_days": 7,
+      "input_records": 56,
+      "processing_time_ms": 2195,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-003225",
+      "timestamp": "2025-09-26T16:32:25.695Z",
+      "store": "Cafe Cyber",
+      "method": "fallback_unified",
+      "forecast_days": 7,
+      "input_records": 30,
+      "processing_time_ms": 2349,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-26-003006",
+      "timestamp": "2025-09-26T16:30:06.707Z",
+      "store": "Uploaded Data",
+      "method": "fallback_unified",
+      "forecast_days": 7,
+      "input_records": 56,
+      "processing_time_ms": 2464,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-002540",
+      "timestamp": "2025-09-26T16:25:40.519Z",
+      "store": "Cafe Cyber",
+      "method": "fallback_unified",
+      "forecast_days": 7,
+      "input_records": 30,
+      "processing_time_ms": 2524,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-001931",
+      "timestamp": "2025-09-26T16:19:31.023Z",
+      "store": "Cafe Cyber",
+      "method": "fallback_unified",
+      "forecast_days": 7,
+      "input_records": 30,
+      "processing_time_ms": 2120,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-26-001908",
+      "timestamp": "2025-09-26T16:19:08.973Z",
+      "store": "Uploaded Data",
+      "method": "fallback_unified",
+      "forecast_days": 7,
+      "input_records": 56,
+      "processing_time_ms": 2985,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-26-233952",
+      "timestamp": "2025-09-26T15:39:52.546Z",
+      "store": "Uploaded Data",
+      "method": "enhanced_ai_statistical",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 2699,
+      "validation_passed": true
+    },
+    {
+      "id": "tech-hub-espresso-2025-09-26-233518",
+      "timestamp": "2025-09-26T15:35:18.235Z",
+      "store": "Tech Hub Espresso",
+      "method": "enhanced_ai_statistical",
+      "forecast_days": 14,
+      "input_records": 7,
+      "processing_time_ms": 2543,
+      "validation_passed": true
+    },
+    {
+      "id": "cyberjaya-morning-brew-2025-09-26-233458",
+      "timestamp": "2025-09-26T15:34:58.989Z",
+      "store": "Cyberjaya Morning Brew",
+      "method": "enhanced_ai_statistical",
+      "forecast_days": 14,
+      "input_records": 7,
+      "processing_time_ms": 2269,
+      "validation_passed": true
+    },
+    {
+      "id": "cyberjaya-tech-cafe-2025-09-26-233438",
+      "timestamp": "2025-09-26T15:34:38.287Z",
+      "store": "Cyberjaya Tech Cafe",
+      "method": "enhanced_ai_statistical",
+      "forecast_days": 14,
+      "input_records": 7,
+      "processing_time_ms": 2608,
+      "validation_passed": true
+    },
+    {
+      "id": "cyberjaya-tech-hub-2025-09-26-233352",
+      "timestamp": "2025-09-26T15:33:52.113Z",
+      "store": "Cyberjaya Tech Hub",
+      "method": "enhanced_ai_statistical",
+      "forecast_days": 14,
+      "input_records": 7,
+      "processing_time_ms": 2528,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-233340",
+      "timestamp": "2025-09-26T15:33:40.856Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai_statistical",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3682,
+      "validation_passed": true
+    },
+    {
+      "id": "test-cafe-2025-09-26-232618",
+      "timestamp": "2025-09-26T15:26:18.041Z",
+      "store": "Test Cafe",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 8,
+      "processing_time_ms": 2789,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-232212",
+      "timestamp": "2025-09-26T15:22:12.859Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3651,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-211727",
+      "timestamp": "2025-09-26T13:17:27.554Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2230,
+      "validation_passed": false
+    },
+    {
+      "id": "uploaded-data-2025-09-26-211719",
+      "timestamp": "2025-09-26T13:17:19.585Z",
+      "store": "Uploaded Data",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 2300,
+      "validation_passed": false
+    },
+    {
+      "id": "uploaded-data-2025-09-26-211712",
+      "timestamp": "2025-09-26T13:17:12.248Z",
+      "store": "Uploaded Data",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 2120,
+      "validation_passed": false
+    },
+    {
+      "id": "uploaded-data-2025-09-26-211658",
+      "timestamp": "2025-09-26T13:16:58.659Z",
+      "store": "Uploaded Data",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 2401,
+      "validation_passed": false
+    },
+    {
+      "id": "uploaded-data-2025-09-26-211651",
+      "timestamp": "2025-09-26T13:16:51.508Z",
+      "store": "Uploaded Data",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 2309,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-211500",
+      "timestamp": "2025-09-26T13:15:00.333Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2340,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-210343",
+      "timestamp": "2025-09-26T13:03:43.713Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2466,
+      "validation_passed": false
+    },
+    {
+      "id": "uploaded-data-2025-09-26-204036",
+      "timestamp": "2025-09-26T12:40:36.812Z",
+      "store": "Uploaded Data",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 2628,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-203645",
+      "timestamp": "2025-09-26T12:36:45.631Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2364,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-203134",
+      "timestamp": "2025-09-26T12:31:34.475Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3857,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-202229",
+      "timestamp": "2025-09-26T12:22:29.582Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2832,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-202157",
+      "timestamp": "2025-09-26T12:21:57.643Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2524,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-200347",
+      "timestamp": "2025-09-26T12:03:47.749Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2178,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-200309",
+      "timestamp": "2025-09-26T12:03:09.425Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 1989,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-200304",
+      "timestamp": "2025-09-26T12:03:04.489Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2184,
+      "validation_passed": false
+    },
+    {
+      "id": "uploaded-data-2025-09-26-195951",
+      "timestamp": "2025-09-26T11:59:51.377Z",
+      "store": "Uploaded Data",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 2238,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-195938",
+      "timestamp": "2025-09-26T11:59:38.404Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2460,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-195616",
+      "timestamp": "2025-09-26T11:56:16.168Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2652,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-195522",
+      "timestamp": "2025-09-26T11:55:22.644Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2359,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-195510",
+      "timestamp": "2025-09-26T11:55:10.212Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3326,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-195501",
+      "timestamp": "2025-09-26T11:55:01.023Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3352,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-195426",
+      "timestamp": "2025-09-26T11:54:26.562Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3228,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-195045",
+      "timestamp": "2025-09-26T11:50:45.496Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3274,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-194826",
+      "timestamp": "2025-09-26T11:48:26.069Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3139,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-194539",
+      "timestamp": "2025-09-26T11:45:39.717Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2262,
+      "validation_passed": false
+    },
+    {
+      "id": "uploaded-data-2025-09-26-194037",
+      "timestamp": "2025-09-26T11:40:37.804Z",
+      "store": "Uploaded Data",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 3683,
+      "validation_passed": false
+    },
+    {
+      "id": "uploaded-data-2025-09-26-194011",
+      "timestamp": "2025-09-26T11:40:11.831Z",
+      "store": "Uploaded Data",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 2861,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-192310",
+      "timestamp": "2025-09-26T11:23:10.870Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 2450,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-191658",
+      "timestamp": "2025-09-26T11:16:58.832Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3136,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-183342",
+      "timestamp": "2025-09-26T10:33:42.524Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 3944,
+      "validation_passed": false
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-181955",
+      "timestamp": "2025-09-26T10:19:55.212Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 5,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-26-181934",
+      "timestamp": "2025-09-26T10:19:34.003Z",
+      "store": "Cafe Cyber",
+      "method": "statistical_fallback",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 129,
+      "validation_passed": true
+    }
+  ]
+}
