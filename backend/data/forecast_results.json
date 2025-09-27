@@ -1,6 +1,6 @@
 {
-  "last_updated": "2025-09-27T10:10:24.593Z",
-  "total_forecasts": 60,
+  "last_updated": "2025-09-27T20:30:56.072Z",
+  "total_forecasts": 64,
   "forecasts": {
     "cafe-cyber-2025-09-26-181934": {
       "id": "cafe-cyber-2025-09-26-181934",
@@ -7222,6 +7222,578 @@
       "input_records_count": 30,
       "validation_passed": true,
       "request_timestamp": "2025-09-27T10:10:24.583Z",
+      "client_ip": "::1"
+    },
+    "cafe-cyber-2025-09-27-042827": {
+      "id": "cafe-cyber-2025-09-27-042827",
+      "timestamp": "2025-09-27T20:28:27.847Z",
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "forecast_horizon_days": 14,
+      "forecast": [
+        {
+          "date": "2025-09-28",
+          "predicted_sales": 8640,
+          "predicted_customers": 184,
+          "confidence": 95,
+          "short_insight": "Tech workers returning, coffee demand high",
+          "weather_impact": 1,
+          "transport_impact": 4
+        },
+        {
+          "date": "2025-09-29",
+          "predicted_sales": 8245,
+          "predicted_customers": 130,
+          "confidence": 93,
+          "short_insight": "Tuesday lunch meetings increase",
+          "weather_impact": 0,
+          "transport_impact": 2
+        },
+        {
+          "date": "2025-09-30",
+          "predicted_sales": 8379,
+          "predicted_customers": 143,
+          "confidence": 92,
+          "short_insight": "Hump day energy with afternoon coffee rush",
+          "weather_impact": -2,
+          "transport_impact": -4
+        },
+        {
+          "date": "2025-10-01",
+          "predicted_sales": 8684,
+          "predicted_customers": 165,
+          "confidence": 90,
+          "short_insight": "Thursday pre-weekend excitement builds",
+          "weather_impact": 1,
+          "transport_impact": 1
+        },
+        {
+          "date": "2025-10-02",
+          "predicted_sales": 8814,
+          "predicted_customers": 149,
+          "confidence": 89,
+          "short_insight": "Weekend prep shopping increases",
+          "weather_impact": 1,
+          "transport_impact": -3
+        },
+        {
+          "date": "2025-10-03",
+          "predicted_sales": 7566,
+          "predicted_customers": 162,
+          "confidence": 87,
+          "short_insight": "Saturday leisure and family time",
+          "weather_impact": -6,
+          "transport_impact": 3
+        },
+        {
+          "date": "2025-10-04",
+          "predicted_sales": 7015,
+          "predicted_customers": 111,
+          "confidence": 86,
+          "short_insight": "Leisurely Sunday brunch crowd expected",
+          "weather_impact": -4,
+          "transport_impact": -2
+        },
+        {
+          "date": "2025-10-05",
+          "predicted_sales": 8342,
+          "predicted_customers": 145,
+          "confidence": 84,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -2,
+          "transport_impact": -1
+        },
+        {
+          "date": "2025-10-06",
+          "predicted_sales": 7961,
+          "predicted_customers": 154,
+          "confidence": 83,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -4,
+          "transport_impact": 1
+        },
+        {
+          "date": "2025-10-07",
+          "predicted_sales": 8090,
+          "predicted_customers": 181,
+          "confidence": 81,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": 5,
+          "transport_impact": -1
+        },
+        {
+          "date": "2025-10-08",
+          "predicted_sales": 8385,
+          "predicted_customers": 177,
+          "confidence": 80,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": 0,
+          "transport_impact": 2
+        },
+        {
+          "date": "2025-10-09",
+          "predicted_sales": 8510,
+          "predicted_customers": 154,
+          "confidence": 78,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -4,
+          "transport_impact": 2
+        },
+        {
+          "date": "2025-10-10",
+          "predicted_sales": 7305,
+          "predicted_customers": 144,
+          "confidence": 77,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": 3,
+          "transport_impact": -1
+        },
+        {
+          "date": "2025-10-11",
+          "predicted_sales": 6773,
+          "predicted_customers": 122,
+          "confidence": 75,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -3,
+          "transport_impact": -3
+        }
+      ],
+      "summary": "AI Analysis for Cafe Cyber: Detected negative momentum (-0.1%) with 11.3% volatility. Enhanced algorithms predict optimized performance during tech worker peak hours. Recommendations: 1) Leverage 10am and 3pm coffee rushes, 2) Optimize Friday evening offerings, 3) Implement dynamic pricing during peak tech events.",
+      "method": "enhanced_ai",
+      "confidence_note": "Generated using advanced AI-like statistical algorithms with Cyberjaya market analysis",
+      "processing_time_ms": 29,
+      "input_records_count": 30,
+      "validation_passed": true,
+      "request_timestamp": "2025-09-27T20:28:27.846Z",
+      "client_ip": "::1"
+    },
+    "cafe-cyber-2025-09-27-042854": {
+      "id": "cafe-cyber-2025-09-27-042854",
+      "timestamp": "2025-09-27T20:28:54.888Z",
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "forecast_horizon_days": 14,
+      "forecast": [
+        {
+          "date": "2025-09-28",
+          "predicted_sales": 8585,
+          "predicted_customers": 154,
+          "confidence": 95,
+          "short_insight": "Monday motivation boost in sales",
+          "weather_impact": 5,
+          "transport_impact": -5
+        },
+        {
+          "date": "2025-09-29",
+          "predicted_sales": 8194,
+          "predicted_customers": 173,
+          "confidence": 93,
+          "short_insight": "Tuesday lunch meetings increase",
+          "weather_impact": -2,
+          "transport_impact": 2
+        },
+        {
+          "date": "2025-09-30",
+          "predicted_sales": 8326,
+          "predicted_customers": 165,
+          "confidence": 92,
+          "short_insight": "Hump day energy with afternoon coffee rush",
+          "weather_impact": 1,
+          "transport_impact": -5
+        },
+        {
+          "date": "2025-10-01",
+          "predicted_sales": 8630,
+          "predicted_customers": 165,
+          "confidence": 90,
+          "short_insight": "Tech meetup crowd potential",
+          "weather_impact": 6,
+          "transport_impact": 5
+        },
+        {
+          "date": "2025-10-02",
+          "predicted_sales": 8758,
+          "predicted_customers": 180,
+          "confidence": 89,
+          "short_insight": "TGIF celebrations drive evening sales",
+          "weather_impact": 5,
+          "transport_impact": -1
+        },
+        {
+          "date": "2025-10-03",
+          "predicted_sales": 7519,
+          "predicted_customers": 120,
+          "confidence": 87,
+          "short_insight": "Weekend premium pricing effective",
+          "weather_impact": 1,
+          "transport_impact": -2
+        },
+        {
+          "date": "2025-10-04",
+          "predicted_sales": 6971,
+          "predicted_customers": 125,
+          "confidence": 86,
+          "short_insight": "Leisurely Sunday brunch crowd expected",
+          "weather_impact": 0,
+          "transport_impact": -5
+        },
+        {
+          "date": "2025-10-05",
+          "predicted_sales": 8289,
+          "predicted_customers": 143,
+          "confidence": 84,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -5,
+          "transport_impact": 5
+        },
+        {
+          "date": "2025-10-06",
+          "predicted_sales": 7911,
+          "predicted_customers": 138,
+          "confidence": 83,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -1,
+          "transport_impact": -4
+        },
+        {
+          "date": "2025-10-07",
+          "predicted_sales": 8039,
+          "predicted_customers": 156,
+          "confidence": 81,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": 5,
+          "transport_impact": 4
+        },
+        {
+          "date": "2025-10-08",
+          "predicted_sales": 8332,
+          "predicted_customers": 146,
+          "confidence": 80,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -4,
+          "transport_impact": -3
+        },
+        {
+          "date": "2025-10-09",
+          "predicted_sales": 8456,
+          "predicted_customers": 128,
+          "confidence": 78,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": 1,
+          "transport_impact": -2
+        },
+        {
+          "date": "2025-10-10",
+          "predicted_sales": 7260,
+          "predicted_customers": 150,
+          "confidence": 77,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": 2,
+          "transport_impact": -5
+        },
+        {
+          "date": "2025-10-11",
+          "predicted_sales": 6731,
+          "predicted_customers": 127,
+          "confidence": 75,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -6,
+          "transport_impact": -2
+        }
+      ],
+      "summary": "AI Analysis for Cafe Cyber: Detected positive momentum (0.7%) with 11.2% volatility. Enhanced algorithms predict optimized performance during tech worker peak hours. Recommendations: 1) Leverage 10am and 3pm coffee rushes, 2) Optimize Friday evening offerings, 3) Implement dynamic pricing during peak tech events.",
+      "method": "enhanced_ai",
+      "confidence_note": "Generated using advanced AI-like statistical algorithms with Cyberjaya market analysis",
+      "processing_time_ms": 4,
+      "input_records_count": 30,
+      "validation_passed": true,
+      "request_timestamp": "2025-09-27T20:28:54.888Z",
+      "client_ip": "::1"
+    },
+    "cafe-cyber-2025-09-27-043047": {
+      "id": "cafe-cyber-2025-09-27-043047",
+      "timestamp": "2025-09-27T20:30:47.766Z",
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "forecast_horizon_days": 14,
+      "forecast": [
+        {
+          "date": "2025-09-28",
+          "predicted_sales": 8148,
+          "predicted_customers": 143,
+          "confidence": 95,
+          "short_insight": "Monday motivation boost in sales",
+          "weather_impact": 0,
+          "transport_impact": -4
+        },
+        {
+          "date": "2025-09-29",
+          "predicted_sales": 7775,
+          "predicted_customers": 151,
+          "confidence": 94,
+          "short_insight": "Tuesday lunch meetings increase",
+          "weather_impact": 4,
+          "transport_impact": 1
+        },
+        {
+          "date": "2025-09-30",
+          "predicted_sales": 7901,
+          "predicted_customers": 157,
+          "confidence": 92,
+          "short_insight": "Mid-week promotional opportunity",
+          "weather_impact": -1,
+          "transport_impact": 2
+        },
+        {
+          "date": "2025-10-01",
+          "predicted_sales": 8190,
+          "predicted_customers": 125,
+          "confidence": 91,
+          "short_insight": "Thursday pre-weekend excitement builds",
+          "weather_impact": -6,
+          "transport_impact": 5
+        },
+        {
+          "date": "2025-10-02",
+          "predicted_sales": 8313,
+          "predicted_customers": 169,
+          "confidence": 89,
+          "short_insight": "Weekend prep shopping increases",
+          "weather_impact": 1,
+          "transport_impact": -1
+        },
+        {
+          "date": "2025-10-03",
+          "predicted_sales": 7133,
+          "predicted_customers": 113,
+          "confidence": 88,
+          "short_insight": "Saturday leisure and family time",
+          "weather_impact": -5,
+          "transport_impact": 0
+        },
+        {
+          "date": "2025-10-04",
+          "predicted_sales": 6611,
+          "predicted_customers": 128,
+          "confidence": 86,
+          "short_insight": "Weekend family dining peak",
+          "weather_impact": -6,
+          "transport_impact": 1
+        },
+        {
+          "date": "2025-10-05",
+          "predicted_sales": 7867,
+          "predicted_customers": 180,
+          "confidence": 85,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -1,
+          "transport_impact": 1
+        },
+        {
+          "date": "2025-10-06",
+          "predicted_sales": 7507,
+          "predicted_customers": 140,
+          "confidence": 83,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -2,
+          "transport_impact": -2
+        },
+        {
+          "date": "2025-10-07",
+          "predicted_sales": 7629,
+          "predicted_customers": 112,
+          "confidence": 82,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -4,
+          "transport_impact": -3
+        },
+        {
+          "date": "2025-10-08",
+          "predicted_sales": 7908,
+          "predicted_customers": 132,
+          "confidence": 80,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": 0,
+          "transport_impact": 1
+        },
+        {
+          "date": "2025-10-09",
+          "predicted_sales": 8026,
+          "predicted_customers": 150,
+          "confidence": 79,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -4,
+          "transport_impact": -3
+        },
+        {
+          "date": "2025-10-10",
+          "predicted_sales": 6887,
+          "predicted_customers": 116,
+          "confidence": 77,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -1,
+          "transport_impact": 4
+        },
+        {
+          "date": "2025-10-11",
+          "predicted_sales": 6383,
+          "predicted_customers": 108,
+          "confidence": 76,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -5,
+          "transport_impact": -2
+        }
+      ],
+      "summary": "AI Analysis for Cafe Cyber: Detected negative momentum (-5.2%) with 9.3% volatility. Enhanced algorithms predict optimized performance during tech worker peak hours. Recommendations: 1) Leverage 10am and 3pm coffee rushes, 2) Optimize Friday evening offerings, 3) Implement dynamic pricing during peak tech events.",
+      "method": "enhanced_ai",
+      "confidence_note": "Generated using advanced AI-like statistical algorithms with Cyberjaya market analysis",
+      "processing_time_ms": 2,
+      "input_records_count": 30,
+      "validation_passed": true,
+      "request_timestamp": "2025-09-27T20:30:47.766Z",
+      "client_ip": "::1"
+    },
+    "cafe-cyber-2025-09-27-043056": {
+      "id": "cafe-cyber-2025-09-27-043056",
+      "timestamp": "2025-09-27T20:30:56.068Z",
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "forecast_horizon_days": 14,
+      "forecast": [
+        {
+          "date": "2025-09-28",
+          "predicted_sales": 8661,
+          "predicted_customers": 185,
+          "confidence": 95,
+          "short_insight": "Tech workers returning, coffee demand high",
+          "weather_impact": -1,
+          "transport_impact": 3
+        },
+        {
+          "date": "2025-09-29",
+          "predicted_sales": 8266,
+          "predicted_customers": 147,
+          "confidence": 93,
+          "short_insight": "Tuesday lunch meetings increase",
+          "weather_impact": -1,
+          "transport_impact": 4
+        },
+        {
+          "date": "2025-09-30",
+          "predicted_sales": 8400,
+          "predicted_customers": 143,
+          "confidence": 92,
+          "short_insight": "Hump day energy with afternoon coffee rush",
+          "weather_impact": -5,
+          "transport_impact": 3
+        },
+        {
+          "date": "2025-10-01",
+          "predicted_sales": 8706,
+          "predicted_customers": 166,
+          "confidence": 90,
+          "short_insight": "Thursday pre-weekend excitement builds",
+          "weather_impact": -4,
+          "transport_impact": -1
+        },
+        {
+          "date": "2025-10-02",
+          "predicted_sales": 8836,
+          "predicted_customers": 153,
+          "confidence": 89,
+          "short_insight": "Weekend prep shopping increases",
+          "weather_impact": -4,
+          "transport_impact": 3
+        },
+        {
+          "date": "2025-10-03",
+          "predicted_sales": 7584,
+          "predicted_customers": 150,
+          "confidence": 87,
+          "short_insight": "Saturday leisure and family time",
+          "weather_impact": 3,
+          "transport_impact": 2
+        },
+        {
+          "date": "2025-10-04",
+          "predicted_sales": 7031,
+          "predicted_customers": 152,
+          "confidence": 86,
+          "short_insight": "Leisurely Sunday brunch crowd expected",
+          "weather_impact": 4,
+          "transport_impact": -1
+        },
+        {
+          "date": "2025-10-05",
+          "predicted_sales": 8363,
+          "predicted_customers": 145,
+          "confidence": 84,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -1,
+          "transport_impact": 3
+        },
+        {
+          "date": "2025-10-06",
+          "predicted_sales": 7981,
+          "predicted_customers": 126,
+          "confidence": 83,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -4,
+          "transport_impact": -1
+        },
+        {
+          "date": "2025-10-07",
+          "predicted_sales": 8110,
+          "predicted_customers": 155,
+          "confidence": 81,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -3,
+          "transport_impact": 3
+        },
+        {
+          "date": "2025-10-08",
+          "predicted_sales": 8406,
+          "predicted_customers": 176,
+          "confidence": 80,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": 4,
+          "transport_impact": 2
+        },
+        {
+          "date": "2025-10-09",
+          "predicted_sales": 8532,
+          "predicted_customers": 143,
+          "confidence": 78,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -2,
+          "transport_impact": 3
+        },
+        {
+          "date": "2025-10-10",
+          "predicted_sales": 7323,
+          "predicted_customers": 112,
+          "confidence": 77,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -6,
+          "transport_impact": 0
+        },
+        {
+          "date": "2025-10-11",
+          "predicted_sales": 6789,
+          "predicted_customers": 148,
+          "confidence": 75,
+          "short_insight": "Mid-term forecast with seasonal adjustments",
+          "weather_impact": -2,
+          "transport_impact": 2
+        }
+      ],
+      "summary": "AI Analysis for Cafe Cyber: Detected negative momentum (-1.8%) with 11.4% volatility. Enhanced algorithms predict optimized performance during tech worker peak hours. Recommendations: 1) Leverage 10am and 3pm coffee rushes, 2) Optimize Friday evening offerings, 3) Implement dynamic pricing during peak tech events.",
+      "method": "enhanced_ai",
+      "confidence_note": "Generated using advanced AI-like statistical algorithms with Cyberjaya market analysis",
+      "processing_time_ms": 3,
+      "input_records_count": 30,
+      "validation_passed": true,
+      "request_timestamp": "2025-09-27T20:30:56.068Z",
       "client_ip": "::1"
     }
   }

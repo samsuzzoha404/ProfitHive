@@ -10,7 +10,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -49,7 +49,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -87,7 +87,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -125,7 +125,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -161,7 +161,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -200,7 +200,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -241,7 +241,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -277,7 +277,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -315,7 +315,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -344,57 +344,16 @@
         "IERC20Metadata"
       ]
     },
-    "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\contracts\\ProfitHiveToken.sol": {
-      "lastModificationDate": 1758952785192,
-      "contentHash": "14baa2a80c568a805313de5e52164bf4",
-      "sourceName": "contracts/ProfitHiveToken.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
-        "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/utils/Pausable.sol",
-        "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ProfitHiveToken"
-      ]
-    },
     "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\contracts\\RevenueSharing.sol": {
-      "lastModificationDate": 1758952786523,
-      "contentHash": "eca4167bdc0c2da98a3844b1066b9f65",
+      "lastModificationDate": 1758998196691,
+      "contentHash": "37fb3c334815724e78ba06fd170ee301",
       "sourceName": "contracts/RevenueSharing.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -426,6 +385,47 @@
         "RevenueSharing"
       ]
     },
+    "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\contracts\\ProfitHiveToken.sol": {
+      "lastModificationDate": 1758952785192,
+      "contentHash": "14baa2a80c568a805313de5e52164bf4",
+      "sourceName": "contracts/ProfitHiveToken.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 800
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/Pausable.sol",
+        "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ProfitHiveToken"
+      ]
+    },
     "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\ReentrancyGuard.sol": {
       "lastModificationDate": 1758951682730,
       "contentHash": "190613e556d509d9e9a0ea43dc5d891d",
@@ -435,7 +435,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 800
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -460,6 +460,200 @@
       ],
       "artifacts": [
         "ReentrancyGuard"
+      ]
+    },
+    "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\contracts\\ProfitHiveTokenV2.sol": {
+      "lastModificationDate": 1759001138757,
+      "contentHash": "966950614665b8076db5c31eb37c3b24",
+      "sourceName": "contracts/ProfitHiveTokenV2.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 800
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/Pausable.sol",
+        "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol",
+        "@openzeppelin/contracts/utils/ReentrancyGuard.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ProfitHiveToken"
+      ]
+    },
+    "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\contracts\\PlatformControlledToken.sol": {
+      "lastModificationDate": 1759001282081,
+      "contentHash": "b0c65378a6c875785e46cf06be11f74c",
+      "sourceName": "contracts/PlatformControlledToken.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 800
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+        "@openzeppelin/contracts/utils/math/Math.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "PlatformControlledToken"
+      ]
+    },
+    "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\math\\Math.sol": {
+      "lastModificationDate": 1758951682671,
+      "contentHash": "5ec781e33d3a9ac91ffdc83d94420412",
+      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 800
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../Panic.sol",
+        "./SafeCast.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Math"
+      ]
+    },
+    "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Panic.sol": {
+      "lastModificationDate": 1758951682718,
+      "contentHash": "2133dc13536b4a6a98131e431fac59e1",
+      "sourceName": "@openzeppelin/contracts/utils/Panic.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 800
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Panic"
+      ]
+    },
+    "C:\\Users\\user\\Documents\\Cyfrin\\ProfitHive\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\math\\SafeCast.sol": {
+      "lastModificationDate": 1758951682741,
+      "contentHash": "2adca1150f58fc6f3d1f0a0f22ee7cca",
+      "sourceName": "@openzeppelin/contracts/utils/math/SafeCast.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 800
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SafeCast"
       ]
     }
   }

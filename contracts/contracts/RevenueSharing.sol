@@ -6,6 +6,20 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
 import "./ProfitHiveToken.sol";
 
+// Custom errors for gas optimization
+error InsufficientRevenue();
+error AlreadyDistributed();
+error InsufficientStake();
+error MinimumStakingPeriod();
+error TransferFailed();
+error InvalidForecaster();
+error InvalidAccuracy();
+error RewardNotFound();
+error AlreadyClaimed();
+error NotAuthorized();
+error InvalidAmount();
+error InvalidShare();
+
 /**
  * @title RevenueSharing
  * @dev Smart contract for distributing revenue among ProfitHive stakeholders
@@ -84,9 +98,11 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
      * @dev Deposit revenue to be distributed
      */
     function depositRevenue() external payable onlyOwner {
-        require(msg.value > 0, "Revenue must be greater than 0");
+        if (msg.value == 0) revert InsufficientRevenue();
 
-        currentPoolId++;
+        unchecked {
+            ++currentPoolId;
+        }
         revenuePools[currentPoolId] = RevenuePool({
             totalRevenue: msg.value,
             distributedRevenue: 0,
@@ -102,13 +118,18 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
      */
     function distributeRevenue(uint256 poolId) external onlyOwner nonReentrant {
         RevenuePool storage pool = revenuePools[poolId];
-        require(!pool.isDistributed, "Revenue already distributed");
-        require(pool.totalRevenue > 0, "No revenue to distribute");
+        if (pool.isDistributed) revert AlreadyDistributed();
+        if (pool.totalRevenue == 0) revert InsufficientRevenue();
 
-        uint256 stakersAmount = (pool.totalRevenue * stakersShare) / 10000;
-        uint256 forecastersAmount = (pool.totalRevenue * forecastersShare) /
-            10000;
-        uint256 platformAmount = (pool.totalRevenue * platformShare) / 10000;
+        uint256 stakersAmount;
+        uint256 forecastersAmount;
+        uint256 platformAmount;
+        
+        unchecked {
+            stakersAmount = (pool.totalRevenue * stakersShare) / 10000;
+            forecastersAmount = (pool.totalRevenue * forecastersShare) / 10000;
+            platformAmount = (pool.totalRevenue * platformShare) / 10000;
+        }
 
         // Distribute to stakers proportionally
         if (totalStaked > 0 && stakersAmount > 0) {
@@ -126,12 +147,8 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
      * @dev Stake ProfitHive tokens to earn revenue share
      */
     function stake(uint256 amount) external nonReentrant whenNotPaused {
-        require(amount > 0, "Stake amount must be greater than 0");
-        require(
-            profitHiveToken.transferFrom(msg.sender, address(this), amount),
-            "Transfer failed"
-        );
-
+        if (amount == 0) revert InvalidAmount();
+        
         UserStake storage userStake = userStakes[msg.sender];
 
         // If user already has a stake, claim pending rewards first
@@ -139,10 +156,17 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
             _claimStakingRewards(msg.sender);
         }
 
-        userStake.amount += amount;
+        if (!profitHiveToken.transferFrom(msg.sender, address(this), amount)) {
+            revert TransferFailed();
+        }
+
+        unchecked {
+            userStake.amount += amount;
+            totalStaked += amount;
+        }
+        
         userStake.stakingTimestamp = block.timestamp;
         userStake.lastRewardClaim = block.timestamp;
-        totalStaked += amount;
 
         emit Staked(msg.sender, amount);
     }
@@ -152,22 +176,22 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
      */
     function unstake(uint256 amount) external nonReentrant {
         UserStake storage userStake = userStakes[msg.sender];
-        require(userStake.amount >= amount, "Insufficient staked amount");
-        require(
-            block.timestamp >= userStake.stakingTimestamp + minStakingPeriod,
-            "Minimum staking period not met"
-        );
+        if (userStake.amount < amount) revert InsufficientStake();
+        if (block.timestamp < userStake.stakingTimestamp + minStakingPeriod) {
+            revert MinimumStakingPeriod();
+        }
 
         // Claim pending rewards first
         _claimStakingRewards(msg.sender);
 
-        userStake.amount -= amount;
-        totalStaked -= amount;
+        unchecked {
+            userStake.amount -= amount;
+            totalStaked -= amount;
+        }
 
-        require(
-            profitHiveToken.transfer(msg.sender, amount),
-            "Transfer failed"
-        );
+        if (!profitHiveToken.transfer(msg.sender, amount)) {
+            revert TransferFailed();
+        }
 
         emit Unstaked(msg.sender, amount);
     }
@@ -187,10 +211,13 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
         uint256 accuracy,
         uint256 rewardAmount
     ) external onlyOwner {
-        require(forecaster != address(0), "Invalid forecaster address");
-        require(accuracy <= 10000, "Accuracy cannot exceed 100%");
+        if (forecaster == address(0)) revert InvalidForecaster();
+        if (accuracy > 10000) revert InvalidAccuracy();
 
-        forecastRewardId++;
+        unchecked {
+            ++forecastRewardId;
+        }
+        
         forecastRewards[forecastRewardId] = ForecastReward({
             forecaster: forecaster,
             accuracy: accuracy,
@@ -212,8 +239,8 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
      */
     function claimForecastReward(uint256 rewardId) external nonReentrant {
         ForecastReward storage reward = forecastRewards[rewardId];
-        require(reward.forecaster == msg.sender, "Not your reward");
-        require(!reward.claimed, "Reward already claimed");
+        if (reward.forecaster != msg.sender) revert NotAuthorized();
+        if (reward.claimed) revert AlreadyClaimed();
 
         reward.claimed = true;
 
@@ -221,7 +248,7 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
         (bool success, ) = payable(msg.sender).call{value: reward.rewardAmount}(
             ""
         );
-        require(success, "ETH transfer failed");
+        if (!success) revert TransferFailed();
 
         emit ForecastRewardClaimed(rewardId, msg.sender, reward.rewardAmount);
     }
@@ -242,7 +269,7 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
         if (rewards > 0) {
             claimableRewards[user] = 0;
             (bool success, ) = payable(user).call{value: rewards}("");
-            require(success, "ETH transfer failed");
+            if (!success) revert TransferFailed();
             emit RewardsClaimed(user, rewards);
         }
     }
@@ -286,10 +313,11 @@ contract RevenueSharing is Ownable, ReentrancyGuard, Pausable {
         uint256 _forecastersShare,
         uint256 _platformShare
     ) external onlyOwner {
-        require(
-            _stakersShare + _forecastersShare + _platformShare == 10000,
-            "Shares must sum to 100%"
-        );
+        unchecked {
+            if (_stakersShare + _forecastersShare + _platformShare != 10000) {
+                revert InvalidShare();
+            }
+        }
 
         stakersShare = _stakersShare;
         forecastersShare = _forecastersShare;

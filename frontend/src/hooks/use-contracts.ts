@@ -7,7 +7,7 @@ import {
 } from "wagmi";
 import { parseEther, formatEther } from "viem";
 import { sepolia } from "wagmi/chains";
-import { CONTRACT_ADDRESSES, getContractAddresses } from "@/lib/contracts";
+import { CONTRACT_ADDRESSES, getContractAddresses } from "../lib/contracts";
 
 // Complete ProfitHive Token ABI with business tokenization functions
 export const PROFITHIVE_TOKEN_ABI = [
@@ -223,3 +223,189 @@ export const useETHTransfer = () => {
     isConfirmed,
   };
 };
+
+// Revenue Sharing ABI for staking functions
+export const REVENUE_SHARING_ABI = [
+  {
+    type: "function",
+    name: "stake",
+    inputs: [{ name: "amount", type: "uint256" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "unstake",
+    inputs: [{ name: "amount", type: "uint256" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "claimStakingRewards",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "getUserStakeInfo",
+    inputs: [{ name: "user", type: "address" }],
+    outputs: [
+      { name: "stakedAmount", type: "uint256" },
+      { name: "stakingTimestamp", type: "uint256" },
+      { name: "claimableAmount", type: "uint256" },
+      { name: "canUnstake", type: "bool" },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "event",
+    name: "Staked",
+    inputs: [
+      { indexed: true, name: "user", type: "address" },
+      { name: "amount", type: "uint256" },
+    ],
+  },
+  {
+    type: "event",
+    name: "Unstaked",
+    inputs: [
+      { indexed: true, name: "user", type: "address" },
+      { name: "amount", type: "uint256" },
+    ],
+  },
+] as const;
+
+// Hook for getting user stake information
+export const useUserStakeInfo = () => {
+  const { address, chainId } = useAccount();
+  const contractAddress = getContractAddresses(
+    chainId || 11155111
+  )?.RevenueSharing;
+
+  return useReadContract({
+    address: contractAddress as `0x${string}`,
+    abi: REVENUE_SHARING_ABI,
+    functionName: "getUserStakeInfo",
+    args: address ? [address as `0x${string}`] : undefined,
+    query: {
+      enabled: !!address && !!contractAddress,
+      refetchInterval: 5000, // Refetch every 5 seconds for real-time updates
+    },
+  });
+};
+
+// Hook for staking tokens
+export const useStakeTokens = () => {
+  const { chainId, address: account } = useAccount();
+  const contractAddress = getContractAddresses(
+    chainId || 11155111
+  )?.RevenueSharing;
+
+  const { writeContract, data: hash, isPending } = useWriteContract();
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({
+      hash,
+    });
+
+  const stakeTokens = async (amount: string) => {
+    if (!contractAddress) throw new Error("Contract address not found");
+    if (!account) throw new Error("Wallet not connected");
+
+    writeContract({
+      address: contractAddress as `0x${string}`,
+      abi: REVENUE_SHARING_ABI,
+      functionName: "stake",
+      args: [parseEther(amount)],
+      chain: sepolia,
+      account: account as `0x${string}`,
+    });
+  };
+
+  return {
+    stakeTokens,
+    hash,
+    isPending,
+    isConfirming,
+    isConfirmed,
+  };
+};
+
+// Hook for unstaking tokens
+export const useUnstakeTokens = () => {
+  const { chainId, address: account } = useAccount();
+  const contractAddress = getContractAddresses(
+    chainId || 11155111
+  )?.RevenueSharing;
+
+  const { writeContract, data: hash, isPending } = useWriteContract();
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({
+      hash,
+    });
+
+  const unstakeTokens = async (amount: string) => {
+    if (!contractAddress) throw new Error("Contract address not found");
+    if (!account) throw new Error("Wallet not connected");
+
+    writeContract({
+      address: contractAddress as `0x${string}`,
+      abi: REVENUE_SHARING_ABI,
+      functionName: "unstake",
+      args: [parseEther(amount)],
+      chain: sepolia,
+      account: account as `0x${string}`,
+    });
+  };
+
+  return {
+    unstakeTokens,
+    hash,
+    isPending,
+    isConfirming,
+    isConfirmed,
+  };
+};
+
+// Hook for claiming staking rewards
+export const useClaimRewards = () => {
+  const { chainId, address: account } = useAccount();
+  const contractAddress = getContractAddresses(
+    chainId || 11155111
+  )?.RevenueSharing;
+
+  const { writeContract, data: hash, isPending } = useWriteContract();
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({
+      hash,
+    });
+
+  const claimRewards = async () => {
+    if (!contractAddress) throw new Error("Contract address not found");
+    if (!account) throw new Error("Wallet not connected");
+
+    writeContract({
+      address: contractAddress as `0x${string}`,
+      abi: REVENUE_SHARING_ABI,
+      functionName: "claimStakingRewards",
+      args: [],
+      chain: sepolia,
+      account: account as `0x${string}`,
+    });
+  };
+
+  return {
+    claimRewards,
+    hash,
+    isPending,
+    isConfirming,
+    isConfirmed,
+  };
+};
+
+// Re-export utilities
+export { getContractAddresses };

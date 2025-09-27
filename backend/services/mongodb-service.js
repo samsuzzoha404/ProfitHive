@@ -5,7 +5,7 @@ class MongoDBService {
     this.client = null;
     this.db = null;
     this.connectionString =
-      "mongodb+srv://HashForce:HashForce2025@profithive.wpnmfwb.mongodb.net/?retryWrites=true&w=majority&appName=ProfitHive";
+      "mongodb+srv://easinarafatssbd_db_user:40FFUaeoEG30DU0C@profithive.0n55nin.mongodb.net/ProfitHive?retryWrites=true&w=majority&appName=ProfitHive";
     this.dbName = "ProfitHive";
     this.tokensCollection = "business_tokens";
     this.countersCollection = "counters";
@@ -15,8 +15,16 @@ class MongoDBService {
     try {
       if (!this.client) {
         console.log("🔗 Connecting to MongoDB...");
-        this.client = new MongoClient(this.connectionString);
+        this.client = new MongoClient(this.connectionString, {
+          serverSelectionTimeoutMS: 30000,
+          connectTimeoutMS: 30000,
+          maxPoolSize: 10,
+        });
         await this.client.connect();
+
+        // Test the connection
+        await this.client.db("admin").command({ ping: 1 });
+
         this.db = this.client.db(this.dbName);
 
         // Initialize counter for token IDs if it doesn't exist
@@ -28,8 +36,17 @@ class MongoDBService {
       return true;
     } catch (error) {
       console.error("❌ MongoDB connection failed:", error.message);
+      this.client = null;
+      this.db = null;
       return false;
     }
+  }
+
+  async ensureConnection() {
+    if (!this.client || !this.db) {
+      return await this.connect();
+    }
+    return true;
   }
 
   async initializeCounter() {
@@ -49,6 +66,9 @@ class MongoDBService {
   }
 
   async getNextSequence(name) {
+    if (!(await this.ensureConnection())) {
+      throw new Error("MongoDB connection failed");
+    }
     const result = await this.db
       .collection(this.countersCollection)
       .findOneAndUpdate(
@@ -71,7 +91,9 @@ class MongoDBService {
   // Business Token Operations
   async getAllTokens() {
     try {
-      await this.connect();
+      if (!(await this.ensureConnection())) {
+        throw new Error("MongoDB connection failed");
+      }
       const tokens = await this.db
         .collection(this.tokensCollection)
         .find({ isActive: true })

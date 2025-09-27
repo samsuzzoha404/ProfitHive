@@ -1,18 +1,26 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Sparkles, BarChart3 } from 'lucide-react';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Sparkles, BarChart3 } from "lucide-react";
 
 interface DemoForecastCardProps {
   onRunDemo: () => void;
   loading: boolean;
-  gptStatus: 'ready' | 'processing' | 'completed' | 'error';
+  gptStatus: "ready" | "processing" | "completed" | "error";
+  portalMode?: "retailer" | "investor";
 }
 
 const DemoForecastCard: React.FC<DemoForecastCardProps> = ({
   onRunDemo,
   loading,
-  gptStatus
+  gptStatus,
+  portalMode = "retailer",
 }) => {
   return (
     <Card className="glass border-primary/20 hover-lift">
@@ -22,27 +30,44 @@ const DemoForecastCard: React.FC<DemoForecastCardProps> = ({
           Try Demo Forecast
         </CardTitle>
         <CardDescription>
-          Generate a sample forecast using demo data to see the system in action
+          {portalMode === "retailer"
+            ? "Generate a sample business forecast to see how AI can predict your sales and customer demand"
+            : "Explore market analysis and investment insights using our AI-powered forecasting demo"}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="p-4 glass rounded-lg border border-primary/20">
-          <h4 className="font-medium text-primary mb-2">Demo Features:</h4>
+          <h4 className="font-medium text-primary mb-2">
+            {portalMode === "retailer"
+              ? "Business Analytics:"
+              : "Investment Analysis:"}
+          </h4>
           <ul className="text-sm text-muted-foreground space-y-1">
-            <li>• 30 days of sample historical data</li>
-            <li>• 14-day AI-powered forecast</li>
-            <li>• Statistical fallback if AI unavailable</li>
-            <li>• Real-time processing with backend API</li>
+            {portalMode === "retailer" ? (
+              <>
+                <li>• Daily sales & customer predictions</li>
+                <li>• Peak hours & traffic analysis</li>
+                <li>• Revenue optimization insights</li>
+                <li>• Inventory planning recommendations</li>
+              </>
+            ) : (
+              <>
+                <li>• Market trend analysis</li>
+                <li>• Investment opportunity scoring</li>
+                <li>• Portfolio performance predictions</li>
+                <li>• Risk assessment metrics</li>
+              </>
+            )}
           </ul>
         </div>
 
-        <Button 
+        <Button
           onClick={onRunDemo}
           disabled={loading}
           className="w-full bg-gradient-primary hover-glow"
           size="lg"
         >
-          {loading && gptStatus === 'processing' ? (
+          {loading && gptStatus === "processing" ? (
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
               Generating Forecast...

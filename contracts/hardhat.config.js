@@ -8,7 +8,7 @@ module.exports = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200,
+        runs: 800, // Increased from 200 for better runtime gas efficiency
       },
     },
   },

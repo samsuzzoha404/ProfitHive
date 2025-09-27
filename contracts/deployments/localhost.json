@@ -4,7 +4,7 @@
     "chainId": "31337"
   },
   "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-  "timestamp": "2025-09-27T08:37:58.445Z",
+  "timestamp": "2025-09-27T19:17:35.481Z",
   "contracts": {
     "ProfitHiveToken": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
@@ -63,11 +63,22 @@
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       "abi": [
         "constructor(address,address)",
+        "error AlreadyClaimed()",
+        "error AlreadyDistributed()",
         "error EnforcedPause()",
         "error ExpectedPause()",
+        "error InsufficientRevenue()",
+        "error InsufficientStake()",
+        "error InvalidAccuracy()",
+        "error InvalidAmount()",
+        "error InvalidForecaster()",
+        "error InvalidShare()",
+        "error MinimumStakingPeriod()",
+        "error NotAuthorized()",
         "error OwnableInvalidOwner(address)",
         "error OwnableUnauthorizedAccount(address)",
         "error ReentrancyGuardReentrantCall()",
+        "error TransferFailed()",
         "event ForecastRewardAdded(uint256 indexed,address,uint256,uint256)",
         "event ForecastRewardClaimed(uint256 indexed,address,uint256)",
         "event OwnershipTransferred(address indexed,address indexed)",

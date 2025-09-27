@@ -7,7 +7,7 @@
 @layer base {
   :root {
     /* Core Cyberjaya Smart City Palette - HSL Colors */
-    --background: 222 84% 5%;  /* Deep space blue */
+    --background: 222 84% 5%; /* Deep space blue */
     --foreground: 210 40% 98%; /* Bright white text */
 
     --card: 222 50% 8%; /* Dark card with slight blue tint */
@@ -25,7 +25,7 @@
     --secondary-foreground: 210 40% 98%;
 
     /* Muted - Subtle backgrounds */
-    --muted: 222 50% 12%; 
+    --muted: 222 50% 12%;
     --muted-foreground: 215 20% 65%;
 
     /* Accent - Neon Cyan */
@@ -50,20 +50,37 @@
     --radius: 0.75rem;
 
     /* Smart City Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(243 75% 59%), hsl(217 91% 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(189 94% 43%), hsl(142 71% 45%));
-    --gradient-background: linear-gradient(180deg, hsl(222 84% 5%), hsl(222 50% 8%));
-    --gradient-cyber: linear-gradient(45deg, hsl(243 75% 59%), hsl(189 94% 43%), hsl(142 71% 45%));
-    
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(243 75% 59%),
+      hsl(217 91% 60%)
+    );
+    --gradient-secondary: linear-gradient(
+      135deg,
+      hsl(189 94% 43%),
+      hsl(142 71% 45%)
+    );
+    --gradient-background: linear-gradient(
+      180deg,
+      hsl(222 84% 5%),
+      hsl(222 50% 8%)
+    );
+    --gradient-cyber: linear-gradient(
+      45deg,
+      hsl(243 75% 59%),
+      hsl(189 94% 43%),
+      hsl(142 71% 45%)
+    );
+
     /* Neon Glow Effects */
     --glow-primary: 0 0 20px hsl(217 91% 60% / 0.5);
     --glow-accent: 0 0 20px hsl(189 94% 43% / 0.5);
     --glow-success: 0 0 20px hsl(142 71% 45% / 0.5);
-    
+
     /* Glassmorphism */
     --glass-bg: hsl(222 50% 12% / 0.8);
     --glass-border: hsl(217 91% 60% / 0.2);
-    
+
     /* Animation Timing */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -104,6 +121,7 @@
   /* Glassmorphism Effect */
   .glass {
     background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
   }
@@ -169,7 +187,7 @@
   }
 
   .nav-glow::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -192,7 +210,8 @@
 @layer utilities {
   /* Animation Keyframes */
   @keyframes gradient-shift {
-    0%, 100% {
+    0%,
+    100% {
       background-position: 0% 50%;
     }
     50% {
@@ -201,16 +220,19 @@
   }
 
   @keyframes pulse-glow {
-    0%, 100% {
+    0%,
+    100% {
       box-shadow: 0 0 5px hsl(var(--primary) / 0.5);
     }
     50% {
-      box-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--primary) / 0.6);
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.8),
+        0 0 30px hsl(var(--primary) / 0.6);
     }
   }
 
   @keyframes cyber-flicker {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {

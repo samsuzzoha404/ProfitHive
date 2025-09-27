@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
-import { useETHTransfer } from "@/hooks/use-contracts";
+import { useETHTransfer } from "../hooks/use-contracts";
+import { useAuth } from "../contexts/AuthContext";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+} from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { Textarea } from "../components/ui/textarea";
+import { Alert, AlertDescription } from "../components/ui/alert";
 import {
   Coins,
   Building2,
@@ -49,6 +50,7 @@ interface BusinessToken {
 
 const Tokenization = () => {
   const { address, isConnected } = useAccount();
+  const { portalMode, isAuthenticated } = useAuth();
   const {
     sendETH,
     hash,
@@ -147,7 +149,9 @@ const Tokenization = () => {
       console.error("Token creation error:", error);
       setBuyMessage(
         `Error: ${
-          error.message || "Network error - check if backend is running"
+          error instanceof Error
+            ? error.message
+            : "Network error - check if backend is running"
         }`
       );
     } finally {
@@ -312,12 +316,16 @@ const Tokenization = () => {
             </div>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-gradient">Revenue</span> Tokenization
+            <span className="text-gradient">
+              {portalMode === "retailer"
+                ? "Tokenize Your Revenue"
+                : "Investment Opportunities"}
+            </span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
-            Transform your business revenue into blockchain tokens, enabling
-            community investment and transparent profit sharing through smart
-            contracts.
+            {portalMode === "retailer"
+              ? "Transform your business revenue into blockchain tokens, enabling community investment and transparent profit sharing through smart contracts."
+              : "Discover tokenized business opportunities and invest in real revenue streams with transparent blockchain technology."}
           </p>
           <div className="bg-blue-50/10 border border-blue-200/20 rounded-lg p-4 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-2 text-blue-600 font-medium text-sm">
@@ -331,412 +339,449 @@ const Tokenization = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {/* Retailer Tokenization Form */}
-          <Card className="glass border-primary/20 hover-lift">
+        {/* Portal Mode Authentication Check */}
+        {!isAuthenticated && (
+          <Card className="glass border-yellow-500/20 mb-8">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-primary" />
-                Retailer Portal
+              <CardTitle className="flex items-center gap-2 text-yellow-600">
+                <Shield className="h-5 w-5" />
+                Sign In Required
               </CardTitle>
               <CardDescription>
-                Tokenize your business revenue and attract community investors
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {!isTokenized ? (
-                <>
-                  <div className="space-y-2">
-                    <Label htmlFor="businessName">Business Name</Label>
-                    <Input
-                      id="businessName"
-                      name="businessName"
-                      placeholder="Enter your business name"
-                      value={formData.businessName}
-                      onChange={handleInputChange}
-                      className="glass border-primary/30"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="revenueEstimate">
-                      Monthly Revenue Estimate (RM)
-                    </Label>
-                    <Input
-                      id="revenueEstimate"
-                      name="revenueEstimate"
-                      type="number"
-                      placeholder="50000"
-                      value={formData.revenueEstimate}
-                      onChange={handleInputChange}
-                      className="glass border-primary/30"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="tokenizePercentage">
-                      Revenue % to Tokenize: {formData.tokenizePercentage}%
-                    </Label>
-                    <Input
-                      id="tokenizePercentage"
-                      name="tokenizePercentage"
-                      type="range"
-                      min="5"
-                      max="50"
-                      value={formData.tokenizePercentage}
-                      onChange={handleInputChange}
-                      className="glass"
-                    />
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>5%</span>
-                      <span>50%</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="description">Business Description</Label>
-                    <Textarea
-                      id="description"
-                      name="description"
-                      placeholder="Describe your business and investment opportunity"
-                      value={formData.description}
-                      onChange={handleInputChange}
-                      className="glass border-primary/30"
-                    />
-                  </div>
-
-                  {/* Tokenization Preview */}
-                  {formData.revenueEstimate && (
-                    <div className="p-4 glass rounded-lg border border-accent/20">
-                      <h4 className="font-semibold text-accent mb-3">
-                        Tokenization Preview
-                      </h4>
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <div className="text-muted-foreground">
-                            Tokens Generated
-                          </div>
-                          <div className="font-bold text-lg">
-                            {calculateTokens()}
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-muted-foreground">
-                            Token Value
-                          </div>
-                          <div className="font-bold text-lg">RM 100 each</div>
-                        </div>
-                        <div>
-                          <div className="text-muted-foreground">
-                            Total Raised
-                          </div>
-                          <div className="font-bold text-lg">
-                            RM {(calculateTokens() * 100).toLocaleString()}
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-muted-foreground">
-                            Your Share
-                          </div>
-                          <div className="font-bold text-lg">
-                            {100 - formData.tokenizePercentage}%
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  <Button
-                    onClick={handleTokenization}
-                    disabled={
-                      !formData.businessName ||
-                      !formData.revenueEstimate ||
-                      loading
-                    }
-                    className="w-full bg-gradient-primary hover-glow"
-                    size="lg"
-                  >
-                    {loading ? (
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-                        Minting Tokens...
-                      </div>
-                    ) : (
-                      <>
-                        <Coins className="mr-2 h-5 w-5" />
-                        Create Tokens
-                      </>
-                    )}
-                  </Button>
-                </>
-              ) : (
-                <div className="text-center space-y-4">
-                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto glow-primary">
-                    <CheckCircle className="h-8 w-8 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">
-                    Tokens Created Successfully!
-                  </h3>
-                  <div className="p-4 glass rounded-lg border border-success/20">
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-success">
-                          {calculateTokens()}
-                        </div>
-                        <div className="text-muted-foreground">
-                          Tokens Issued
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-primary">
-                          RM {(calculateTokens() * 100).toLocaleString()}
-                        </div>
-                        <div className="text-muted-foreground">Total Value</div>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground">
-                    Your tokens are now available for community investment.
-                    Smart contracts will automatically distribute profits based
-                    on token ownership.
-                  </p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Investor Portal */}
-          <Card className="glass border-accent/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-accent" />
-                Investor Portal
-              </CardTitle>
-              <CardDescription>
-                Discover investment opportunities in Cyberjaya businesses
+                Please sign in to access the{" "}
+                {portalMode === "retailer" ? "Retailer" : "Investor"} Portal
+                features. You can switch between Retailer and Investor modes
+                after signing in.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {availableTokens
-                  .filter((token) => token.availableTokens > 0)
-                  .map((token) => (
-                    <div
-                      key={token.id}
-                      className="p-4 glass rounded-lg border border-muted/20 hover-lift"
-                    >
-                      <div className="flex justify-between items-start mb-3">
-                        <div>
-                          <h4 className="font-semibold text-foreground">
-                            {token.businessName}
-                          </h4>
-                          <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">
-                            {token.sector}
-                          </span>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-lg font-bold text-success">
-                            +{token.expectedROI}
+              <Button asChild className="w-full">
+                <a href="/login">Sign In to Continue</a>
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+
+        <div
+          className={`grid gap-8 mb-12 ${
+            portalMode === "retailer" ? "lg:grid-cols-1" : "grid-cols-1"
+          }`}
+        >
+          {/* Retailer Portal Content */}
+          {(portalMode === "retailer" || !isAuthenticated) && (
+            <Card className="glass border-primary/20 hover-lift">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Building2 className="h-5 w-5 text-primary" />
+                  Retailer Portal
+                </CardTitle>
+                <CardDescription>
+                  Tokenize your business revenue and attract community investors
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {!isTokenized ? (
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="businessName">Business Name</Label>
+                      <Input
+                        id="businessName"
+                        name="businessName"
+                        placeholder="Enter your business name"
+                        value={formData.businessName}
+                        onChange={handleInputChange}
+                        className="glass border-primary/30"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="revenueEstimate">
+                        Monthly Revenue Estimate (RM)
+                      </Label>
+                      <Input
+                        id="revenueEstimate"
+                        name="revenueEstimate"
+                        type="number"
+                        placeholder="50000"
+                        value={formData.revenueEstimate}
+                        onChange={handleInputChange}
+                        className="glass border-primary/30"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="tokenizePercentage">
+                        Revenue % to Tokenize: {formData.tokenizePercentage}%
+                      </Label>
+                      <Input
+                        id="tokenizePercentage"
+                        name="tokenizePercentage"
+                        type="range"
+                        min="5"
+                        max="50"
+                        value={formData.tokenizePercentage}
+                        onChange={handleInputChange}
+                        className="glass"
+                      />
+                      <div className="flex justify-between text-xs text-muted-foreground">
+                        <span>5%</span>
+                        <span>50%</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="description">Business Description</Label>
+                      <Textarea
+                        id="description"
+                        name="description"
+                        placeholder="Describe your business and investment opportunity"
+                        value={formData.description}
+                        onChange={handleInputChange}
+                        className="glass border-primary/30"
+                      />
+                    </div>
+
+                    {/* Tokenization Preview */}
+                    {formData.revenueEstimate && (
+                      <div className="p-4 glass rounded-lg border border-accent/20">
+                        <h4 className="font-semibold text-accent mb-3">
+                          Tokenization Preview
+                        </h4>
+                        <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <div className="text-muted-foreground">
+                              Tokens Generated
+                            </div>
+                            <div className="font-bold text-lg">
+                              {calculateTokens()}
+                            </div>
                           </div>
-                          <div className="text-xs text-muted-foreground">
-                            Expected ROI
+                          <div>
+                            <div className="text-muted-foreground">
+                              Token Value
+                            </div>
+                            <div className="font-bold text-lg">RM 100 each</div>
+                          </div>
+                          <div>
+                            <div className="text-muted-foreground">
+                              Total Raised
+                            </div>
+                            <div className="font-bold text-lg">
+                              RM {(calculateTokens() * 100).toLocaleString()}
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-muted-foreground">
+                              Your Share
+                            </div>
+                            <div className="font-bold text-lg">
+                              {100 - formData.tokenizePercentage}%
+                            </div>
                           </div>
                         </div>
                       </div>
+                    )}
 
-                      <div className="grid grid-cols-3 gap-2 text-sm mb-3">
-                        <div>
-                          <div className="text-muted-foreground">Available</div>
-                          <div className="font-semibold">
-                            {token.availableTokens} tokens
+                    <Button
+                      onClick={handleTokenization}
+                      disabled={
+                        !formData.businessName ||
+                        !formData.revenueEstimate ||
+                        loading
+                      }
+                      className="w-full bg-gradient-primary hover-glow"
+                      size="lg"
+                    >
+                      {loading ? (
+                        <div className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
+                          Minting Tokens...
+                        </div>
+                      ) : (
+                        <>
+                          <Coins className="mr-2 h-5 w-5" />
+                          Create Tokens
+                        </>
+                      )}
+                    </Button>
+                  </>
+                ) : (
+                  <div className="text-center space-y-4">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto glow-primary">
+                      <CheckCircle className="h-8 w-8 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground">
+                      Tokens Created Successfully!
+                    </h3>
+                    <div className="p-4 glass rounded-lg border border-success/20">
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-success">
+                            {calculateTokens()}
+                          </div>
+                          <div className="text-muted-foreground">
+                            Tokens Issued
                           </div>
                         </div>
-                        <div>
-                          <div className="text-muted-foreground">Price</div>
-                          <div className="font-semibold">
-                            RM {token.pricePerToken}
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-primary">
+                            RM {(calculateTokens() * 100).toLocaleString()}
                           </div>
-                          <div className="text-xs text-muted-foreground">
-                            ≈ {(token.pricePerToken * 0.0001).toFixed(6)} ETH
-                          </div>
-                        </div>
-                        <div>
                           <div className="text-muted-foreground">
                             Total Value
                           </div>
-                          <div className="font-semibold">
-                            RM {token.totalValue.toLocaleString()}
-                          </div>
-                          <div className="text-xs text-green-600">
-                            💰 Real ETH Payments
-                          </div>
                         </div>
                       </div>
-
-                      {selectedToken === `token-${token.id}` ? (
-                        <div className="space-y-2">
-                          <Input
-                            type="number"
-                            placeholder="Enter amount to buy"
-                            value={buyAmount}
-                            onChange={(e) => setBuyAmount(e.target.value)}
-                            min="1"
-                            max={token.availableTokens}
-                          />
-                          {buyAmount && Number(buyAmount) > 0 && (
-                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                              <div className="flex items-center justify-between text-sm">
-                                <span className="text-blue-700 font-medium">
-                                  Total Cost: RM{" "}
-                                  {(
-                                    Number(buyAmount) * token.pricePerToken
-                                  ).toFixed(2)}
-                                </span>
-                                <span className="text-blue-600 font-semibold">
-                                  ≈{" "}
-                                  {(
-                                    Number(buyAmount) *
-                                    token.pricePerToken *
-                                    0.0001
-                                  ).toFixed(6)}{" "}
-                                  ETH
-                                </span>
-                              </div>
-                              <div className="text-xs text-blue-600 mt-1">
-                                ⚡ Real blockchain payment to{" "}
-                                {token.ownerAddress?.slice(0, 6)}...
-                                {token.ownerAddress?.slice(-4)}
-                              </div>
-                            </div>
-                          )}
-                          <div className="flex gap-2">
-                            <Button
-                              size="sm"
-                              onClick={() => handleBuyTokens(token.id)}
-                              disabled={isBuying || !isConnected}
-                              className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground"
-                            >
-                              {isBuying ? (
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              ) : (
-                                <DollarSign className="mr-2 h-4 w-4" />
-                              )}
-                              {isBuying ? "Buying..." : "Confirm"}
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => {
-                                setSelectedToken(null);
-                                setBuyAmount("");
-                                setBuyMessage(null);
-                              }}
-                            >
-                              Cancel
-                            </Button>
-                          </div>
-                        </div>
-                      ) : (
-                        <Button
-                          size="sm"
-                          onClick={() => setSelectedToken(`token-${token.id}`)}
-                          disabled={!isConnected}
-                          className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
-                        >
-                          {!isConnected ? (
-                            <Wallet className="mr-2 h-4 w-4" />
-                          ) : (
-                            <DollarSign className="mr-2 h-4 w-4" />
-                          )}
-                          {!isConnected ? "Connect Wallet" : "Buy Tokens"}
-                        </Button>
-                      )}
                     </div>
-                  ))}
-              </div>
+                    <p className="text-muted-foreground">
+                      Your tokens are now available for community investment.
+                      Smart contracts will automatically distribute profits
+                      based on token ownership.
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
-              {buyMessage && (
-                <Alert className="mt-4">
-                  <CheckCircle className="h-4 w-4" />
-                  <AlertDescription>{buyMessage}</AlertDescription>
-                </Alert>
-              )}
-
-              {/* Sold Out Tokens Section */}
-              {availableTokens.filter((token) => token.availableTokens === 0)
-                .length > 0 && (
-                <div className="mt-6">
-                  <h4 className="font-semibold text-muted-foreground mb-3 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                    Sold Out - Awaiting Restock
-                  </h4>
-                  <div className="space-y-3">
-                    {availableTokens
-                      .filter((token) => token.availableTokens === 0)
-                      .map((token) => (
-                        <div
-                          key={token.id}
-                          className="p-3 glass rounded-lg border border-red-500/20 opacity-75"
-                        >
-                          <div className="flex justify-between items-center">
-                            <div>
-                              <h5 className="font-semibold text-foreground">
-                                {token.businessName}
-                              </h5>
-                              <span className="text-xs px-2 py-1 bg-red-500/20 text-red-400 rounded-full">
-                                SOLD OUT
-                              </span>
+          {/* Investor Portal */}
+          {(portalMode === "investor" || !isAuthenticated) && (
+            <Card className="glass border-accent/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-accent" />
+                  Investor Portal
+                </CardTitle>
+                <CardDescription>
+                  Discover investment opportunities in Cyberjaya businesses
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {availableTokens
+                    .filter((token) => token.availableTokens > 0)
+                    .map((token) => (
+                      <div
+                        key={token.id}
+                        className="p-4 glass rounded-lg border border-muted/20 hover-lift"
+                      >
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h4 className="font-semibold text-foreground">
+                              {token.businessName}
+                            </h4>
+                            <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">
+                              {token.sector}
+                            </span>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-lg font-bold text-success">
+                              +{token.expectedROI}
                             </div>
-                            <div className="text-right">
-                              <div className="text-sm text-muted-foreground mb-2">
-                                <div>
-                                  All {token.totalTokens || 0} tokens sold
-                                </div>
-                                <div>RM {token.pricePerToken} each</div>
-                              </div>
-                              {isConnected &&
-                                address?.toLowerCase() ===
-                                  token.ownerAddress.toLowerCase() && (
-                                  <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={() =>
-                                      handleRestockTokens(token.id)
-                                    }
-                                    className="text-xs border-green-500/50 text-green-400 hover:bg-green-500/10"
-                                  >
-                                    Restock +50
-                                  </Button>
-                                )}
+                            <div className="text-xs text-muted-foreground">
+                              Expected ROI
                             </div>
                           </div>
                         </div>
-                      ))}
-                  </div>
-                </div>
-              )}
 
-              <div className="mt-6 p-4 glass rounded-lg border border-warning/20">
-                <h4 className="font-semibold text-warning mb-2">
-                  Investment Benefits
-                </h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li className="flex items-center gap-2">
-                    <ArrowRight className="h-3 w-3 text-warning" />
-                    Monthly profit distributions
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ArrowRight className="h-3 w-3 text-warning" />
-                    Transparent blockchain tracking
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ArrowRight className="h-3 w-3 text-warning" />
-                    Support local businesses
-                  </li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
+                        <div className="grid grid-cols-3 gap-2 text-sm mb-3">
+                          <div>
+                            <div className="text-muted-foreground">
+                              Available
+                            </div>
+                            <div className="font-semibold">
+                              {token.availableTokens} tokens
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-muted-foreground">Price</div>
+                            <div className="font-semibold">
+                              RM {token.pricePerToken}
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              ≈ {(token.pricePerToken * 0.0001).toFixed(6)} ETH
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-muted-foreground">
+                              Total Value
+                            </div>
+                            <div className="font-semibold">
+                              RM {token.totalValue.toLocaleString()}
+                            </div>
+                            <div className="text-xs text-green-600">
+                              💰 Real ETH Payments
+                            </div>
+                          </div>
+                        </div>
+
+                        {selectedToken === `token-${token.id}` ? (
+                          <div className="space-y-2">
+                            <Input
+                              type="number"
+                              placeholder="Enter amount to buy"
+                              value={buyAmount}
+                              onChange={(e) => setBuyAmount(e.target.value)}
+                              min="1"
+                              max={token.availableTokens}
+                            />
+                            {buyAmount && Number(buyAmount) > 0 && (
+                              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                                <div className="flex items-center justify-between text-sm">
+                                  <span className="text-blue-700 font-medium">
+                                    Total Cost: RM{" "}
+                                    {(
+                                      Number(buyAmount) * token.pricePerToken
+                                    ).toFixed(2)}
+                                  </span>
+                                  <span className="text-blue-600 font-semibold">
+                                    ≈{" "}
+                                    {(
+                                      Number(buyAmount) *
+                                      token.pricePerToken *
+                                      0.0001
+                                    ).toFixed(6)}{" "}
+                                    ETH
+                                  </span>
+                                </div>
+                                <div className="text-xs text-blue-600 mt-1">
+                                  ⚡ Real blockchain payment to{" "}
+                                  {token.ownerAddress?.slice(0, 6)}...
+                                  {token.ownerAddress?.slice(-4)}
+                                </div>
+                              </div>
+                            )}
+                            <div className="flex gap-2">
+                              <Button
+                                size="sm"
+                                onClick={() => handleBuyTokens(token.id)}
+                                disabled={isBuying || !isConnected}
+                                className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground"
+                              >
+                                {isBuying ? (
+                                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                ) : (
+                                  <DollarSign className="mr-2 h-4 w-4" />
+                                )}
+                                {isBuying ? "Buying..." : "Confirm"}
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => {
+                                  setSelectedToken(null);
+                                  setBuyAmount("");
+                                  setBuyMessage(null);
+                                }}
+                              >
+                                Cancel
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <Button
+                            size="sm"
+                            onClick={() =>
+                              setSelectedToken(`token-${token.id}`)
+                            }
+                            disabled={!isConnected}
+                            className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+                          >
+                            {!isConnected ? (
+                              <Wallet className="mr-2 h-4 w-4" />
+                            ) : (
+                              <DollarSign className="mr-2 h-4 w-4" />
+                            )}
+                            {!isConnected ? "Connect Wallet" : "Buy Tokens"}
+                          </Button>
+                        )}
+                      </div>
+                    ))}
+                </div>
+
+                {buyMessage && (
+                  <Alert className="mt-4">
+                    <CheckCircle className="h-4 w-4" />
+                    <AlertDescription>{buyMessage}</AlertDescription>
+                  </Alert>
+                )}
+
+                {/* Sold Out Tokens Section */}
+                {availableTokens.filter((token) => token.availableTokens === 0)
+                  .length > 0 && (
+                  <div className="mt-6">
+                    <h4 className="font-semibold text-muted-foreground mb-3 flex items-center gap-2">
+                      <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                      Sold Out - Awaiting Restock
+                    </h4>
+                    <div className="space-y-3">
+                      {availableTokens
+                        .filter((token) => token.availableTokens === 0)
+                        .map((token) => (
+                          <div
+                            key={token.id}
+                            className="p-3 glass rounded-lg border border-red-500/20 opacity-75"
+                          >
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <h5 className="font-semibold text-foreground">
+                                  {token.businessName}
+                                </h5>
+                                <span className="text-xs px-2 py-1 bg-red-500/20 text-red-400 rounded-full">
+                                  SOLD OUT
+                                </span>
+                              </div>
+                              <div className="text-right">
+                                <div className="text-sm text-muted-foreground mb-2">
+                                  <div>
+                                    All {token.totalTokens || 0} tokens sold
+                                  </div>
+                                  <div>RM {token.pricePerToken} each</div>
+                                </div>
+                                {isConnected &&
+                                  address?.toLowerCase() ===
+                                    token.ownerAddress.toLowerCase() && (
+                                    <Button
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() =>
+                                        handleRestockTokens(token.id)
+                                      }
+                                      className="text-xs border-green-500/50 text-green-400 hover:bg-green-500/10"
+                                    >
+                                      Restock +50
+                                    </Button>
+                                  )}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="mt-6 p-4 glass rounded-lg border border-warning/20">
+                  <h4 className="font-semibold text-warning mb-2">
+                    Investment Benefits
+                  </h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li className="flex items-center gap-2">
+                      <ArrowRight className="h-3 w-3 text-warning" />
+                      Monthly profit distributions
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <ArrowRight className="h-3 w-3 text-warning" />
+                      Transparent blockchain tracking
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <ArrowRight className="h-3 w-3 text-warning" />
+                      Support local businesses
+                    </li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* How It Works */}

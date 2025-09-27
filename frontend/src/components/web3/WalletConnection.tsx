@@ -1,14 +1,14 @@
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "../ui/card";
+import { Badge } from "../ui/badge";
 import { Wallet, ChevronRight, Coins } from "lucide-react";
 
 export function WalletConnection() {

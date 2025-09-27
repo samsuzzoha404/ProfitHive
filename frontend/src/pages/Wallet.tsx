@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { useAccount, useBalance } from "wagmi";
+import { useAuth } from "../contexts/AuthContext";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+} from "../components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
 import {
   Wallet as WalletIcon,
   Coins,
@@ -23,11 +30,12 @@ import {
   ArrowUpRight,
   Clock,
 } from "lucide-react";
-import { WalletConnection } from "@/components/web3/WalletConnection";
-import { StakingInterface } from "@/components/web3/StakingInterface";
-import { TokenizationInterface } from "@/components/web3/TokenizationInterface";
+import { WalletConnection } from "../components/web3/WalletConnection";
+import { StakingInterface } from "../components/web3/StakingInterface";
+import { TokenizationInterface } from "../components/web3/TokenizationInterface";
 
 const Wallet = () => {
+  const { isAuthenticated, loading: authLoading } = useAuth();
   const { address, isConnected } = useAccount();
   const { data: ethBalance } = useBalance({
     address: address as `0x${string}`,
@@ -102,6 +110,20 @@ const Wallet = () => {
   const handleTransferTokens = () => {
     console.log("Transfer tokens functionality - to be implemented");
   };
+
+  // Redirect to login if not authenticated
+  if (!authLoading && !isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen pt-20 pb-12">

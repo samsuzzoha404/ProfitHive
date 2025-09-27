@@ -1,213 +1,163 @@
 import { useState, useEffect } from "react";
 import { useAccount, useReadContract } from "wagmi";
+import { useAuth } from "../../contexts/AuthContext";
 import { parseEther, formatEther } from "viem";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, TrendingUp, Coins, Award, Clock } from "lucide-react";
+} from "../ui/card";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Badge } from "../ui/badge";
+import { Separator } from "../ui/separator";
+import { Alert, AlertDescription } from "../ui/alert";
 import {
-  CONTRACT_ADDRESSES,
+  Loader2,
+  TrendingUp,
+  Coins,
+  Award,
+  Clock,
+  CheckCircle,
+} from "lucide-react";
+import {
+  useTokenBalance,
+  useUserStakeInfo,
+  useStakeTokens,
+  useUnstakeTokens,
+  useClaimRewards,
+  useApproveTokens,
+  getContractAddresses,
   REVENUE_SHARING_ABI,
-  PROFITHIVE_TOKEN_ABI,
-} from "@/lib/contracts";
+} from "../../hooks/use-contracts";
 
 export function StakingInterface() {
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, chainId } = useAccount();
+  const { portalMode } = useAuth();
   const [stakeAmount, setStakeAmount] = useState("");
   const [unstakeAmount, setUnstakeAmount] = useState("");
-  const [contractAddresses, setContractAddresses] =
-    useState(CONTRACT_ADDRESSES);
-  const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Mock data for demo purposes
-  const [mockData, setMockData] = useState({
-    tokenBalance: "5000.0",
-    stakedAmount: "2500.0",
-    claimableRewards: "25.5",
-    canUnstake: true,
-  });
+  // Get contract addresses
+  const contractAddresses = getContractAddresses(chainId || 11155111); // Default to Sepolia
 
-  // Load contract addresses from backend
+  // Real blockchain data hooks
+  const { data: tokenBalance, refetch: refetchTokenBalance } =
+    useTokenBalance(address);
+  const { data: stakeInfo, refetch: refetchStakeInfo } = useUserStakeInfo();
+
+  // Transaction hooks
+  const {
+    stakeTokens,
+    isPending: isStaking,
+    isConfirmed: stakeConfirmed,
+  } = useStakeTokens();
+  const {
+    unstakeTokens,
+    isPending: isUnstaking,
+    isConfirmed: unstakeConfirmed,
+  } = useUnstakeTokens();
+  const {
+    claimRewards,
+    isPending: isClaiming,
+    isConfirmed: claimConfirmed,
+  } = useClaimRewards();
+  const {
+    approveTokens,
+    isPending: isApproving,
+    isConfirmed: approveConfirmed,
+  } = useApproveTokens();
+
+  // Clear messages and refetch data after successful transactions
   useEffect(() => {
-    fetch("http://localhost:5000/api/blockchain/health")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.contracts) {
-          setContractAddresses(data.contracts);
-        }
-      })
-      .catch((error) => {
-        console.error("Failed to load contract addresses:", error);
-        setErrorMessage("Failed to connect to blockchain services");
-      });
-  }, []);
+    if (stakeConfirmed) {
+      setSuccessMessage("Successfully staked tokens!");
+      setStakeAmount("");
+      refetchTokenBalance();
+      refetchStakeInfo();
+      setTimeout(() => setSuccessMessage(""), 5000);
+    }
+  }, [stakeConfirmed, refetchTokenBalance, refetchStakeInfo]);
+
+  useEffect(() => {
+    if (unstakeConfirmed) {
+      setSuccessMessage("Successfully unstaked tokens!");
+      setUnstakeAmount("");
+      refetchTokenBalance();
+      refetchStakeInfo();
+      setTimeout(() => setSuccessMessage(""), 5000);
+    }
+  }, [unstakeConfirmed, refetchTokenBalance, refetchStakeInfo]);
+
+  useEffect(() => {
+    if (claimConfirmed) {
+      setSuccessMessage("Successfully claimed rewards!");
+      refetchStakeInfo();
+      setTimeout(() => setSuccessMessage(""), 5000);
+    }
+  }, [claimConfirmed, refetchStakeInfo]);
+
+  useEffect(() => {
+    if (approveConfirmed) {
+      setSuccessMessage("Approval successful! You can now stake tokens.");
+      setTimeout(() => setSuccessMessage(""), 5000);
+    }
+  }, [approveConfirmed]);
 
   const handleStake = async () => {
-    if (!stakeAmount || !contractAddresses.RevenueSharing) {
-      setErrorMessage("Please enter an amount to stake");
+    if (!stakeAmount || !isConnected) {
+      setErrorMessage(
+        "Please enter an amount to stake and connect your wallet"
+      );
       return;
     }
 
-    setIsLoading(true);
     setErrorMessage("");
-    setSuccessMessage("");
 
     try {
-      // In production, this would interact with smart contracts
-      // For now, we'll simulate the transaction
-
-      if (!isConnected) {
-        setErrorMessage("Please connect your wallet first");
-        setIsLoading(false);
-        return;
-      }
-
-      // Simulate API call to backend for staking
-      const response = await fetch(
-        "http://localhost:5000/api/blockchain/stake",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userAddress: address,
-            amount: stakeAmount,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        const result = await response.json();
-        setSuccessMessage(`Successfully staked ${stakeAmount} PHIVE tokens!`);
-        setStakeAmount("");
-
-        // Update mock data
-        setMockData((prev) => ({
-          ...prev,
-          tokenBalance: (
-            parseFloat(prev.tokenBalance) - parseFloat(stakeAmount)
-          ).toString(),
-          stakedAmount: (
-            parseFloat(prev.stakedAmount) + parseFloat(stakeAmount)
-          ).toString(),
-        }));
-      } else {
-        throw new Error("Staking failed");
-      }
+      await stakeTokens(stakeAmount);
+      setStakeAmount("");
     } catch (error) {
       console.error("Staking error:", error);
-      setErrorMessage("Staking transaction failed. Please try again.");
-    } finally {
-      setIsLoading(false);
+      setErrorMessage(
+        error instanceof Error ? error.message : "Failed to stake tokens"
+      );
     }
   };
 
   const handleUnstake = async () => {
-    if (!unstakeAmount || !contractAddresses.RevenueSharing) {
+    if (!unstakeAmount) {
       setErrorMessage("Please enter an amount to unstake");
       return;
     }
 
-    setIsLoading(true);
     setErrorMessage("");
-    setSuccessMessage("");
 
     try {
-      // Simulate API call to backend for unstaking
-      const response = await fetch(
-        "http://localhost:5000/api/blockchain/unstake",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userAddress: address,
-            amount: unstakeAmount,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setSuccessMessage(
-          `Successfully unstaked ${unstakeAmount} PHIVE tokens!`
-        );
-        setUnstakeAmount("");
-
-        // Update mock data
-        setMockData((prev) => ({
-          ...prev,
-          tokenBalance: (
-            parseFloat(prev.tokenBalance) + parseFloat(unstakeAmount)
-          ).toString(),
-          stakedAmount: (
-            parseFloat(prev.stakedAmount) - parseFloat(unstakeAmount)
-          ).toString(),
-        }));
-      } else {
-        throw new Error("Unstaking failed");
-      }
+      await unstakeTokens(unstakeAmount);
+      setUnstakeAmount("");
     } catch (error) {
       console.error("Unstaking error:", error);
-      setErrorMessage("Unstaking transaction failed. Please try again.");
-    } finally {
-      setIsLoading(false);
+      setErrorMessage(
+        error instanceof Error ? error.message : "Failed to unstake tokens"
+      );
     }
   };
 
   const handleClaimRewards = async () => {
-    if (!contractAddresses.RevenueSharing) return;
-
-    setIsLoading(true);
     setErrorMessage("");
-    setSuccessMessage("");
 
     try {
-      // Simulate API call for claiming rewards
-      const response = await fetch(
-        "http://localhost:5000/api/blockchain/claim-rewards",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userAddress: address,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setSuccessMessage(
-          `Successfully claimed ${mockData.claimableRewards} ETH in rewards!`
-        );
-
-        // Update mock data
-        setMockData((prev) => ({
-          ...prev,
-          claimableRewards: "0.0",
-        }));
-      } else {
-        throw new Error("Claiming rewards failed");
-      }
+      await claimRewards();
     } catch (error) {
       console.error("Claim rewards error:", error);
-      setErrorMessage("Failed to claim rewards. Please try again.");
-    } finally {
-      setIsLoading(false);
+      setErrorMessage(
+        error instanceof Error ? error.message : "Failed to claim rewards"
+      );
     }
   };
 
@@ -245,19 +195,34 @@ export function StakingInterface() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-primary" />
-            Staking Overview
+            {portalMode === "retailer"
+              ? "Business Revenue Sharing"
+              : "Token Investment Portfolio"}
           </CardTitle>
           <CardDescription>
-            Stake PHIVE tokens to earn a share of platform revenue
+            {portalMode === "retailer"
+              ? "Tokenize your business revenue and manage profit distribution to investors"
+              : "Stake PHIVE tokens to earn a share of platform and business revenue"}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-muted/50 rounded-lg">
               <Coins className="h-8 w-8 mx-auto mb-2 text-primary" />
-              <p className="text-sm text-muted-foreground">Token Balance</p>
+              <p className="text-sm text-muted-foreground">
+                {portalMode === "retailer"
+                  ? "Business Token Balance"
+                  : "Investment Token Balance"}
+              </p>
               <p className="text-2xl font-bold">
-                {parseFloat(mockData.tokenBalance).toFixed(2)} PHIVE
+                {portalMode === "retailer"
+                  ? // Retailers start with 0 tokens - they create/sell tokens
+                    "0.00"
+                  : // Investors can have tokens they purchased
+                  tokenBalance
+                  ? parseFloat(formatEther(tokenBalance)).toFixed(2)
+                  : "0.00"}{" "}
+                PHIVE
               </p>
             </div>
 
@@ -265,7 +230,10 @@ export function StakingInterface() {
               <Award className="h-8 w-8 mx-auto mb-2 text-green-500" />
               <p className="text-sm text-muted-foreground">Staked Amount</p>
               <p className="text-2xl font-bold">
-                {parseFloat(mockData.stakedAmount).toFixed(2)} PHIVE
+                {stakeInfo
+                  ? parseFloat(formatEther(stakeInfo[0])).toFixed(2)
+                  : "0.00"}{" "}
+                PHIVE
               </p>
             </div>
 
@@ -273,7 +241,10 @@ export function StakingInterface() {
               <Clock className="h-8 w-8 mx-auto mb-2 text-orange-500" />
               <p className="text-sm text-muted-foreground">Claimable Rewards</p>
               <p className="text-2xl font-bold">
-                {parseFloat(mockData.claimableRewards).toFixed(4)} ETH
+                {stakeInfo
+                  ? parseFloat(formatEther(stakeInfo[2])).toFixed(4)
+                  : "0.0000"}{" "}
+                ETH
               </p>
             </div>
           </div>
@@ -285,9 +256,15 @@ export function StakingInterface() {
         {/* Stake Tokens */}
         <Card>
           <CardHeader>
-            <CardTitle>Stake Tokens</CardTitle>
+            <CardTitle>
+              {portalMode === "retailer"
+                ? "Issue Business Tokens"
+                : "Stake Investment Tokens"}
+            </CardTitle>
             <CardDescription>
-              Lock your PHIVE tokens to earn revenue share
+              {portalMode === "retailer"
+                ? "Create and distribute revenue-sharing tokens for your business"
+                : "Lock your PHIVE tokens to earn revenue share from businesses"}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -301,16 +278,20 @@ export function StakingInterface() {
                 onChange={(e) => setStakeAmount(e.target.value)}
               />
               <p className="text-xs text-muted-foreground mt-1">
-                Available: {parseFloat(mockData.tokenBalance).toFixed(2)} PHIVE
+                Available:{" "}
+                {tokenBalance
+                  ? parseFloat(formatEther(tokenBalance)).toFixed(2)
+                  : "0.00"}{" "}
+                PHIVE
               </p>
             </div>
 
             <Button
               onClick={handleStake}
-              disabled={!stakeAmount || isLoading}
+              disabled={!stakeAmount || isStaking}
               className="w-full"
             >
-              {isLoading ? (
+              {isStaking ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                   Staking...
@@ -339,12 +320,16 @@ export function StakingInterface() {
                 placeholder="0.00"
                 value={unstakeAmount}
                 onChange={(e) => setUnstakeAmount(e.target.value)}
-                disabled={!mockData.canUnstake}
+                disabled={!stakeInfo || !stakeInfo[3]}
               />
               <p className="text-xs text-muted-foreground mt-1">
-                Staked: {parseFloat(mockData.stakedAmount).toFixed(2)} PHIVE
+                Staked:{" "}
+                {stakeInfo
+                  ? parseFloat(formatEther(stakeInfo[0])).toFixed(2)
+                  : "0.00"}{" "}
+                PHIVE
               </p>
-              {!mockData.canUnstake && (
+              {stakeInfo && !stakeInfo[3] && (
                 <Badge variant="secondary" className="mt-2">
                   Minimum staking period not met
                 </Badge>
@@ -353,11 +338,13 @@ export function StakingInterface() {
 
             <Button
               onClick={handleUnstake}
-              disabled={!unstakeAmount || !mockData.canUnstake || isLoading}
+              disabled={
+                !unstakeAmount || !stakeInfo || !stakeInfo[3] || isUnstaking
+              }
               variant="outline"
               className="w-full"
             >
-              {isLoading ? (
+              {isUnstaking ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                   Unstaking...
@@ -371,19 +358,22 @@ export function StakingInterface() {
       </div>
 
       {/* Claim Rewards */}
-      {parseFloat(mockData.claimableRewards) > 0 && (
+      {stakeInfo && parseFloat(formatEther(stakeInfo[2])) > 0 && (
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-medium">Claimable Rewards</h3>
                 <p className="text-sm text-muted-foreground">
-                  You have {parseFloat(mockData.claimableRewards).toFixed(4)}{" "}
+                  You have{" "}
+                  {stakeInfo
+                    ? parseFloat(formatEther(stakeInfo[2])).toFixed(4)
+                    : "0.0000"}{" "}
                   ETH available to claim
                 </p>
               </div>
-              <Button onClick={handleClaimRewards} disabled={isLoading}>
-                {isLoading ? (
+              <Button onClick={handleClaimRewards} disabled={isClaiming}>
+                {isClaiming ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                     Claiming...
