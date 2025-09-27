@@ -12,13 +12,13 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDqsPvLKR6KuLJgNbJeaVuFYP98P07XK2Y",
-  authDomain: "profithive-f5410.firebaseapp.com",
-  projectId: "profithive-f5410",
-  storageBucket: "profithive-f5410.firebasestorage.app",
-  messagingSenderId: "166274614093",
-  appId: "1:166274614093:web:6d302800a5f9aca7acad04",
-  measurementId: "G-F7H30JLRWW",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
