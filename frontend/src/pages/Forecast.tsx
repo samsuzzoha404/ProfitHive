@@ -5,7 +5,6 @@ import { useAuth } from "../contexts/AuthContext";
 import { ForecastRequest, SalesRecord } from "../services/api-service";
 
 // Import modular components
-<<<<<<< HEAD
 import ForecastHeader from "@/components/forecast/ForecastHeader";
 import DemoForecastCard from "@/components/forecast/DemoForecastCard";
 import FileUploadCard from "@/components/forecast/FileUploadCard";
@@ -14,27 +13,13 @@ import KPIs from "@/components/forecast/KPIs";
 import ForecastCharts from "@/components/forecast/ForecastCharts";
 import ForecastTable from "@/components/forecast/ForecastTable";
 import InsightsCard from "@/components/forecast/InsightsCard";
+import WeatherImpactCard from "@/components/forecast/WeatherImpactCard";
+import TransportImpactCard from "@/components/forecast/TransportImpactCard";
+import FootTrafficImpactCard from "@/components/forecast/FootTrafficImpactCard";
 import LoadingState from "@/components/forecast/LoadingState";
 import ErrorState from "@/components/forecast/ErrorState";
 import EmptyState from "@/components/forecast/EmptyState";
 import StatusIndicator from "@/components/forecast/StatusIndicator";
-=======
-import ForecastHeader from '@/components/forecast/ForecastHeader';
-import DemoForecastCard from '@/components/forecast/DemoForecastCard';
-import FileUploadCard from '@/components/forecast/FileUploadCard';
-import SystemStatusCard from '@/components/forecast/SystemStatusCard';
-import KPIs from '@/components/forecast/KPIs';
-import ForecastCharts from '@/components/forecast/ForecastCharts';
-import ForecastTable from '@/components/forecast/ForecastTable';
-import InsightsCard from '@/components/forecast/InsightsCard';
-import WeatherImpactCard from '@/components/forecast/WeatherImpactCard';
-import TransportImpactCard from '@/components/forecast/TransportImpactCard';
-import FootTrafficImpactCard from '@/components/forecast/FootTrafficImpactCard';
-import LoadingState from '@/components/forecast/LoadingState';
-import ErrorState from '@/components/forecast/ErrorState';
-import EmptyState from '@/components/forecast/EmptyState';
-import StatusIndicator from '@/components/forecast/StatusIndicator';
->>>>>>> 4eb0ee0e615e0711048845ab6f63506edf4506be
 
 const Forecast = () => {
   const { isAuthenticated, loading: authLoading, portalMode } = useAuth();
