@@ -2,6 +2,96 @@
   "created": "2025-09-26T10:06:52.740Z",
   "entries": [
     {
+      "id": "uploaded-data-2025-09-27-160614",
+      "timestamp": "2025-09-27T08:06:14.976Z",
+      "store": "Uploaded Data",
+      "method": "enhanced_ai_with_external_data",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 209,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-27-160126",
+      "timestamp": "2025-09-27T08:01:26.827Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai_with_external_data",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 249,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-27-155507",
+      "timestamp": "2025-09-27T07:55:07.337Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai_with_external_data",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 73,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-27-155443",
+      "timestamp": "2025-09-27T07:54:43.104Z",
+      "store": "Uploaded Data",
+      "method": "enhanced_ai_with_external_data",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 153,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-27-155235",
+      "timestamp": "2025-09-27T07:52:35.480Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai_with_external_data",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 460,
+      "validation_passed": true
+    },
+    {
+      "id": "tech-cafe-2025-09-27-154943",
+      "timestamp": "2025-09-27T07:49:43.403Z",
+      "store": "Tech Cafe",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 7,
+      "processing_time_ms": 3,
+      "validation_passed": true
+    },
+    {
+      "id": "tech-cafe-2025-09-27-154912",
+      "timestamp": "2025-09-27T07:49:12.110Z",
+      "store": "Tech Cafe",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 7,
+      "processing_time_ms": 2,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-09-27-154829",
+      "timestamp": "2025-09-27T07:48:29.703Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 11,
+      "validation_passed": true
+    },
+    {
+      "id": "uploaded-data-2025-09-27-152534",
+      "timestamp": "2025-09-27T07:25:34.024Z",
+      "store": "Uploaded Data",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 27,
+      "validation_passed": true
+    },
+    {
       "id": "uploaded-data-2025-09-27-143843",
       "timestamp": "2025-09-27T06:38:43.968Z",
       "store": "Uploaded Data",

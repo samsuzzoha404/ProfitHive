@@ -4,7 +4,13 @@
  * Mimics AI behavior with sophisticated insights and predictions
  */
 
+import ExternalDataService from './external-data-service.js';
+
 class EnhancedAIForecastService {
+
+  constructor() {
+    this.externalDataService = new ExternalDataService();
+  }
   
   /**
    * Generate enhanced AI-like forecast with advanced algorithms
@@ -13,9 +19,12 @@ class EnhancedAIForecastService {
    * @param {Array} records - Historical sales records
    * @returns {Object} - Advanced forecast data with AI-like insights
    */
-  static generateEnhancedForecast(store, city, records) {
+  static async generateEnhancedForecast(store, city, records) {
     try {
       console.log(`🧠 Generating Enhanced AI Forecast for ${store} using ${records.length} records`);
+      
+      // Initialize external data service
+      const externalDataService = new ExternalDataService();
       
       // Sort records by date (oldest first)
       const sortedRecords = records
@@ -26,8 +35,19 @@ class EnhancedAIForecastService {
         throw new Error('Insufficient data for AI forecast (minimum 7 days required)');
       }
 
-      // Advanced analytics
-      const analytics = this.performAdvancedAnalytics(sortedRecords);
+      // Fetch external data concurrently with analytics
+      console.log('🌐 Fetching external data impact...');
+      const [externalData, analytics] = await Promise.all([
+        externalDataService.getCombinedImpact().catch(error => {
+          console.warn('External data fetch failed, using fallbacks:', error.message);
+          return {
+            weather: externalDataService.getFallbackWeatherData(),
+            transport: externalDataService.getFallbackTransportData(),
+            combinedScore: 65
+          };
+        }),
+        Promise.resolve(this.performAdvancedAnalytics(sortedRecords))
+      ]);
       
       // Cyberjaya-specific patterns (tech workers, lunch rushes, weekend patterns)
       const cyberjayanPatterns = this.detectCyberjayanPatterns(sortedRecords, city);
@@ -36,15 +56,15 @@ class EnhancedAIForecastService {
       const marketTrends = this.detectMarketTrends(sortedRecords);
       
       // Generate enhanced 14-day forecast with multiple algorithms
-      const forecast = this.generateEnhancedForecastDays(analytics, cyberjayanPatterns, marketTrends);
+      const forecast = this.generateEnhancedForecastDays(analytics, cyberjayanPatterns, marketTrends, externalData);
       
       // Generate AI-like insights and recommendations
-      const insights = this.generateAIInsights(analytics, cyberjayanPatterns, marketTrends, store);
+      const insights = this.generateAIInsights(analytics, cyberjayanPatterns, marketTrends, store, externalData);
       
       // Calculate business impact predictions
       const businessImpact = this.calculateBusinessImpact(forecast, analytics);
       
-      console.log('✅ Enhanced AI forecast generated with advanced patterns');
+      console.log('✅ Enhanced AI forecast generated with advanced patterns and external data');
       
       return {
         store: store,
@@ -54,9 +74,11 @@ class EnhancedAIForecastService {
         summary: insights.summary,
         ai_insights: insights.detailed,
         business_impact: businessImpact,
-        method: 'enhanced_ai_statistical',
-        confidence_note: 'Generated using advanced AI-like statistical algorithms with Cyberjaya market analysis',
-        algorithm_version: '2.1'
+        weatherImpact: externalData.weather,
+        transportImpact: externalData.transport,
+        method: 'enhanced_ai_statistical_with_external_data',
+        confidence_note: 'Generated using advanced AI-like statistical algorithms with Cyberjaya market analysis and external data integration',
+        algorithm_version: '3.0'
       };
       
     } catch (error) {
@@ -152,9 +174,10 @@ class EnhancedAIForecastService {
    * @param {Object} analytics - Advanced analytics
    * @param {Object} patterns - Cyberjaya patterns
    * @param {Object} trends - Market trends
+   * @param {Object} externalData - Weather and transport data
    * @returns {Array} - 14 days of enhanced forecasts
    */
-  static generateEnhancedForecastDays(analytics, patterns, trends) {
+  static generateEnhancedForecastDays(analytics, patterns, trends, externalData = null) {
     const forecast = [];
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -167,9 +190,9 @@ class EnhancedAIForecastService {
       const dateString = forecastDate.toISOString().split('T')[0];
       const weekNumber = Math.floor(i / 7) + 1;
       
-      // Multi-algorithm prediction
+      // Multi-algorithm prediction with external data impact
       const prediction = this.calculateMultiAlgorithmPrediction(
-        analytics, patterns, trends, dayOfWeek, i, weekNumber
+        analytics, patterns, trends, dayOfWeek, i, weekNumber, externalData
       );
       
       // Enhanced confidence calculation
@@ -237,7 +260,7 @@ class EnhancedAIForecastService {
     return patterns;
   }
 
-  static calculateMultiAlgorithmPrediction(analytics, patterns, trends, dayOfWeek, dayIndex, weekNumber) {
+  static calculateMultiAlgorithmPrediction(analytics, patterns, trends, dayOfWeek, dayIndex, weekNumber, externalData = null) {
     // Ensemble of multiple algorithms with Cyberjaya market adjustments
     const basePredict = analytics.avgSales;
     const trendAdjust = basePredict * (analytics.momentum / 100) * 0.15; // Slightly higher trend impact
@@ -248,7 +271,28 @@ class EnhancedAIForecastService {
     const cyberjayanMultiplier = 1.4; // 40% higher for tech workers
     const marketBoost = basePredict * 0.2; // Market growth factor
     
-    const rawSales = (basePredict + trendAdjust + patternAdjust + marketBoost) * weekDecay * cyberjayanMultiplier;
+    // External data impact calculations
+    let weatherImpactMultiplier = 1.0;
+    let transportImpactMultiplier = 1.0;
+    let weatherImpactValue = 0;
+    let transportImpactValue = 0;
+    
+    if (externalData) {
+      // Weather impact on sales (scale: 0-100 to 0.7-1.3 multiplier)
+      weatherImpactMultiplier = 0.7 + (externalData.weather.impactScore / 100) * 0.6;
+      weatherImpactValue = Math.round((externalData.weather.impactScore - 50) * 0.4); // -20 to +20
+      
+      // Transport impact on sales (scale: 0-100 to 0.8-1.2 multiplier)
+      transportImpactMultiplier = 0.8 + (externalData.transport.impactScore / 100) * 0.4;
+      transportImpactValue = Math.round((externalData.transport.impactScore - 50) * 0.3); // -15 to +15
+    } else {
+      // Fallback random impact for backward compatibility
+      weatherImpactValue = Math.round((Math.random() - 0.5) * 12);
+      transportImpactValue = Math.round((Math.random() - 0.5) * 10);
+    }
+    
+    const rawSales = (basePredict + trendAdjust + patternAdjust + marketBoost) 
+      * weekDecay * cyberjayanMultiplier * weatherImpactMultiplier * transportImpactMultiplier;
     const sales = Math.max(1500, Math.round(rawSales)); // Minimum RM1500/day for cafe
     
     // More realistic customer calculation for Cyberjaya cafe - RM45-65 per customer
@@ -258,8 +302,8 @@ class EnhancedAIForecastService {
     return { 
       sales, 
       customers, 
-      weatherImpact: Math.round((Math.random() - 0.5) * 12), // Slightly higher weather impact
-      transportImpact: Math.round((Math.random() - 0.5) * 10) // Higher transport impact for tech hub
+      weatherImpact: weatherImpactValue,
+      transportImpact: transportImpactValue
     };
   }
 
@@ -324,15 +368,44 @@ class EnhancedAIForecastService {
   static detectEventPatterns(records) { return 1.05; }
   static detectMarketTrends(records) { return { trend: 'stable', strength: 0.02 }; }
 
-  static generateAIInsights(analytics, patterns, trends, store) {
+  static generateAIInsights(analytics, patterns, trends, store, externalData = null) {
+    let weatherInsight = '';
+    let transportInsight = '';
+    let externalSummary = '';
+
+    if (externalData) {
+      // Weather insights
+      const weather = externalData.weather;
+      if (weather.impactScore >= 75) {
+        weatherInsight = `Excellent weather conditions (${weather.temp}°C, ${weather.condition}) boosting foot traffic by up to 25%.`;
+      } else if (weather.impactScore <= 40) {
+        weatherInsight = `Challenging weather (${weather.temp}°C, ${weather.condition}) may reduce foot traffic by up to 25%.`;
+      } else {
+        weatherInsight = `Moderate weather conditions (${weather.temp}°C, ${weather.condition}) with neutral impact on foot traffic.`;
+      }
+
+      // Transport insights
+      const transport = externalData.transport;
+      if (transport.impactScore >= 75) {
+        transportInsight = `Excellent transportation connectivity (Bus: ${transport.busAvailability}%, Train: ${transport.trainFrequency}%) enhancing customer accessibility.`;
+      } else if (transport.impactScore <= 50) {
+        transportInsight = `Transportation challenges detected (Congestion: ${transport.congestionLevel}%) may impact customer visits during peak hours.`;
+      } else {
+        transportInsight = `Moderate transportation conditions with ${transport.congestionLevel}% congestion levels.`;
+      }
+
+      externalSummary = ` Weather and transportation data integrated for enhanced accuracy.`;
+    }
+
     return {
-      summary: `AI Analysis for ${store}: Detected ${analytics.momentum > 0 ? 'positive' : 'negative'} momentum (${analytics.momentum.toFixed(1)}%) with ${analytics.volatility.toFixed(1)}% volatility. Enhanced algorithms predict optimized performance during tech worker peak hours. Recommendations: 1) Leverage 10am and 3pm coffee rushes, 2) Optimize Friday evening offerings, 3) Implement dynamic pricing during peak tech events.`,
+      summary: `AI Analysis for ${store}: Detected ${analytics.momentum > 0 ? 'positive' : 'negative'} momentum (${analytics.momentum.toFixed(1)}%) with ${analytics.volatility.toFixed(1)}% volatility. Enhanced algorithms predict optimized performance during tech worker peak hours.${externalSummary} Recommendations: 1) Leverage 10am and 3pm coffee rushes, 2) Optimize Friday evening offerings, 3) Implement dynamic pricing during peak tech events.`,
       detailed: [
         `Market momentum: ${analytics.momentum > 0 ? 'Positive' : 'Negative'} ${Math.abs(analytics.momentum).toFixed(1)}%`,
         `Volatility: ${analytics.volatility.toFixed(1)}% (${analytics.volatility < 15 ? 'Stable' : 'Variable'} market)`,
         `Growth trajectory: ${analytics.growthRate.toFixed(1)}% vs previous period`,
         'Cyberjaya tech worker patterns detected and optimized',
-        'Weekend family dining opportunities identified'
+        'Weekend family dining opportunities identified',
+        ...(externalData ? [weatherInsight, transportInsight] : [])
       ]
     };
   }

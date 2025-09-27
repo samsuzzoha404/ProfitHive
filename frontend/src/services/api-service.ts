@@ -55,6 +55,24 @@ export interface ForecastResponse {
   insights?: string[];               // Unified AI insights array
   weather_impact_summary?: string;    // Weather impact insights
   transport_impact_summary?: string;  // Transport impact insights
+  weatherImpact?: {                   // Weather impact data
+    temp: number;
+    humidity: number;
+    condition: string;
+    description: string;
+    impactScore: number;
+    timestamp: string;
+    fallback?: boolean;
+  };
+  transportImpact?: {                 // Transport impact data
+    busAvailability: number;
+    trainFrequency: number;
+    congestionLevel: number;
+    impactScore: number;
+    peakHour: boolean;
+    timestamp: string;
+    fallback?: boolean;
+  };
   service_details?: {                 // Unified AI service information
     openai_available: boolean;
     prophet_available: boolean;

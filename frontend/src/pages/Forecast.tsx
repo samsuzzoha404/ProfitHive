@@ -11,6 +11,8 @@ import KPIs from '@/components/forecast/KPIs';
 import ForecastCharts from '@/components/forecast/ForecastCharts';
 import ForecastTable from '@/components/forecast/ForecastTable';
 import InsightsCard from '@/components/forecast/InsightsCard';
+import WeatherImpactCard from '@/components/forecast/WeatherImpactCard';
+import TransportImpactCard from '@/components/forecast/TransportImpactCard';
 import LoadingState from '@/components/forecast/LoadingState';
 import ErrorState from '@/components/forecast/ErrorState';
 import EmptyState from '@/components/forecast/EmptyState';
@@ -305,6 +307,12 @@ const Forecast = () => {
           <div className="space-y-6 md:space-y-8">
             {/* Key Performance Indicators */}
             <KPIs kpis={kpis} />
+
+            {/* External Data Impact Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+              <WeatherImpactCard weatherData={forecastData.weatherImpact} />
+              <TransportImpactCard transportData={forecastData.transportImpact} />
+            </div>
 
             {/* Charts Grid */}
             <ForecastCharts
