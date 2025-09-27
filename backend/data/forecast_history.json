@@ -2,6 +2,16 @@
   "created": "2025-09-26T10:06:52.740Z",
   "entries": [
     {
+      "id": "cafe-cyber-2025-09-27-181024",
+      "timestamp": "2025-09-27T10:10:24.584Z",
+      "store": "Cafe Cyber",
+      "method": "enhanced_ai",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 19,
+      "validation_passed": true
+    },
+    {
       "id": "uploaded-data-2025-09-27-143843",
       "timestamp": "2025-09-27T06:38:43.968Z",
       "store": "Uploaded Data",
