@@ -158,15 +158,6 @@ app.post("/api/forecast", async (req, res) => {
     console.log(
       `Request validated: ${store} in ${city} with ${records.length} records`
     );
-
-    // Use Enhanced AI Forecasting directly
-    console.log("Step 2: Generating Enhanced AI Forecast...");
-    forecastData = EnhancedAIForecastService.generateEnhancedForecast(
-      store,
-      city,
-      records
-    );
-    method = "enhanced_ai";
     validationPassed = true;
 
     // Step 3: Save forecast results

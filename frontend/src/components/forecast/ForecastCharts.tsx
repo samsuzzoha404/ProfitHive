@@ -9,20 +9,62 @@ interface ChartDataPoint {
   customers: number;
 }
 
+interface FootTrafficData {
+  hour: number;
+  trafficLevel: number;
+}
+
+interface FootTrafficImpact {
+  locationName?: string;
+  popularTimes?: FootTrafficData[];
+  currentTrafficLevel?: number;
+  avgTraffic?: number;
+  impactScore?: number;
+  fallback?: boolean;
+}
+
 interface ForecastChartsProps {
   displayData: ChartDataPoint[];
   salesData: ChartDataPoint[];
   chartTitle: string;
   chartDescription: string;
+  footTrafficImpact?: FootTrafficImpact;
 }
 
 const ForecastCharts: React.FC<ForecastChartsProps> = ({
   displayData,
   salesData,
   chartTitle,
-  chartDescription
+  chartDescription,
+  footTrafficImpact
 }) => {
-  // Peak hours data for Cyberjaya
+  // Prepare foot traffic data for the chart
+  const footTrafficData = React.useMemo(() => {
+    if (!footTrafficImpact?.popularTimes) {
+      // Default peak hours data for Cyberjaya (fallback)
+      return [
+        { hour: '8AM', hourValue: 8, trafficLevel: 45, sales: 900, isCurrentHour: false },
+        { hour: '10AM', hourValue: 10, trafficLevel: 78, sales: 1560, isCurrentHour: false },
+        { hour: '12PM', hourValue: 12, trafficLevel: 145, sales: 2900, isCurrentHour: false },
+        { hour: '2PM', hourValue: 14, trafficLevel: 165, sales: 3300, isCurrentHour: false },
+        { hour: '4PM', hourValue: 16, trafficLevel: 122, sales: 2440, isCurrentHour: false },
+        { hour: '6PM', hourValue: 18, trafficLevel: 189, sales: 3780, isCurrentHour: false },
+        { hour: '8PM', hourValue: 20, trafficLevel: 156, sales: 3120, isCurrentHour: false },
+        { hour: '10PM', hourValue: 22, trafficLevel: 89, sales: 1780, isCurrentHour: false }
+      ];
+    }
+
+    const currentHour = new Date().getHours();
+    return footTrafficImpact.popularTimes.map(data => ({
+      hour: data.hour < 12 ? `${data.hour || 12}AM` : data.hour === 12 ? '12PM' : `${data.hour - 12}PM`,
+      hourValue: data.hour,
+      trafficLevel: data.trafficLevel,
+      sales: Math.round(data.trafficLevel * 20), // Estimate sales based on traffic
+      isCurrentHour: data.hour === currentHour
+    }));
+  }, [footTrafficImpact]);
+
+  // Peak hours data for Cyberjaya (keeping original for backward compatibility)
   const peakHoursData = [
     { hour: '8AM', customers: 45, sales: 900 },
     { hour: '10AM', customers: 78, sales: 1560 },
@@ -127,19 +169,25 @@ const ForecastCharts: React.FC<ForecastChartsProps> = ({
         </CardContent>
       </Card>
 
-      {/* Peak Hours Chart (Cyberjaya specific) */}
+      {/* Peak Hours Chart with Google Maps Foot Traffic */}
       <Card className="glass border-secondary/20 hover-lift">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-secondary" />
-            Peak Hours (Cyberjaya)
+            Foot Traffic Peak Hours
+            {footTrafficImpact?.fallback && (
+              <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Fallback</span>
+            )}
           </CardTitle>
-          <CardDescription>Busiest predicted hours for retail traffic</CardDescription>
+          <CardDescription>
+            {footTrafficImpact?.locationName || 'Cyberjaya retail location'} - 
+            Current traffic: {footTrafficImpact?.currentTrafficLevel || 50}%
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={peakHoursData}>
+              <BarChart data={footTrafficData}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted/20" />
                 <XAxis 
                   dataKey="hour" 
@@ -149,18 +197,31 @@ const ForecastCharts: React.FC<ForecastChartsProps> = ({
                 <YAxis 
                   tick={{ fontSize: 12 }}
                   className="text-muted-foreground"
+                  label={{ value: 'Traffic Level (%)', angle: -90, position: 'insideLeft' }}
                 />
-                <Tooltip contentStyle={tooltipStyle} />
+                <Tooltip 
+                  contentStyle={tooltipStyle}
+                  formatter={(value: number, name: string) => [
+                    name === 'trafficLevel' ? `${value}%` : value,
+                    name === 'trafficLevel' ? 'Foot Traffic' : name
+                  ]}
+                />
                 <Legend />
                 <Bar 
-                  dataKey="customers" 
-                  fill="hsl(var(--secondary))" 
-                  name="Peak Traffic"
+                  dataKey="trafficLevel" 
+                  fill="hsl(var(--secondary))"
+                  name="Foot Traffic (%)"
                   radius={[4, 4, 0, 0]}
                 />
               </BarChart>
             </ResponsiveContainer>
           </div>
+          {footTrafficImpact && (
+            <div className="mt-4 flex justify-between text-sm text-muted-foreground">
+              <span>Avg Traffic: {footTrafficImpact.avgTraffic}%</span>
+              <span>Impact Score: {footTrafficImpact.impactScore}/100</span>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

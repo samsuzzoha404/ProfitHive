@@ -1,6 +1,9 @@
 {
+<<<<<<< HEAD
   "last_updated": "2025-09-27T20:30:56.072Z",
   "total_forecasts": 64,
+=======
+>>>>>>> 4eb0ee0e615e0711048845ab6f63506edf4506be
   "forecasts": {
     "cafe-cyber-2025-09-26-181934": {
       "id": "cafe-cyber-2025-09-26-181934",
@@ -7081,89 +7084,20 @@
       "request_timestamp": "2025-09-27T06:38:43.967Z",
       "client_ip": "::1"
     },
-    "cafe-cyber-2025-09-27-181024": {
-      "id": "cafe-cyber-2025-09-27-181024",
-      "timestamp": "2025-09-27T10:10:24.584Z",
-      "store": "Cafe Cyber",
       "city": "Cyberjaya",
       "forecast_horizon_days": 14,
       "forecast": [
         {
           "date": "2025-09-28",
-          "predicted_sales": 7289,
-          "predicted_customers": 149,
-          "confidence": 95,
-          "short_insight": "Weekend family dining peak",
-          "weather_impact": 0,
-          "transport_impact": -4
-        },
-        {
-          "date": "2025-09-29",
-          "predicted_sales": 8665,
-          "predicted_customers": 141,
-          "confidence": 94,
-          "short_insight": "Monday motivation boost in sales",
-          "weather_impact": 3,
-          "transport_impact": 0
-        },
-        {
-          "date": "2025-09-30",
-          "predicted_sales": 8270,
-          "predicted_customers": 153,
-          "confidence": 92,
-          "short_insight": "Mid-week steady flow anticipated",
-          "weather_impact": -2,
-          "transport_impact": 0
-        },
-        {
-          "date": "2025-10-01",
-          "predicted_sales": 8404,
-          "predicted_customers": 134,
-          "confidence": 91,
-          "short_insight": "Mid-week promotional opportunity",
-          "weather_impact": 5,
-          "transport_impact": 4
-        },
-        {
-          "date": "2025-10-02",
-          "predicted_sales": 8710,
-          "predicted_customers": 177,
-          "confidence": 89,
-          "short_insight": "Tech meetup crowd potential",
-          "weather_impact": 5,
-          "transport_impact": 1
-        },
-        {
-          "date": "2025-10-03",
-          "predicted_sales": 8839,
-          "predicted_customers": 157,
-          "confidence": 88,
-          "short_insight": "TGIF celebrations drive evening sales",
           "weather_impact": -3,
           "transport_impact": 2
         },
         {
           "date": "2025-10-04",
-          "predicted_sales": 7590,
-          "predicted_customers": 122,
-          "confidence": 86,
-          "short_insight": "Weekend premium pricing effective",
-          "weather_impact": -2,
-          "transport_impact": 5
-        },
-        {
-          "date": "2025-10-05",
-          "predicted_sales": 7038,
-          "predicted_customers": 148,
-          "confidence": 85,
-          "short_insight": "Mid-term forecast with seasonal adjustments",
-          "weather_impact": -3,
           "transport_impact": 2
         },
         {
           "date": "2025-10-06",
-          "predicted_sales": 8366,
-          "predicted_customers": 170,
           "confidence": 83,
           "short_insight": "Mid-term forecast with seasonal adjustments",
           "weather_impact": -3,
@@ -7171,57 +7105,6 @@
         },
         {
           "date": "2025-10-07",
-          "predicted_sales": 7985,
-          "predicted_customers": 165,
-          "confidence": 82,
-          "short_insight": "Mid-term forecast with seasonal adjustments",
-          "weather_impact": -5,
-          "transport_impact": -3
-        },
-        {
-          "date": "2025-10-08",
-          "predicted_sales": 8114,
-          "predicted_customers": 170,
-          "confidence": 80,
-          "short_insight": "Mid-term forecast with seasonal adjustments",
-          "weather_impact": -4,
-          "transport_impact": 4
-        },
-        {
-          "date": "2025-10-09",
-          "predicted_sales": 8409,
-          "predicted_customers": 169,
-          "confidence": 79,
-          "short_insight": "Mid-term forecast with seasonal adjustments",
-          "weather_impact": 4,
-          "transport_impact": -1
-        },
-        {
-          "date": "2025-10-10",
-          "predicted_sales": 8534,
-          "predicted_customers": 134,
-          "confidence": 77,
-          "short_insight": "Mid-term forecast with seasonal adjustments",
-          "weather_impact": -1,
-          "transport_impact": 2
-        },
-        {
-          "date": "2025-10-11",
-          "predicted_sales": 7328,
-          "predicted_customers": 149,
-          "confidence": 76,
-          "short_insight": "Mid-term forecast with seasonal adjustments",
-          "weather_impact": -4,
-          "transport_impact": 2
-        }
-      ],
-      "summary": "AI Analysis for Cafe Cyber: Detected positive momentum (2.6%) with 9.4% volatility. Enhanced algorithms predict optimized performance during tech worker peak hours. Recommendations: 1) Leverage 10am and 3pm coffee rushes, 2) Optimize Friday evening offerings, 3) Implement dynamic pricing during peak tech events.",
-      "method": "enhanced_ai",
-      "confidence_note": "Generated using advanced AI-like statistical algorithms with Cyberjaya market analysis",
-      "processing_time_ms": 19,
-      "input_records_count": 30,
-      "validation_passed": true,
-      "request_timestamp": "2025-09-27T10:10:24.583Z",
       "client_ip": "::1"
     },
     "cafe-cyber-2025-09-27-042827": {
