@@ -5,11 +5,13 @@
  */
 
 import ExternalDataService from './external-data-service.js';
+import FootTrafficService from './foot-traffic-service.js';
 
 class EnhancedAIForecastService {
 
   constructor() {
     this.externalDataService = new ExternalDataService();
+    this.footTrafficService = new FootTrafficService();
   }
   
   /**
@@ -23,8 +25,9 @@ class EnhancedAIForecastService {
     try {
       console.log(`🧠 Generating Enhanced AI Forecast for ${store} using ${records.length} records`);
       
-      // Initialize external data service
+      // Initialize external data services
       const externalDataService = new ExternalDataService();
+      const footTrafficService = new FootTrafficService();
       
       // Sort records by date (oldest first)
       const sortedRecords = records
@@ -35,9 +38,9 @@ class EnhancedAIForecastService {
         throw new Error('Insufficient data for AI forecast (minimum 7 days required)');
       }
 
-      // Fetch external data concurrently with analytics
-      console.log('🌐 Fetching external data impact...');
-      const [externalData, analytics] = await Promise.all([
+      // Fetch external data concurrently with analytics (including foot traffic)
+      console.log('🌐 Fetching external data impact (weather, transport, foot traffic)...');
+      const [externalData, footTrafficData, analytics] = await Promise.all([
         externalDataService.getCombinedImpact().catch(error => {
           console.warn('External data fetch failed, using fallbacks:', error.message);
           return {
@@ -45,6 +48,10 @@ class EnhancedAIForecastService {
             transport: externalDataService.getFallbackTransportData(),
             combinedScore: 65
           };
+        }),
+        footTrafficService.getFootTrafficImpact().catch(error => {
+          console.warn('Foot traffic data fetch failed, using fallback:', error.message);
+          return footTrafficService.getFallbackFootTrafficData();
         }),
         Promise.resolve(this.performAdvancedAnalytics(sortedRecords))
       ]);
@@ -76,6 +83,7 @@ class EnhancedAIForecastService {
         business_impact: businessImpact,
         weatherImpact: externalData.weather,
         transportImpact: externalData.transport,
+        footTrafficImpact: footTrafficData,
         method: 'enhanced_ai_statistical_with_external_data',
         confidence_note: 'Generated using advanced AI-like statistical algorithms with Cyberjaya market analysis and external data integration',
         algorithm_version: '3.0'

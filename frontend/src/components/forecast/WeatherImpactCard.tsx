@@ -18,7 +18,7 @@ interface WeatherImpactCardProps {
 const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) => {
   if (!weatherData) {
     return (
-      <Card className="h-full">
+      <Card className="h-full glass border-blue-400/20 hover-lift transition-all duration-300 hover:border-blue-400/40">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Cloud className="h-5 w-5" />
@@ -85,7 +85,7 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
   const impactInfo = getImpactInfo(weatherData.impactScore);
 
   return (
-    <Card className="h-full">
+    <Card className="h-full glass border-blue-400/20 hover-lift transition-all duration-300 hover:border-blue-400/40">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2">
           {getWeatherIcon(weatherData.condition)}

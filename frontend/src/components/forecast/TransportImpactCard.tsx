@@ -18,7 +18,7 @@ interface TransportImpactCardProps {
 const TransportImpactCard: React.FC<TransportImpactCardProps> = ({ transportData }) => {
   if (!transportData) {
     return (
-      <Card className="h-full">
+      <Card className="h-full glass border-secondary/20 hover-lift transition-all duration-300 hover:border-secondary/40">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Bus className="h-5 w-5" />
@@ -81,7 +81,7 @@ const TransportImpactCard: React.FC<TransportImpactCardProps> = ({ transportData
   const impactInfo = getImpactInfo(transportData.impactScore);
 
   return (
-    <Card className="h-full">
+    <Card className="h-full glass border-secondary/20 hover-lift transition-all duration-300 hover:border-secondary/40">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2">
           <Bus className="h-5 w-5 text-blue-600" />

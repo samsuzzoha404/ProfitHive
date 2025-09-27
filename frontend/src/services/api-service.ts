@@ -73,6 +73,20 @@ export interface ForecastResponse {
     timestamp: string;
     fallback?: boolean;
   };
+  footTrafficImpact?: {               // Foot traffic impact data
+    locationName: string;
+    popularTimes: Array<{
+      hour: number;
+      trafficLevel: number;
+    }>;
+    currentTrafficLevel: number;
+    avgTraffic: number;
+    impactScore: number;
+    rating?: number;
+    totalRatings?: number;
+    fallback?: boolean;
+    timestamp: string;
+  };
   service_details?: {                 // Unified AI service information
     openai_available: boolean;
     prophet_available: boolean;
