@@ -1,0 +1,105 @@
+{
+  "history": [
+    {
+      "ds": "2025-09-14",
+      "y": 2400,
+      "weather_score": 0.7,
+      "transport_score": 0.6,
+      "foot_traffic_score": 0.5
+    },
+    {
+      "ds": "2025-09-15",
+      "y": 2600,
+      "weather_score": 0.8,
+      "transport_score": 0.7,
+      "foot_traffic_score": 0.6
+    },
+    {
+      "ds": "2025-09-16",
+      "y": 2300,
+      "weather_score": 0.6,
+      "transport_score": 0.5,
+      "foot_traffic_score": 0.4
+    },
+    {
+      "ds": "2025-09-17",
+      "y": 2800,
+      "weather_score": 0.9,
+      "transport_score": 0.8,
+      "foot_traffic_score": 0.7
+    },
+    {
+      "ds": "2025-09-18",
+      "y": 3000,
+      "weather_score": 0.8,
+      "transport_score": 0.8,
+      "foot_traffic_score": 0.8
+    },
+    {
+      "ds": "2025-09-19",
+      "y": 2700,
+      "weather_score": 0.7,
+      "transport_score": 0.7,
+      "foot_traffic_score": 0.6
+    },
+    {
+      "ds": "2025-09-20",
+      "y": 2500,
+      "weather_score": 0.8,
+      "transport_score": 0.7,
+      "foot_traffic_score": 0.6
+    },
+    {
+      "ds": "2025-09-21",
+      "y": 2800,
+      "weather_score": 0.9,
+      "transport_score": 0.8,
+      "foot_traffic_score": 0.7
+    },
+    {
+      "ds": "2025-09-22",
+      "y": 2200,
+      "weather_score": 0.6,
+      "transport_score": 0.6,
+      "foot_traffic_score": 0.5
+    },
+    {
+      "ds": "2025-09-23",
+      "y": 3100,
+      "weather_score": 0.9,
+      "transport_score": 0.9,
+      "foot_traffic_score": 0.8
+    },
+    {
+      "ds": "2025-09-24",
+      "y": 3300,
+      "weather_score": 0.8,
+      "transport_score": 0.8,
+      "foot_traffic_score": 0.9
+    },
+    {
+      "ds": "2025-09-25",
+      "y": 2900,
+      "weather_score": 0.7,
+      "transport_score": 0.7,
+      "foot_traffic_score": 0.6
+    },
+    {
+      "ds": "2025-09-26",
+      "y": 2700,
+      "weather_score": 0.6,
+      "transport_score": 0.6,
+      "foot_traffic_score": 0.5
+    },
+    {
+      "ds": "2025-09-27",
+      "y": 2950,
+      "weather_score": 0.8,
+      "transport_score": 0.8,
+      "foot_traffic_score": 0.7
+    }
+  ],
+  "predict_periods": 7,
+  "freq": "D",
+  "retailer_id": "tech_cafe_cyberjaya"
+}

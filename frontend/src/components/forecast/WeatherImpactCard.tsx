@@ -1,7 +1,21 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { Cloud, Sun, CloudRain, CloudSnow, Wind, Thermometer, Droplets } from 'lucide-react';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { Badge } from "../ui/badge";
+import {
+  Cloud,
+  Sun,
+  CloudRain,
+  CloudSnow,
+  Wind,
+  Thermometer,
+  Droplets,
+} from "lucide-react";
 
 interface WeatherImpactCardProps {
   weatherData?: {
@@ -15,7 +29,9 @@ interface WeatherImpactCardProps {
   };
 }
 
-const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) => {
+const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({
+  weatherData,
+}) => {
   if (!weatherData) {
     return (
       <Card className="h-full glass border-blue-400/20 hover-lift transition-all duration-300 hover:border-blue-400/40">
@@ -24,7 +40,9 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
             <Cloud className="h-5 w-5" />
             Weather Impact
           </CardTitle>
-          <CardDescription>Real-time weather analysis for Cyberjaya</CardDescription>
+          <CardDescription>
+            Real-time weather analysis for Cyberjaya
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-center h-32 text-muted-foreground">
@@ -39,20 +57,21 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
   }
 
   // Weather icon mapping
-  const getWeatherIcon = (condition: string) => {
+  const getWeatherIcon = (condition: string | undefined) => {
     const iconClass = "h-8 w-8";
-    switch (condition.toLowerCase()) {
-      case 'clear':
-      case 'sunny':
+    const conditionLower = condition?.toLowerCase() || "";
+    switch (conditionLower) {
+      case "clear":
+      case "sunny":
         return <Sun className={`${iconClass} text-yellow-500`} />;
-      case 'rain':
-      case 'drizzle':
+      case "rain":
+      case "drizzle":
         return <CloudRain className={`${iconClass} text-blue-500`} />;
-      case 'snow':
+      case "snow":
         return <CloudSnow className={`${iconClass} text-blue-300`} />;
-      case 'clouds':
-      case 'partly cloudy':
-      case 'cloudy':
+      case "clouds":
+      case "partly cloudy":
+      case "cloudy":
         return <Cloud className={`${iconClass} text-gray-500`} />;
       default:
         return <Wind className={`${iconClass} text-gray-400`} />;
@@ -63,21 +82,21 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
   const getImpactInfo = (score: number) => {
     if (score >= 75) {
       return {
-        color: 'bg-green-100 text-green-800 border-green-200',
-        label: 'Positive Impact',
-        description: 'Great weather for customer visits'
+        color: "bg-green-100 text-green-800 border-green-200",
+        label: "Positive Impact",
+        description: "Great weather for customer visits",
       };
     } else if (score >= 50) {
       return {
-        color: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-        label: 'Moderate Impact',
-        description: 'Normal weather conditions'
+        color: "bg-yellow-100 text-yellow-800 border-yellow-200",
+        label: "Moderate Impact",
+        description: "Normal weather conditions",
       };
     } else {
       return {
-        color: 'bg-red-100 text-red-800 border-red-200',
-        label: 'Negative Impact',
-        description: 'Weather may reduce foot traffic'
+        color: "bg-red-100 text-red-800 border-red-200",
+        label: "Negative Impact",
+        description: "Weather may reduce foot traffic",
       };
     }
   };
@@ -100,7 +119,7 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
           Real-time weather analysis for Cyberjaya
         </CardDescription>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         {/* Current Conditions */}
         <div className="grid grid-cols-2 gap-4">
@@ -111,7 +130,7 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
             </div>
             <p className="text-2xl font-bold">{weatherData.temp}°C</p>
           </div>
-          
+
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Droplets className="h-4 w-4 text-blue-500" />
@@ -126,7 +145,9 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
           <p className="text-sm font-medium">Condition</p>
           <div className="flex items-center gap-2">
             {getWeatherIcon(weatherData.condition)}
-            <span className="font-medium capitalize">{weatherData.description}</span>
+            <span className="font-medium capitalize">
+              {weatherData.description}
+            </span>
           </div>
         </div>
 
@@ -138,18 +159,23 @@ const WeatherImpactCard: React.FC<WeatherImpactCardProps> = ({ weatherData }) =>
               {weatherData.impactScore}/100
             </Badge>
           </div>
-          
+
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
+            <div
               className={`h-2 rounded-full transition-all duration-300 ${
-                weatherData.impactScore >= 75 ? 'bg-green-500' :
-                weatherData.impactScore >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                weatherData.impactScore >= 75
+                  ? "bg-green-500"
+                  : weatherData.impactScore >= 50
+                  ? "bg-yellow-500"
+                  : "bg-red-500"
               }`}
               style={{ width: `${weatherData.impactScore}%` }}
             />
           </div>
-          
-          <p className="text-xs text-muted-foreground">{impactInfo.description}</p>
+
+          <p className="text-xs text-muted-foreground">
+            {impactInfo.description}
+          </p>
         </div>
 
         {/* Impact Label */}

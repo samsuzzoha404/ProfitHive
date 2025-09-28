@@ -380,8 +380,12 @@ const Forecast = () => {
             {/* External Data Impact Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
               <WeatherImpactCard weatherData={forecastData.weatherImpact} />
-              <TransportImpactCard transportData={forecastData.transportImpact} />
-              <FootTrafficImpactCard footTrafficData={forecastData.footTrafficImpact} />
+              <TransportImpactCard
+                transportData={forecastData.transportImpact}
+              />
+              <FootTrafficImpactCard
+                footTrafficData={forecastData.footTrafficImpact}
+              />
             </div>
 
             {/* Charts Grid */}

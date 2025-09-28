@@ -1,6 +1,12 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
   Sparkles,
   TrendingUp,
   TrendingDown,
@@ -8,8 +14,8 @@ import {
   Users,
   AlertTriangle,
   DollarSign,
-  Activity
-} from 'lucide-react';
+  Activity,
+} from "lucide-react";
 
 interface InsightsCardProps {
   insights: string[];
@@ -17,19 +23,44 @@ interface InsightsCardProps {
 
 const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
   // Determine icon based on insight content or index
-  const getInsightIcon = (text: string, idx: number) => {
-    const lowerText = text.toLowerCase();
-    if (lowerText.includes('increase') || lowerText.includes('growth') || lowerText.includes('rise')) {
+  const getInsightIcon = (text: string | unknown, idx: number) => {
+    // Ensure text is a string
+    const textString = typeof text === "string" ? text : String(text || "");
+    const lowerText = textString.toLowerCase();
+    if (
+      lowerText.includes("increase") ||
+      lowerText.includes("growth") ||
+      lowerText.includes("rise")
+    ) {
       return <TrendingUp className="w-4 h-4 text-primary-foreground" />;
-    } else if (lowerText.includes('decrease') || lowerText.includes('decline') || lowerText.includes('drop')) {
+    } else if (
+      lowerText.includes("decrease") ||
+      lowerText.includes("decline") ||
+      lowerText.includes("drop")
+    ) {
       return <TrendingDown className="w-4 h-4 text-primary-foreground" />;
-    } else if (lowerText.includes('peak') || lowerText.includes('best') || lowerText.includes('highest')) {
+    } else if (
+      lowerText.includes("peak") ||
+      lowerText.includes("best") ||
+      lowerText.includes("highest")
+    ) {
       return <Target className="w-4 h-4 text-primary-foreground" />;
-    } else if (lowerText.includes('customer') || lowerText.includes('traffic')) {
+    } else if (
+      lowerText.includes("customer") ||
+      lowerText.includes("traffic")
+    ) {
       return <Users className="w-4 h-4 text-primary-foreground" />;
-    } else if (lowerText.includes('warning') || lowerText.includes('risk') || lowerText.includes('concern')) {
+    } else if (
+      lowerText.includes("warning") ||
+      lowerText.includes("risk") ||
+      lowerText.includes("concern")
+    ) {
       return <AlertTriangle className="w-4 h-4 text-primary-foreground" />;
-    } else if (lowerText.includes('revenue') || lowerText.includes('sales') || lowerText.includes('profit')) {
+    } else if (
+      lowerText.includes("revenue") ||
+      lowerText.includes("sales") ||
+      lowerText.includes("profit")
+    ) {
       return <DollarSign className="w-4 h-4 text-primary-foreground" />;
     } else {
       return <Activity className="w-4 h-4 text-primary-foreground" />;
@@ -38,12 +69,15 @@ const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
 
   const getEmojiPrefix = (text: string, idx: number) => {
     const lowerText = text.toLowerCase();
-    if (lowerText.includes('increase') || lowerText.includes('growth')) return '📈';
-    if (lowerText.includes('warning') || lowerText.includes('risk')) return '⚠️';
-    if (lowerText.includes('peak') || lowerText.includes('best')) return '🎯';
-    if (lowerText.includes('customer')) return '👥';
-    if (lowerText.includes('revenue') || lowerText.includes('sales')) return '💰';
-    return ['💡', '🔍', '📊', '⭐'][idx % 4];
+    if (lowerText.includes("increase") || lowerText.includes("growth"))
+      return "📈";
+    if (lowerText.includes("warning") || lowerText.includes("risk"))
+      return "⚠️";
+    if (lowerText.includes("peak") || lowerText.includes("best")) return "🎯";
+    if (lowerText.includes("customer")) return "👥";
+    if (lowerText.includes("revenue") || lowerText.includes("sales"))
+      return "💰";
+    return ["💡", "🔍", "📊", "⭐"][idx % 4];
   };
 
   if (!insights || insights.length === 0) {
@@ -64,13 +98,18 @@ const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
       <CardContent>
         <div className="space-y-4">
           {insights.map((insight, index) => (
-            <div key={index} className="flex items-start gap-3 p-4 glass rounded-xl border border-primary/20">
+            <div
+              key={index}
+              className="flex items-start gap-3 p-4 glass rounded-xl border border-primary/20"
+            >
               <div className="p-2 bg-gradient-primary rounded-lg glow-primary">
                 {getInsightIcon(insight, index)}
               </div>
               <div className="flex-1">
                 <p className="text-sm text-muted-foreground">
-                  <span className="mr-2 text-base">{getEmojiPrefix(insight, index)}</span>
+                  <span className="mr-2 text-base">
+                    {getEmojiPrefix(insight, index)}
+                  </span>
                   {insight}
                 </p>
               </div>

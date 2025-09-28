@@ -1,19 +1,21 @@
 /**
  * Google Maps Foot Traffic Service
  * Fetches popular times and foot traffic data from Google Maps Places API
- * 
+ *
  * Author: Cyberjaya Team
  * Features: Real-time foot traffic, popular times data
  */
 
-import axios from 'axios';
+import axios from "axios";
 
 class FootTrafficService {
-  
   constructor() {
-    this.googleMapsApiKey = 'AIzaSyAzI03sJax4sxCLYTLm2Drle85k1cpN9r8';
-    this.cyberjayanPlaceId = 'ChIJG_yUGCIjzTERhJgdAYGpilg'; // Example place ID for Cyberjaya
-    this.placesApiUrl = 'https://maps.googleapis.com/maps/api/place/details/json';
+    this.googleMapsApiKey =
+      process.env.GOOGLE_MAPS_API_KEY ||
+      "AIzaSyAzI03sJax4sxCLYTLm2Drle85k1cpN9r8";
+    this.cyberjayanPlaceId = "ChIJG_yUGCIjzTERhJgdAYGpilg"; // Example place ID for Cyberjaya
+    this.placesApiUrl =
+      "https://maps.googleapis.com/maps/api/place/details/json";
   }
 
   /**
@@ -23,52 +25,63 @@ class FootTrafficService {
    */
   async getFootTrafficImpact(placeId = this.cyberjayanPlaceId) {
     try {
-      console.log('👥 Fetching foot traffic data from Google Maps Places API...');
-      
+      console.log(
+        "👥 Fetching foot traffic data from Google Maps Places API..."
+      );
+
       const response = await axios.get(this.placesApiUrl, {
         params: {
           place_id: placeId,
-          fields: 'name,popular_times,rating,user_ratings_total,current_opening_hours',
-          key: this.googleMapsApiKey
+          fields:
+            "name,popular_times,rating,user_ratings_total,current_opening_hours",
+          key: this.googleMapsApiKey,
         },
-        timeout: 10000
+        timeout: 10000,
       });
 
       const placeData = response.data.result;
-      
+
       if (!placeData) {
-        throw new Error('No place data found for the specified location');
+        throw new Error("No place data found for the specified location");
       }
 
       // Extract popular times data
       const popularTimes = this.parsePopularTimes(placeData.popular_times);
-      
+
       // Calculate current traffic level based on current time
       const currentHour = new Date().getHours();
-      const currentTrafficLevel = this.getCurrentTrafficLevel(popularTimes, currentHour);
-      
+      const currentTrafficLevel = this.getCurrentTrafficLevel(
+        popularTimes,
+        currentHour
+      );
+
       // Calculate average traffic for impact scoring
       const avgTraffic = this.calculateAverageTraffic(popularTimes);
-      
-      // Calculate impact score (0-100)
-      const impactScore = this.calculateFootTrafficImpactScore(currentTrafficLevel, avgTraffic, placeData.rating);
 
-      console.log(`✅ Foot traffic data retrieved: Current ${currentTrafficLevel}%, Avg ${avgTraffic}%, Impact: ${impactScore}`);
+      // Calculate impact score (0-100)
+      const impactScore = this.calculateFootTrafficImpactScore(
+        currentTrafficLevel,
+        avgTraffic,
+        placeData.rating
+      );
+
+      console.log(
+        `✅ Foot traffic data retrieved: Current ${currentTrafficLevel}%, Avg ${avgTraffic}%, Impact: ${impactScore}`
+      );
 
       return {
-        locationName: placeData.name || 'Cyberjaya Retail Location',
+        locationName: placeData.name || "Cyberjaya Retail Location",
         popularTimes: popularTimes,
         currentTrafficLevel: currentTrafficLevel,
         avgTraffic: avgTraffic,
         impactScore: impactScore,
         rating: placeData.rating || 4.0,
         totalRatings: placeData.user_ratings_total || 100,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
-
     } catch (error) {
-      console.error('❌ Google Maps Places API failed:', error.message);
-      
+      console.error("❌ Google Maps Places API failed:", error.message);
+
       // Return fallback foot traffic data
       return this.getFallbackFootTrafficData();
     }
@@ -86,8 +99,10 @@ class FootTrafficService {
 
     // Get today's popular times (0 = Monday, 6 = Sunday in Google's format)
     const today = new Date().getDay();
-    const todayData = popularTimesData.find(day => day.day === (today === 0 ? 6 : today - 1));
-    
+    const todayData = popularTimesData.find(
+      (day) => day.day === (today === 0 ? 6 : today - 1)
+    );
+
     if (!todayData || !todayData.data) {
       return this.generateDefaultPopularTimes();
     }
@@ -98,7 +113,7 @@ class FootTrafficService {
       const trafficLevel = todayData.data[hour] || 0; // Google provides 0-100 scale
       popularTimes.push({
         hour: hour,
-        trafficLevel: trafficLevel
+        trafficLevel: trafficLevel,
       });
     }
 
@@ -111,14 +126,35 @@ class FootTrafficService {
    */
   generateDefaultPopularTimes() {
     const defaultPattern = [
-      10, 15, 20, 25, 30, 35, 40, 45, // 12AM-8AM (low traffic)
-      60, 75, 85, 90, 95, 85, 80, 75, // 8AM-4PM (business hours peak)
-      85, 90, 95, 88, 75, 65, 50, 35  // 4PM-12AM (evening peak)
+      10,
+      15,
+      20,
+      25,
+      30,
+      35,
+      40,
+      45, // 12AM-8AM (low traffic)
+      60,
+      75,
+      85,
+      90,
+      95,
+      85,
+      80,
+      75, // 8AM-4PM (business hours peak)
+      85,
+      90,
+      95,
+      88,
+      75,
+      65,
+      50,
+      35, // 4PM-12AM (evening peak)
     ];
 
     return defaultPattern.map((trafficLevel, hour) => ({
       hour: hour,
-      trafficLevel: trafficLevel
+      trafficLevel: trafficLevel,
     }));
   }
 
@@ -129,7 +165,9 @@ class FootTrafficService {
    * @returns {number} Current traffic level (0-100)
    */
   getCurrentTrafficLevel(popularTimes, currentHour) {
-    const currentHourData = popularTimes.find(data => data.hour === currentHour);
+    const currentHourData = popularTimes.find(
+      (data) => data.hour === currentHour
+    );
     return currentHourData ? currentHourData.trafficLevel : 50;
   }
 
@@ -143,7 +181,10 @@ class FootTrafficService {
       return 50;
     }
 
-    const totalTraffic = popularTimes.reduce((sum, data) => sum + data.trafficLevel, 0);
+    const totalTraffic = popularTimes.reduce(
+      (sum, data) => sum + data.trafficLevel,
+      0
+    );
     return Math.round(totalTraffic / popularTimes.length);
   }
 
@@ -154,7 +195,11 @@ class FootTrafficService {
    * @param {number} rating - Place rating (1-5)
    * @returns {number} Impact score (0-100)
    */
-  calculateFootTrafficImpactScore(currentTrafficLevel, avgTraffic, rating = 4.0) {
+  calculateFootTrafficImpactScore(
+    currentTrafficLevel,
+    avgTraffic,
+    rating = 4.0
+  ) {
     let score = 50; // Base score
 
     // Current traffic impact
@@ -194,7 +239,8 @@ class FootTrafficService {
 
     // Weekend boost (Cyberjaya has more weekend shoppers)
     const dayOfWeek = new Date().getDay();
-    if (dayOfWeek === 0 || dayOfWeek === 6) { // Sunday or Saturday
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      // Sunday or Saturday
       score += 10;
     }
 
@@ -207,23 +253,29 @@ class FootTrafficService {
    * @returns {Object} Fallback foot traffic data
    */
   getFallbackFootTrafficData() {
-    console.log('🔄 Using fallback foot traffic data...');
-    
+    console.log("🔄 Using fallback foot traffic data...");
+
     const currentHour = new Date().getHours();
     const popularTimes = this.generateDefaultPopularTimes();
-    const currentTrafficLevel = this.getCurrentTrafficLevel(popularTimes, currentHour);
+    const currentTrafficLevel = this.getCurrentTrafficLevel(
+      popularTimes,
+      currentHour
+    );
     const avgTraffic = this.calculateAverageTraffic(popularTimes);
 
     return {
-      locationName: 'Cyberjaya Retail Location (Fallback)',
+      locationName: "Cyberjaya Retail Location (Fallback)",
       popularTimes: popularTimes,
       currentTrafficLevel: currentTrafficLevel,
       avgTraffic: avgTraffic,
-      impactScore: this.calculateFootTrafficImpactScore(currentTrafficLevel, avgTraffic),
+      impactScore: this.calculateFootTrafficImpactScore(
+        currentTrafficLevel,
+        avgTraffic
+      ),
       rating: 4.0,
       totalRatings: 100,
       fallback: true,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 }
