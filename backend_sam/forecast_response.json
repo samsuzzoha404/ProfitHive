@@ -1,0 +1,279 @@
+{
+  "store": "Test Cafe",
+  "city": "Cyberjaya",
+  "forecast_horizon_days": 14,
+  "forecast": [
+    {
+      "date": "2025-08-11",
+      "predicted_sales": 20952,
+      "predicted_customers": 1048,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM20,952"
+    },
+    {
+      "date": "2025-08-12",
+      "predicted_sales": 18329,
+      "predicted_customers": 916,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM18,329"
+    },
+    {
+      "date": "2025-08-13",
+      "predicted_sales": 15893,
+      "predicted_customers": 795,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM15,893"
+    },
+    {
+      "date": "2025-08-14",
+      "predicted_sales": 13464,
+      "predicted_customers": 673,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM13,464"
+    },
+    {
+      "date": "2025-08-15",
+      "predicted_sales": 11898,
+      "predicted_customers": 595,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM11,898"
+    },
+    {
+      "date": "2025-08-16",
+      "predicted_sales": 10148,
+      "predicted_customers": 507,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM10,148"
+    },
+    {
+      "date": "2025-08-17",
+      "predicted_sales": 8517,
+      "predicted_customers": 426,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM8,517"
+    },
+    {
+      "date": "2025-08-18",
+      "predicted_sales": 7074,
+      "predicted_customers": 354,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM7,074"
+    },
+    {
+      "date": "2025-08-19",
+      "predicted_sales": 5954,
+      "predicted_customers": 298,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM5,954"
+    },
+    {
+      "date": "2025-08-20",
+      "predicted_sales": 5017,
+      "predicted_customers": 251,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM5,017"
+    },
+    {
+      "date": "2025-08-21",
+      "predicted_sales": 4050,
+      "predicted_customers": 203,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM4,050"
+    },
+    {
+      "date": "2025-08-22",
+      "predicted_sales": 3882,
+      "predicted_customers": 194,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM3,882"
+    },
+    {
+      "date": "2025-08-23",
+      "predicted_sales": 3440,
+      "predicted_customers": 172,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM3,440"
+    },
+    {
+      "date": "2025-08-24",
+      "predicted_sales": 3010,
+      "predicted_customers": 151,
+      "confidence": 95,
+      "short_insight": "Prophet forecast: RM3,010"
+    }
+  ],
+  "summary": "Prophet forecast completed with 95% confidence for 14 days",
+  "ai_insights": {
+    "detailed": [
+      "Prophet model confidence: 95.0%",
+      "Weather impact: Weather data unavailable, using neutral impact",
+      "Transport impact: Transport data unavailable, using neutral impact",
+      "Foot traffic impact: Foot traffic data unavailable, using neutral impact",
+      "Total predicted revenue: RM131,627",
+      "Method: Facebook Prophet with external regressors"
+    ],
+    "prophet_confidence": 0.95,
+    "model_metadata": {
+      "trained_on": "2025-09-28T03:11:19.768914",
+      "method": "facebook_prophet",
+      "changepoint_prior_scale": 0.05,
+      "retailer_id": null,
+      "predict_periods": 14,
+      "frequency": "D",
+      "version": "1.0.0",
+      "generated_at": "2025-09-27T19:14:09.812Z"
+    }
+  },
+  "weatherImpact": {
+    "temp": 31.1,
+    "humidity": 67,
+    "condition": "sunny",
+    "description": "Weather data unavailable, using neutral impact",
+    "impactScore": 50,
+    "timestamp": "2025-09-27T19:14:09.812Z",
+    "fallback": false,
+    "prophet_data": {
+      "score": 0.5,
+      "explanation": "Weather data unavailable, using neutral impact"
+    }
+  },
+  "transportImpact": {
+    "busAvailability": 86.2,
+    "trainFrequency": 86.3,
+    "congestionLevel": 46.4,
+    "impactScore": 50,
+    "peakHour": false,
+    "timestamp": "2025-09-27T19:14:09.812Z",
+    "fallback": false,
+    "description": "Transport data unavailable, using neutral impact",
+    "prophet_data": {
+      "score": 0.5,
+      "explanation": "Transport data unavailable, using neutral impact"
+    }
+  },
+  "footTrafficImpact": {
+    "locationName": "Cyberjaya Business District",
+    "popularTimes": [
+      {
+        "hour": 0,
+        "trafficLevel": 20.1
+      },
+      {
+        "hour": 1,
+        "trafficLevel": 13.8
+      },
+      {
+        "hour": 2,
+        "trafficLevel": 12.3
+      },
+      {
+        "hour": 3,
+        "trafficLevel": 7.8
+      },
+      {
+        "hour": 4,
+        "trafficLevel": 8.5
+      },
+      {
+        "hour": 5,
+        "trafficLevel": 14.7
+      },
+      {
+        "hour": 6,
+        "trafficLevel": 19.4
+      },
+      {
+        "hour": 7,
+        "trafficLevel": 30.7
+      },
+      {
+        "hour": 8,
+        "trafficLevel": 78.3
+      },
+      {
+        "hour": 9,
+        "trafficLevel": 78.2
+      },
+      {
+        "hour": 10,
+        "trafficLevel": 92.3
+      },
+      {
+        "hour": 11,
+        "trafficLevel": 97.3
+      },
+      {
+        "hour": 12,
+        "trafficLevel": 98.4
+      },
+      {
+        "hour": 13,
+        "trafficLevel": 87.9
+      },
+      {
+        "hour": 14,
+        "trafficLevel": 87.4
+      },
+      {
+        "hour": 15,
+        "trafficLevel": 84.4
+      },
+      {
+        "hour": 16,
+        "trafficLevel": 89.7
+      },
+      {
+        "hour": 17,
+        "trafficLevel": 89.9
+      },
+      {
+        "hour": 18,
+        "trafficLevel": 89.3
+      },
+      {
+        "hour": 19,
+        "trafficLevel": 94.9
+      },
+      {
+        "hour": 20,
+        "trafficLevel": 76.1
+      },
+      {
+        "hour": 21,
+        "trafficLevel": 72.2
+      },
+      {
+        "hour": 22,
+        "trafficLevel": 58.8
+      },
+      {
+        "hour": 23,
+        "trafficLevel": 32.6
+      }
+    ],
+    "currentTrafficLevel": 85.6,
+    "avgTraffic": 50,
+    "impactScore": 50,
+    "rating": 4.7,
+    "totalRatings": 189,
+    "fallback": false,
+    "timestamp": "2025-09-27T19:14:09.812Z",
+    "description": "Foot traffic data unavailable, using neutral impact",
+    "prophet_data": {
+      "score": 0.5,
+      "explanation": "Foot traffic data unavailable, using neutral impact",
+      "popularTimes": []
+    }
+  },
+  "method": "facebook_prophet_with_regressors",
+  "confidence_note": "Generated using Facebook Prophet with external regressors",
+  "algorithm_version": "4.0",
+  "metadata": {
+    "processing_time_ms": 3,
+    "method": "facebook_prophet",
+    "validation_passed": true,
+    "forecast_id": "test-cafe-2025-09-27-031409",
+    "timestamp": "2025-09-27T19:14:09.885Z",
+    "prophet_enabled": true
+  }
+}

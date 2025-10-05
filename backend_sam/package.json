@@ -1,0 +1,37 @@
+{
+  "name": "retail-smart-demand-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Retail Smart Demand & Revenue Sharing Platform",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "retail",
+    "demand",
+    "forecast",
+    "ai",
+    "openai"
+  ],
+  "author": "Cyberjaya Team",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^3.0.1",
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^17.2.2",
+    "express": "^4.19.2",
+    "fs": "0.0.1-security",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.68.4",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
