@@ -1,0 +1,41 @@
+{
+  "store": "Tech Cafe",
+  "city": "Cyberjaya",
+  "records": [
+    {
+      "date": "2025-09-20",
+      "sales_rm": 2500,
+      "customers": 45
+    },
+    {
+      "date": "2025-09-21",
+      "sales_rm": 2800,
+      "customers": 52
+    },
+    {
+      "date": "2025-09-22",
+      "sales_rm": 2200,
+      "customers": 38
+    },
+    {
+      "date": "2025-09-23",
+      "sales_rm": 3100,
+      "customers": 58
+    },
+    {
+      "date": "2025-09-24",
+      "sales_rm": 3300,
+      "customers": 62
+    },
+    {
+      "date": "2025-09-25",
+      "sales_rm": 2900,
+      "customers": 48
+    },
+    {
+      "date": "2025-09-26",
+      "sales_rm": 2700,
+      "customers": 43
+    }
+  ]
+}

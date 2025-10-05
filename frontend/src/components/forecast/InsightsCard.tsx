@@ -17,8 +17,10 @@ interface InsightsCardProps {
 
 const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
   // Determine icon based on insight content or index
-  const getInsightIcon = (text: string, idx: number) => {
-    const lowerText = text.toLowerCase();
+  const getInsightIcon = (text: string | unknown, idx: number) => {
+    // Ensure text is a string
+    const textString = typeof text === 'string' ? text : String(text || '');
+    const lowerText = textString.toLowerCase();
     if (lowerText.includes('increase') || lowerText.includes('growth') || lowerText.includes('rise')) {
       return <TrendingUp className="w-4 h-4 text-primary-foreground" />;
     } else if (lowerText.includes('decrease') || lowerText.includes('decline') || lowerText.includes('drop')) {

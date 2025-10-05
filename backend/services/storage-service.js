@@ -368,6 +368,55 @@ class StorageService {
       };
     }
   }
+
+  /**
+   * Append forecast metadata to history log for audit trail
+   * @param {Object} forecastMetadata - Forecast metadata to append
+   * @returns {Object} - Result object with success status
+   */
+  async appendForecastHistory(forecastMetadata) {
+    try {
+      const historyData = this.readJsonFile(this.historyFile);
+      
+      if (!historyData.entries) {
+        historyData.entries = [];
+      }
+      
+      // Add timestamp if not provided
+      if (!forecastMetadata.timestamp) {
+        forecastMetadata.timestamp = new Date().toISOString();
+      }
+      
+      // Append new entry
+      historyData.entries.push(forecastMetadata);
+      
+      // Keep only last 1000 entries to prevent file from growing too large
+      if (historyData.entries.length > 1000) {
+        historyData.entries = historyData.entries.slice(-1000);
+      }
+      
+      // Update metadata
+      historyData.last_updated = new Date().toISOString();
+      historyData.total_entries = historyData.entries.length;
+      
+      // Save updated history
+      this.writeJsonFile(this.historyFile, historyData);
+      
+      console.log(`Appended forecast history entry: ${forecastMetadata.store || 'Unknown'}`);
+      
+      return {
+        success: true,
+        entry_count: historyData.entries.length
+      };
+      
+    } catch (error) {
+      console.error('Forecast history append error:', error);
+      return {
+        success: false,
+        error: error.message
+      };
+    }
+  }
 }
 
 export default StorageService;

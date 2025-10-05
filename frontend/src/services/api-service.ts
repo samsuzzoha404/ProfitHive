@@ -53,8 +53,45 @@ export interface ForecastResponse {
   confidence?: number;                // Unified AI confidence score
   confidence_note?: string;           // Additional confidence information
   insights?: string[];               // Unified AI insights array
+  ai_insights?: {                     // Prophet-specific insights
+    detailed?: string[];
+    prophet_confidence?: number;
+    model_metadata?: Record<string, unknown>;
+  };
   weather_impact_summary?: string;    // Weather impact insights
   transport_impact_summary?: string;  // Transport impact insights
+  weatherImpact?: {                   // Weather impact data
+    temp: number;
+    humidity: number;
+    condition: string;
+    description: string;
+    impactScore: number;
+    timestamp: string;
+    fallback?: boolean;
+  };
+  transportImpact?: {                 // Transport impact data
+    busAvailability: number;
+    trainFrequency: number;
+    congestionLevel: number;
+    impactScore: number;
+    peakHour: boolean;
+    timestamp: string;
+    fallback?: boolean;
+  };
+  footTrafficImpact?: {               // Foot traffic impact data
+    locationName: string;
+    popularTimes: Array<{
+      hour: number;
+      trafficLevel: number;
+    }>;
+    currentTrafficLevel: number;
+    avgTraffic: number;
+    impactScore: number;
+    rating?: number;
+    totalRatings?: number;
+    fallback?: boolean;
+    timestamp: string;
+  };
   service_details?: {                 // Unified AI service information
     openai_available: boolean;
     prophet_available: boolean;
