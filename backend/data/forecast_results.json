@@ -1,471 +1,120 @@
 {
-  "last_updated": "2025-09-28T06:01:01.273Z",
+  "last_updated": "2025-10-05T15:44:27.466Z",
   "total_forecasts": 100,
   "forecasts": {
-    "uploaded-data-2025-09-28-140101": {
-      "id": "uploaded-data-2025-09-28-140101",
-      "timestamp": "2025-09-28T06:01:01.262Z",
-      "store": "Uploaded Data",
-      "city": "Cyberjaya",
-      "forecast_horizon_days": 14,
-      "forecast": [
-        {
-          "date": "2025-09-26",
-          "predicted_sales": 3808,
-          "predicted_customers": 190,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM3,808"
-        },
-        {
-          "date": "2025-09-27",
-          "predicted_sales": 3982,
-          "predicted_customers": 199,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM3,982"
-        },
-        {
-          "date": "2025-09-28",
-          "predicted_sales": 4136,
-          "predicted_customers": 207,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM4,136"
-        },
-        {
-          "date": "2025-09-29",
-          "predicted_sales": 4368,
-          "predicted_customers": 218,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM4,368"
-        },
-        {
-          "date": "2025-09-30",
-          "predicted_sales": 4846,
-          "predicted_customers": 242,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM4,846"
-        },
-        {
-          "date": "2025-10-01",
-          "predicted_sales": 5472,
-          "predicted_customers": 274,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM5,472"
-        },
-        {
-          "date": "2025-10-02",
-          "predicted_sales": 6075,
-          "predicted_customers": 304,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM6,075"
-        },
-        {
-          "date": "2025-10-03",
-          "predicted_sales": 7527,
-          "predicted_customers": 376,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM7,527"
-        },
-        {
-          "date": "2025-10-04",
-          "predicted_sales": 8800,
-          "predicted_customers": 440,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM8,800"
-        },
-        {
-          "date": "2025-10-05",
-          "predicted_sales": 10220,
-          "predicted_customers": 511,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM10,220"
-        },
-        {
-          "date": "2025-10-06",
-          "predicted_sales": 11882,
-          "predicted_customers": 594,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM11,882"
-        },
-        {
-          "date": "2025-10-07",
-          "predicted_sales": 13946,
-          "predicted_customers": 697,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM13,946"
-        },
-        {
-          "date": "2025-10-08",
-          "predicted_sales": 16293,
-          "predicted_customers": 815,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM16,293"
-        },
-        {
-          "date": "2025-10-09",
-          "predicted_sales": 18733,
-          "predicted_customers": 937,
-          "confidence": 79,
-          "short_insight": "Prophet forecast: RM18,733"
-        }
-      ],
-      "summary": "Prophet forecast completed with 79% confidence for 14 days",
-      "method": "facebook_prophet",
-      "confidence_note": "Generated using Facebook Prophet with external regressors",
-      "processing_time_ms": 4667,
-      "input_records_count": 56,
-      "validation_passed": true,
-      "request_timestamp": "2025-09-28T06:01:01.262Z",
-      "client_ip": "::1",
-      "retailer_id": null,
-      "prophet_used": true
-    },
-    "cafe-cyber-2025-09-28-135558": {
-      "id": "cafe-cyber-2025-09-28-135558",
-      "timestamp": "2025-09-28T05:55:58.324Z",
+    "cafe-cyber-2025-10-05-234427": {
+      "id": "cafe-cyber-2025-10-05-234427",
+      "timestamp": "2025-10-05T15:44:27.456Z",
       "store": "Cafe Cyber",
       "city": "Cyberjaya",
       "forecast_horizon_days": 14,
       "forecast": [
         {
-          "date": "2025-09-28",
-          "predicted_sales": 4136,
-          "predicted_customers": 207,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM4,136"
-        },
-        {
-          "date": "2025-09-29",
-          "predicted_sales": 4368,
-          "predicted_customers": 218,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM4,368"
-        },
-        {
-          "date": "2025-09-30",
-          "predicted_sales": 4846,
-          "predicted_customers": 242,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM4,846"
-        },
-        {
-          "date": "2025-10-01",
-          "predicted_sales": 5472,
-          "predicted_customers": 274,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM5,472"
-        },
-        {
-          "date": "2025-10-02",
-          "predicted_sales": 6075,
-          "predicted_customers": 304,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM6,075"
-        },
-        {
-          "date": "2025-10-03",
-          "predicted_sales": 7527,
-          "predicted_customers": 376,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM7,527"
-        },
-        {
-          "date": "2025-10-04",
-          "predicted_sales": 8800,
-          "predicted_customers": 440,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM8,800"
-        },
-        {
           "date": "2025-10-05",
-          "predicted_sales": 10220,
-          "predicted_customers": 511,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM10,220"
+          "predicted_sales": 2970,
+          "predicted_customers": 148,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM2,970"
         },
         {
           "date": "2025-10-06",
-          "predicted_sales": 11882,
-          "predicted_customers": 594,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM11,882"
+          "predicted_sales": 2687,
+          "predicted_customers": 134,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM2,687"
         },
         {
           "date": "2025-10-07",
-          "predicted_sales": 13946,
-          "predicted_customers": 697,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM13,946"
+          "predicted_sales": 2893,
+          "predicted_customers": 145,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM2,893"
         },
         {
           "date": "2025-10-08",
-          "predicted_sales": 16293,
-          "predicted_customers": 815,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM16,293"
+          "predicted_sales": 3329,
+          "predicted_customers": 166,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM3,329"
         },
         {
           "date": "2025-10-09",
-          "predicted_sales": 18733,
-          "predicted_customers": 936,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM18,733"
+          "predicted_sales": 3651,
+          "predicted_customers": 183,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM3,651"
         },
         {
           "date": "2025-10-10",
-          "predicted_sales": 22106,
-          "predicted_customers": 1105,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM22,106"
+          "predicted_sales": 4168,
+          "predicted_customers": 208,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM4,168"
         },
         {
           "date": "2025-10-11",
-          "predicted_sales": 25350,
-          "predicted_customers": 1267,
-          "confidence": 80,
-          "short_insight": "Prophet forecast: RM25,350"
+          "predicted_sales": 5229,
+          "predicted_customers": 261,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM5,229"
+        },
+        {
+          "date": "2025-10-12",
+          "predicted_sales": 6396,
+          "predicted_customers": 320,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM6,396"
+        },
+        {
+          "date": "2025-10-13",
+          "predicted_sales": 7197,
+          "predicted_customers": 360,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM7,197"
+        },
+        {
+          "date": "2025-10-14",
+          "predicted_sales": 8690,
+          "predicted_customers": 434,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM8,690"
+        },
+        {
+          "date": "2025-10-15",
+          "predicted_sales": 10618,
+          "predicted_customers": 531,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM10,618"
+        },
+        {
+          "date": "2025-10-16",
+          "predicted_sales": 12637,
+          "predicted_customers": 632,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM12,637"
+        },
+        {
+          "date": "2025-10-17",
+          "predicted_sales": 15043,
+          "predicted_customers": 752,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM15,043"
+        },
+        {
+          "date": "2025-10-18",
+          "predicted_sales": 18170,
+          "predicted_customers": 908,
+          "confidence": 76,
+          "short_insight": "Prophet forecast: RM18,170"
         }
       ],
-      "summary": "Prophet forecast completed with 80% confidence for 14 days",
+      "summary": "Prophet forecast completed with 76% confidence for 14 days",
       "method": "facebook_prophet",
       "confidence_note": "Generated using Facebook Prophet with external regressors",
-      "processing_time_ms": 4018,
+      "processing_time_ms": 28229,
       "input_records_count": 30,
       "validation_passed": true,
-      "request_timestamp": "2025-09-28T05:55:58.324Z",
-      "client_ip": "::1",
-      "retailer_id": null,
-      "prophet_used": true
-    },
-    "uploaded-data-2025-09-28-124228": {
-      "id": "uploaded-data-2025-09-28-124228",
-      "timestamp": "2025-09-28T04:42:28.669Z",
-      "store": "Uploaded Data",
-      "city": "Cyberjaya",
-      "forecast_horizon_days": 14,
-      "forecast": [
-        {
-          "date": "2025-09-26",
-          "predicted_sales": 3808,
-          "predicted_customers": 190,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM3,808"
-        },
-        {
-          "date": "2025-09-27",
-          "predicted_sales": 3982,
-          "predicted_customers": 199,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM3,982"
-        },
-        {
-          "date": "2025-09-28",
-          "predicted_sales": 4136,
-          "predicted_customers": 207,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM4,136"
-        },
-        {
-          "date": "2025-09-29",
-          "predicted_sales": 4368,
-          "predicted_customers": 218,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM4,368"
-        },
-        {
-          "date": "2025-09-30",
-          "predicted_sales": 4846,
-          "predicted_customers": 242,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM4,846"
-        },
-        {
-          "date": "2025-10-01",
-          "predicted_sales": 5472,
-          "predicted_customers": 274,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM5,472"
-        },
-        {
-          "date": "2025-10-02",
-          "predicted_sales": 6075,
-          "predicted_customers": 304,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM6,075"
-        },
-        {
-          "date": "2025-10-03",
-          "predicted_sales": 7527,
-          "predicted_customers": 376,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM7,527"
-        },
-        {
-          "date": "2025-10-04",
-          "predicted_sales": 8800,
-          "predicted_customers": 440,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM8,800"
-        },
-        {
-          "date": "2025-10-05",
-          "predicted_sales": 10220,
-          "predicted_customers": 511,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM10,220"
-        },
-        {
-          "date": "2025-10-06",
-          "predicted_sales": 11882,
-          "predicted_customers": 594,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM11,882"
-        },
-        {
-          "date": "2025-10-07",
-          "predicted_sales": 13946,
-          "predicted_customers": 697,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM13,946"
-        },
-        {
-          "date": "2025-10-08",
-          "predicted_sales": 16293,
-          "predicted_customers": 815,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM16,293"
-        },
-        {
-          "date": "2025-10-09",
-          "predicted_sales": 18733,
-          "predicted_customers": 937,
-          "confidence": 77,
-          "short_insight": "Prophet forecast: RM18,733"
-        }
-      ],
-      "summary": "Prophet forecast completed with 77% confidence for 14 days",
-      "method": "facebook_prophet",
-      "confidence_note": "Generated using Facebook Prophet with external regressors",
-      "processing_time_ms": 2711,
-      "input_records_count": 56,
-      "validation_passed": true,
-      "request_timestamp": "2025-09-28T04:42:28.669Z",
-      "client_ip": "::1",
-      "retailer_id": null,
-      "prophet_used": true
-    },
-    "cafe-cyber-2025-09-28-124133": {
-      "id": "cafe-cyber-2025-09-28-124133",
-      "timestamp": "2025-09-28T04:41:33.491Z",
-      "store": "Cafe Cyber",
-      "city": "Cyberjaya",
-      "forecast_horizon_days": 14,
-      "forecast": [
-        {
-          "date": "2025-09-28",
-          "predicted_sales": 3496,
-          "predicted_customers": 175,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM3,496"
-        },
-        {
-          "date": "2025-09-29",
-          "predicted_sales": 3728,
-          "predicted_customers": 186,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM3,728"
-        },
-        {
-          "date": "2025-09-30",
-          "predicted_sales": 4206,
-          "predicted_customers": 210,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM4,206"
-        },
-        {
-          "date": "2025-10-01",
-          "predicted_sales": 4832,
-          "predicted_customers": 242,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM4,832"
-        },
-        {
-          "date": "2025-10-02",
-          "predicted_sales": 5435,
-          "predicted_customers": 272,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM5,435"
-        },
-        {
-          "date": "2025-10-03",
-          "predicted_sales": 6887,
-          "predicted_customers": 344,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM6,887"
-        },
-        {
-          "date": "2025-10-04",
-          "predicted_sales": 8160,
-          "predicted_customers": 408,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM8,160"
-        },
-        {
-          "date": "2025-10-05",
-          "predicted_sales": 9580,
-          "predicted_customers": 479,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM9,580"
-        },
-        {
-          "date": "2025-10-06",
-          "predicted_sales": 11242,
-          "predicted_customers": 562,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM11,242"
-        },
-        {
-          "date": "2025-10-07",
-          "predicted_sales": 13306,
-          "predicted_customers": 665,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM13,306"
-        },
-        {
-          "date": "2025-10-08",
-          "predicted_sales": 15653,
-          "predicted_customers": 783,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM15,653"
-        },
-        {
-          "date": "2025-10-09",
-          "predicted_sales": 18093,
-          "predicted_customers": 905,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM18,093"
-        },
-        {
-          "date": "2025-10-10",
-          "predicted_sales": 21466,
-          "predicted_customers": 1073,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM21,466"
-        },
-        {
-          "date": "2025-10-11",
-          "predicted_sales": 24710,
-          "predicted_customers": 1235,
-          "confidence": 78,
-          "short_insight": "Prophet forecast: RM24,710"
-        }
-      ],
-      "summary": "Prophet forecast completed with 78% confidence for 14 days",
-      "method": "facebook_prophet",
-      "confidence_note": "Generated using Facebook Prophet with external regressors",
-      "processing_time_ms": 12339,
-      "input_records_count": 30,
-      "validation_passed": true,
-      "request_timestamp": "2025-09-28T04:41:33.491Z",
+      "request_timestamp": "2025-10-05T15:44:27.455Z",
       "client_ip": "::1",
       "retailer_id": null,
       "prophet_used": true
@@ -12468,6 +12117,351 @@
       "input_records_count": 30,
       "validation_passed": false,
       "request_timestamp": "2025-09-26T12:22:29.582Z",
+      "client_ip": "::1"
+    },
+    "cafe-cyber-2025-09-26-202157": {
+      "id": "cafe-cyber-2025-09-26-202157",
+      "timestamp": "2025-09-26T12:21:57.643Z",
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "forecast_horizon_days": 14,
+      "forecast": [
+        {
+          "date": "2025-09-27",
+          "predicted_sales": 2904,
+          "predicted_customers": 148,
+          "confidence": 63,
+          "short_insight": "Typical weekend flow"
+        },
+        {
+          "date": "2025-09-28",
+          "predicted_sales": 2763,
+          "predicted_customers": 141,
+          "confidence": 63,
+          "short_insight": "Typical weekend flow"
+        },
+        {
+          "date": "2025-09-29",
+          "predicted_sales": 2611,
+          "predicted_customers": 119,
+          "confidence": 63,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-09-30",
+          "predicted_sales": 2356,
+          "predicted_customers": 116,
+          "confidence": 63,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-01",
+          "predicted_sales": 2336,
+          "predicted_customers": 128,
+          "confidence": 63,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-02",
+          "predicted_sales": 2394,
+          "predicted_customers": 113,
+          "confidence": 63,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-03",
+          "predicted_sales": 2533,
+          "predicted_customers": 122,
+          "confidence": 63,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-04",
+          "predicted_sales": 2945,
+          "predicted_customers": 140,
+          "confidence": 63,
+          "short_insight": "Second week weekend"
+        },
+        {
+          "date": "2025-10-05",
+          "predicted_sales": 2877,
+          "predicted_customers": 149,
+          "confidence": 63,
+          "short_insight": "Second week weekend"
+        },
+        {
+          "date": "2025-10-06",
+          "predicted_sales": 2458,
+          "predicted_customers": 127,
+          "confidence": 63,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-07",
+          "predicted_sales": 2245,
+          "predicted_customers": 121,
+          "confidence": 63,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-08",
+          "predicted_sales": 2464,
+          "predicted_customers": 128,
+          "confidence": 63,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-09",
+          "predicted_sales": 2283,
+          "predicted_customers": 115,
+          "confidence": 63,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-10",
+          "predicted_sales": 2418,
+          "predicted_customers": 123,
+          "confidence": 63,
+          "short_insight": "Mid-term forecast"
+        }
+      ],
+      "summary": "Based on statistical analysis, your store shows a declining trend with average daily sales of RM2540. Saturday typically performs 15% above average. Recommendations: 1) Optimize staffing for Saturday peak performance, 2) Implement targeted promotions during slower periods, 3) Monitor trend changes for strategic planning. Note: This forecast uses statistical methods as backup to AI analysis.",
+      "method": "statistical_fallback",
+      "confidence_note": "Generated using statistical methods as AI backup",
+      "processing_time_ms": 2524,
+      "input_records_count": 30,
+      "validation_passed": false,
+      "request_timestamp": "2025-09-26T12:21:57.643Z",
+      "client_ip": "::1"
+    },
+    "cafe-cyber-2025-09-26-200347": {
+      "id": "cafe-cyber-2025-09-26-200347",
+      "timestamp": "2025-09-26T12:03:47.749Z",
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "forecast_horizon_days": 14,
+      "forecast": [
+        {
+          "date": "2025-09-27",
+          "predicted_sales": 2647,
+          "predicted_customers": 135,
+          "confidence": 64,
+          "short_insight": "Typical weekend flow"
+        },
+        {
+          "date": "2025-09-28",
+          "predicted_sales": 2859,
+          "predicted_customers": 137,
+          "confidence": 64,
+          "short_insight": "Typical weekend flow"
+        },
+        {
+          "date": "2025-09-29",
+          "predicted_sales": 2430,
+          "predicted_customers": 129,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-09-30",
+          "predicted_sales": 2546,
+          "predicted_customers": 119,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-01",
+          "predicted_sales": 2464,
+          "predicted_customers": 131,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-02",
+          "predicted_sales": 2377,
+          "predicted_customers": 124,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-03",
+          "predicted_sales": 2545,
+          "predicted_customers": 121,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-04",
+          "predicted_sales": 2651,
+          "predicted_customers": 135,
+          "confidence": 64,
+          "short_insight": "Second week weekend"
+        },
+        {
+          "date": "2025-10-05",
+          "predicted_sales": 2863,
+          "predicted_customers": 142,
+          "confidence": 64,
+          "short_insight": "Second week weekend"
+        },
+        {
+          "date": "2025-10-06",
+          "predicted_sales": 2373,
+          "predicted_customers": 120,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-07",
+          "predicted_sales": 2448,
+          "predicted_customers": 128,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-08",
+          "predicted_sales": 2532,
+          "predicted_customers": 128,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-09",
+          "predicted_sales": 2419,
+          "predicted_customers": 120,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-10",
+          "predicted_sales": 2468,
+          "predicted_customers": 117,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        }
+      ],
+      "summary": "Based on statistical analysis, your store shows a growing trend with average daily sales of RM2532. Sunday typically performs 13% above average. Recommendations: 1) Optimize staffing for Sunday peak performance, 2) Implement targeted promotions during slower periods, 3) Monitor trend changes for strategic planning. Note: This forecast uses statistical methods as backup to AI analysis.",
+      "method": "statistical_fallback",
+      "confidence_note": "Generated using statistical methods as AI backup",
+      "processing_time_ms": 2178,
+      "input_records_count": 30,
+      "validation_passed": false,
+      "request_timestamp": "2025-09-26T12:03:47.749Z",
+      "client_ip": "::1"
+    },
+    "cafe-cyber-2025-09-26-200309": {
+      "id": "cafe-cyber-2025-09-26-200309",
+      "timestamp": "2025-09-26T12:03:09.425Z",
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "forecast_horizon_days": 14,
+      "forecast": [
+        {
+          "date": "2025-09-27",
+          "predicted_sales": 2843,
+          "predicted_customers": 148,
+          "confidence": 64,
+          "short_insight": "Typical weekend flow"
+        },
+        {
+          "date": "2025-09-28",
+          "predicted_sales": 2901,
+          "predicted_customers": 140,
+          "confidence": 64,
+          "short_insight": "Typical weekend flow"
+        },
+        {
+          "date": "2025-09-29",
+          "predicted_sales": 2338,
+          "predicted_customers": 126,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-09-30",
+          "predicted_sales": 2269,
+          "predicted_customers": 120,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-01",
+          "predicted_sales": 2320,
+          "predicted_customers": 122,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-02",
+          "predicted_sales": 2311,
+          "predicted_customers": 126,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-03",
+          "predicted_sales": 2373,
+          "predicted_customers": 125,
+          "confidence": 64,
+          "short_insight": "Regular business day"
+        },
+        {
+          "date": "2025-10-04",
+          "predicted_sales": 2734,
+          "predicted_customers": 150,
+          "confidence": 64,
+          "short_insight": "Second week weekend"
+        },
+        {
+          "date": "2025-10-05",
+          "predicted_sales": 2900,
+          "predicted_customers": 150,
+          "confidence": 64,
+          "short_insight": "Second week weekend"
+        },
+        {
+          "date": "2025-10-06",
+          "predicted_sales": 2335,
+          "predicted_customers": 120,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-07",
+          "predicted_sales": 2340,
+          "predicted_customers": 113,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-08",
+          "predicted_sales": 2354,
+          "predicted_customers": 120,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-09",
+          "predicted_sales": 2323,
+          "predicted_customers": 124,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        },
+        {
+          "date": "2025-10-10",
+          "predicted_sales": 2422,
+          "predicted_customers": 123,
+          "confidence": 64,
+          "short_insight": "Mid-term forecast"
+        }
+      ],
+      "summary": "Based on statistical analysis, your store shows a growing trend with average daily sales of RM2514. Sunday typically performs 14% above average. Recommendations: 1) Optimize staffing for Sunday peak performance, 2) Implement targeted promotions during slower periods, 3) Monitor trend changes for strategic planning. Note: This forecast uses statistical methods as backup to AI analysis.",
+      "method": "statistical_fallback",
+      "confidence_note": "Generated using statistical methods as AI backup",
+      "processing_time_ms": 1989,
+      "input_records_count": 30,
+      "validation_passed": false,
+      "request_timestamp": "2025-09-26T12:03:09.425Z",
       "client_ip": "::1"
     }
   }

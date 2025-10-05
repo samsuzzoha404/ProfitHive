@@ -2,43 +2,13 @@
   "created": "2025-09-26T10:06:52.740Z",
   "entries": [
     {
-      "id": "uploaded-data-2025-09-28-140101",
-      "timestamp": "2025-09-28T06:01:01.262Z",
-      "store": "Uploaded Data",
-      "method": "facebook_prophet",
-      "forecast_days": 14,
-      "input_records": 56,
-      "processing_time_ms": 4667,
-      "validation_passed": true
-    },
-    {
-      "id": "cafe-cyber-2025-09-28-135558",
-      "timestamp": "2025-09-28T05:55:58.324Z",
+      "id": "cafe-cyber-2025-10-05-234427",
+      "timestamp": "2025-10-05T15:44:27.456Z",
       "store": "Cafe Cyber",
       "method": "facebook_prophet",
       "forecast_days": 14,
       "input_records": 30,
-      "processing_time_ms": 4018,
-      "validation_passed": true
-    },
-    {
-      "id": "uploaded-data-2025-09-28-124228",
-      "timestamp": "2025-09-28T04:42:28.669Z",
-      "store": "Uploaded Data",
-      "method": "facebook_prophet",
-      "forecast_days": 14,
-      "input_records": 56,
-      "processing_time_ms": 2711,
-      "validation_passed": true
-    },
-    {
-      "id": "cafe-cyber-2025-09-28-124133",
-      "timestamp": "2025-09-28T04:41:33.491Z",
-      "store": "Cafe Cyber",
-      "method": "facebook_prophet",
-      "forecast_days": 14,
-      "input_records": 30,
-      "processing_time_ms": 12339,
+      "processing_time_ms": 28229,
       "validation_passed": true
     },
     {
@@ -1572,42 +1542,9 @@
       "forecast_periods": 14,
       "confidence": 0,
       "total_predicted_revenue": 0,
-      "timestamp": "2025-09-28T04:41:33.583Z"
-    },
-    {
-      "retailer_id": null,
-      "store": "Uploaded Data",
-      "city": "Cyberjaya",
-      "method": "facebook_prophet",
-      "input_records": 56,
-      "forecast_periods": 14,
-      "confidence": 0,
-      "total_predicted_revenue": 0,
-      "timestamp": "2025-09-28T04:42:28.734Z"
-    },
-    {
-      "retailer_id": null,
-      "store": "Cafe Cyber",
-      "city": "Cyberjaya",
-      "method": "facebook_prophet",
-      "input_records": 30,
-      "forecast_periods": 14,
-      "confidence": 0,
-      "total_predicted_revenue": 0,
-      "timestamp": "2025-09-28T05:55:58.402Z"
-    },
-    {
-      "retailer_id": null,
-      "store": "Uploaded Data",
-      "city": "Cyberjaya",
-      "method": "facebook_prophet",
-      "input_records": 56,
-      "forecast_periods": 14,
-      "confidence": 0,
-      "total_predicted_revenue": 0,
-      "timestamp": "2025-09-28T06:01:01.334Z"
+      "timestamp": "2025-10-05T15:44:27.531Z"
     }
   ],
-  "last_updated": "2025-09-28T06:01:01.337Z",
-  "total_entries": 157
+  "last_updated": "2025-10-05T15:44:27.532Z",
+  "total_entries": 151
 }
