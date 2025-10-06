@@ -5,7 +5,7 @@
 ### 🌐 Live URLs
 
 - **🎯 Production Frontend**: https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app
-- **📊 Backend API**: https://profithive-backend-lf8gqkc7t-samsuzzoha404s-projects.vercel.app
+- **📊 Backend API**: https://profithive-backend-eight.vercel.app
 - **🔍 Vercel Dashboard**: https://vercel.com/samsuzzoha404s-projects/profithive-frontend/6baxmUmSrLzemJJtnAJTJ7YVMAJR
 
 ### 🔗 Smart Contract Addresses (Sepolia Testnet)

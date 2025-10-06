@@ -54,7 +54,7 @@ ProfitHive leverages **Facebook Prophet AI** for precise demand forecasting and 
 
 ### 🚀 **Production Environment**
 - **🎯 Frontend Application**: [profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app](https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app)
-- **📊 Backend API**: [profithive-backend-lf8gqkc7t-samsuzzoha404s-projects.vercel.app](https://profithive-backend-lf8gqkc7t-samsuzzoha404s-projects.vercel.app)
+- **📊 Backend API**: [profithive-backend-eight.vercel.app](https://profithive-backend-eight.vercel.app)
 - **🔗 GitHub Repository**: [github.com/samsuzzoha404/ProfitHive](https://github.com/samsuzzoha404/ProfitHive)
 
 ### ⛓️ **Smart Contracts on Sepolia Testnet**
@@ -396,7 +396,7 @@ vercel --prod
 ### 📬 **Get in Touch**
 - 🌐 **Live Demo**: [ProfitHive Application](https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app)
 - 💻 **Source Code**: [GitHub Repository](https://github.com/samsuzzoha404/ProfitHive)
-- 📊 **API Documentation**: [Backend API](https://profithive-backend-lf8gqkc7t-samsuzzoha404s-projects.vercel.app)
+- 📊 **API Documentation**: [Backend API](https://profithive-backend-eight.vercel.app)
 - 🔗 **Smart Contracts**: [Sepolia Testnet](https://sepolia.etherscan.io/)
 
 ### 🤝 **Contributing**

@@ -164,6 +164,13 @@ class VercelStorageService {
   }
 
   /**
+   * Alias for getStats() to maintain compatibility with StorageService
+   */
+  getForecastStats() {
+    return this.getStats();
+  }
+
+  /**
    * Get latest forecast for a store - from memory or file
    */
   getLatestForecast(store) {
