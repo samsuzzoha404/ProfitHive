@@ -45,6 +45,11 @@ app.use(cors({
     'http://127.0.0.1:8080', 
     'http://127.0.0.1:8081',
     'https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app',
+    'https://profithive-frontend-qmmzxyi5s-samsuzzoha404s-projects.vercel.app',
+    'https://profithive-frontend-jx85owcpb-samsuzzoha404s-projects.vercel.app',
+    'https://profithive-frontend-h7l86e06z-samsuzzoha404s-projects.vercel.app',
+    'https://profithive-frontend-fg6bk0b8n-samsuzzoha404s-projects.vercel.app',
+    'https://profithive-frontend-aibupeybt-samsuzzoha404s-projects.vercel.app',
     'https://profithive-frontend.vercel.app'
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -656,15 +661,25 @@ if (server) {
   });
 }
 
-// Handle uncaught exceptions
-process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
-  process.exit(1);
-});
+// Handle uncaught exceptions (but don't exit in Vercel)
+if (!isVercel) {
+  process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+    process.exit(1);
+  });
 
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  process.exit(1);
-});
+  process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    process.exit(1);
+  });
+} else {
+  process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception in Vercel:', error);
+  });
+
+  process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection in Vercel:', promise, 'reason:', reason);
+  });
+}
 
 export default app;

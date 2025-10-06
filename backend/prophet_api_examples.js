@@ -9,14 +9,14 @@
  * 
  * Make sure the server is running or use deployed backend:
  * Local: http://localhost:5000
- * Deployed: https://profithive-backend-eight.vercel.app
+ * Deployed: https://profithive-backend-7cy07eyw6-samsuzzoha404s-projects.vercel.app
  */
 
 import fetch from 'node-fetch';
 import fs from 'fs/promises';
 import path from 'path';
 
-const BASE_URL = 'https://profithive-backend-eight.vercel.app';
+const BASE_URL = 'https://profithive-backend-7cy07eyw6-samsuzzoha404s-projects.vercel.app';
 const TEST_DATA_FILE = './test_prophet_input.json';
 
 /**

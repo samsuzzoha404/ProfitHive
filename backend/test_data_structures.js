@@ -25,7 +25,7 @@ const testForecastAPI = async () => {
       predict_periods: 7
     };
 
-    const response = await fetch('https://profithive-backend-eight.vercel.app/api/forecast', {
+    const response = await fetch('https://profithive-backend-7cy07eyw6-samsuzzoha404s-projects.vercel.app/api/forecast', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

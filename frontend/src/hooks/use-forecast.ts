@@ -42,6 +42,7 @@ export interface UseForecastReturn extends ForecastState, ForecastActions {
   hasData: boolean;
   isSuccessful: boolean;
   canRetry: boolean;
+  isDemoData: boolean;
   
   // Helper methods
   getChartData: () => {
@@ -359,6 +360,9 @@ export const useForecast = (): UseForecastReturn => {
   const hasData = state.data !== null;
   const isSuccessful = hasData && !state.error;
   const canRetry = lastRequestRef.current !== null && !state.loading;
+  const isDemoData = state.data?.method === 'demo_fallback' || 
+                     state.data?.weatherImpact?.fallback === true ||
+                     state.data?.service_details?.primary_method === 'demo_fallback';
 
   return {
     // State
@@ -379,6 +383,7 @@ export const useForecast = (): UseForecastReturn => {
     hasData,
     isSuccessful,
     canRetry,
+    isDemoData,
 
     // Helper methods
     getChartData,

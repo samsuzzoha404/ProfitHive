@@ -5,7 +5,7 @@
 ![ProfitHive Banner](https://via.placeholder.com/800x200/2563eb/ffffff?text=ProfitHive+%7C+AI-Powered+Smart+Retail+Platform)
 
 [![Hackathon](https://img.shields.io/badge/Built%20For-InnoJam%20Hackathon-ff6b35)](https://hackathon.link)
-[![Status](https://img.shields.io/badge/Status-Working%20Prototype-success)](https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app)
+[![Status](https://img.shields.io/badge/Status-Working%20Prototype-success)](https://profithive-frontend-ayn3w5xxg-samsuzzoha404s-projects.vercel.app)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Solidity](https://img.shields.io/badge/Solidity-%23363636.svg?logo=solidity&logoColor=white)](https://soliditylang.org/)
@@ -29,7 +29,7 @@
 **Alternative Links:**
 - 📱 [Short Demo (Mobile)](https://drive.google.com/your-video-link)
 - 💻 [Full Presentation](https://drive.google.com/your-presentation-link)
-- 🔗 [Live Demo](https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app)
+- 🔗 [Live Demo](https://profithive-frontend-ayn3w5xxg-samsuzzoha404s-projects.vercel.app)
 
 ---
 
@@ -53,8 +53,8 @@ ProfitHive leverages **Facebook Prophet AI** for precise demand forecasting and 
 ## 🌐 **Live Deployment & Links**
 
 ### 🚀 **Production Environment**
-- **🎯 Frontend Application**: [profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app](https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app)
-- **📊 Backend API**: [profithive-backend-eight.vercel.app](https://profithive-backend-eight.vercel.app)
+- **🎯 Frontend Application**: [profithive-frontend-ayn3w5xxg-samsuzzoha404s-projects.vercel.app](https://profithive-frontend-ayn3w5xxg-samsuzzoha404s-projects.vercel.app)
+- **📊 Backend API**: [profithive-backend-7cy07eyw6-samsuzzoha404s-projects.vercel.app](https://profithive-backend-7cy07eyw6-samsuzzoha404s-projects.vercel.app)
 - **🔗 GitHub Repository**: [github.com/samsuzzoha404/ProfitHive](https://github.com/samsuzzoha404/ProfitHive)
 
 ### ⛓️ **Smart Contracts on Sepolia Testnet**
@@ -394,9 +394,9 @@ vercel --prod
 - **Location**: Cyberjaya, Malaysia
 
 ### 📬 **Get in Touch**
-- 🌐 **Live Demo**: [ProfitHive Application](https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app)
+- 🌐 **Live Demo**: [ProfitHive Application](https://profithive-frontend-ayn3w5xxg-samsuzzoha404s-projects.vercel.app)
 - 💻 **Source Code**: [GitHub Repository](https://github.com/samsuzzoha404/ProfitHive)
-- 📊 **API Documentation**: [Backend API](https://profithive-backend-eight.vercel.app)
+- 📊 **API Documentation**: [Backend API](https://profithive-backend-7cy07eyw6-samsuzzoha404s-projects.vercel.app)
 - 🔗 **Smart Contracts**: [Sepolia Testnet](https://sepolia.etherscan.io/)
 
 ### 🤝 **Contributing**
