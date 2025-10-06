@@ -10,7 +10,7 @@
  */
 
 // API Configuration - Node.js backend with enhanced AI algorithms
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 const API_TIMEOUT = 45000; // 45 seconds for AI processing
 
 // TypeScript Interfaces

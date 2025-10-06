@@ -1,7 +1,7 @@
 {
-  "31337": {
-    "ProfitHiveToken": "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
-    "RevenueSharing": "0x59b670e9fA9D0A427751Af201D676719a970857b",
-    "ForecastData": "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1"
+  "11155111": {
+    "PlatformControlledToken": "0x3F64ad6A92Ff5a65604EFE0997c75D02D178c8aA",
+    "RevenueSharing": "0xdDDeA21aBaDA076d0196b1F87dfA9515D25D66ea",
+    "ForecastData": "0xB67d6b134e6E630e1bDBee5f28ff43a642E29189"
   }
 }

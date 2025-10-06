@@ -1,9 +1,21 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Zap, TrendingUp, Shield, Globe } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthGuard } from '@/hooks/use-auth-guard';
 
 const Hero = () => {
+  const { requireAuth } = useAuthGuard();
+  const navigate = useNavigate();
+
+  const handleExplorePlatform = () => {
+    requireAuth(() => navigate('/forecast'));
+  };
+
+  const handleStartDemo = () => {
+    requireAuth(() => navigate('/dashboard'));
+  };
+
   return (
     <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
       {/* Hero Background Image */}
@@ -57,23 +69,19 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 md:mb-12 px-4">
             <Button 
-              asChild 
+              onClick={handleExplorePlatform}
               size="lg" 
               className="bg-gradient-primary hover-glow text-primary-foreground px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-semibold w-full sm:w-auto"
             >
-              <Link to="/forecast">
-                Explore Platform <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-              </Link>
+              Explore Platform <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
             </Button>
             <Button 
-              asChild 
+              onClick={handleStartDemo}
               variant="outline" 
               size="lg"
               className="glass border-primary/30 hover:bg-primary/10 px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-semibold w-full sm:w-auto"
             >
-              <Link to="/dashboard">
-                Start Demo
-              </Link>
+              Start Demo
             </Button>
           </div>
 

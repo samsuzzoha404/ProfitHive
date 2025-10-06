@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Connection Test - ProfitHive</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+        .success { background: rgba(34, 197, 94, 0.2); border: 1px solid #22c55e; }
+        .error { background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; }
+        .info { background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; }
+        .button {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        h1 {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Firebase Connection Test - ProfitHive</h1>
+        
+        <div class="info">
+            <strong>Account:</strong> samsuzzohahaquerakib@gmail.com<br>
+            <strong>Project:</strong> profithive-f5410<br>
+            <strong>Testing:</strong> Authentication & Firestore connection
+        </div>
+
+        <div id="status-container">
+            <div class="info">🔄 Testing Firebase connection...</div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="button" onclick="testConnection()">🧪 Test Connection</button>
+            <button class="button" onclick="testGoogleAuth()">🔐 Test Google Auth</button>
+            <button class="button" onclick="testEmailAuth()">📧 Test Email Auth</button>
+            <button class="button" onclick="testFirestore()">🗄️ Test Firestore</button>
+        </div>
+
+        <div id="results">
+            <h3>Test Results:</h3>
+            <pre id="logs">Click a test button to begin...</pre>
+        </div>
+
+        <div id="user-info" style="display: none;">
+            <h3>User Information:</h3>
+            <pre id="user-details"></pre>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js';
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDqsPvLKR6KuLJgNbJeaVuFYP98P07XK2Y",
+            authDomain: "profithive-f5410.firebaseapp.com",
+            projectId: "profithive-f5410",
+            storageBucket: "profithive-f5410.firebasestorage.app",
+            messagingSenderId: "166274614093",
+            appId: "1:166274614093:web:6d302800a5f9aca7acad04"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        // Global functions
+        window.testConnection = testConnection;
+        window.testGoogleAuth = testGoogleAuth;
+        window.testEmailAuth = testEmailAuth;
+        window.testFirestore = testFirestore;
+
+        let logs = [];
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push(`[${timestamp}] ${message}`);
+            updateLogs();
+            updateStatus(message, type);
+        }
+
+        function updateLogs() {
+            document.getElementById('logs').textContent = logs.join('\n');
+        }
+
+        function updateStatus(message, type) {
+            const statusContainer = document.getElementById('status-container');
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : 'info';
+            statusContainer.innerHTML = `<div class="${className}">${message}</div>`;
+        }
+
+        function updateUserInfo(user) {
+            if (user) {
+                document.getElementById('user-info').style.display = 'block';
+                document.getElementById('user-details').textContent = JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    emailVerified: user.emailVerified
+                }, null, 2);
+            }
+        }
+
+        async function testConnection() {
+            logs = [];
+            log('🔄 Starting Firebase connection test...');
+            
+            try {
+                // Test Firebase app initialization
+                log('✅ Firebase app initialized successfully');
+                log(`📱 App name: ${app.name}`);
+                log(`🆔 Project ID: ${app.options.projectId}`);
+                
+                // Test Auth service
+                log('🔐 Firebase Auth service initialized');
+                log(`🌐 Auth domain: ${auth.app.options.authDomain}`);
+                
+                // Test Firestore service
+                log('🗄️ Firestore service initialized');
+                
+                // Test current auth state
+                const currentUser = auth.currentUser;
+                if (currentUser) {
+                    log(`👤 Current user: ${currentUser.email}`);
+                    updateUserInfo(currentUser);
+                } else {
+                    log('👤 No user currently signed in');
+                }
+                
+                log('✅ All Firebase services connected successfully!', 'success');
+                
+            } catch (error) {
+                log(`❌ Connection test failed: ${error.message}`, 'error');
+                console.error('Firebase connection error:', error);
+            }
+        }
+
+        async function testGoogleAuth() {
+            log('🔄 Testing Google Authentication...');
+            
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                
+                log(`✅ Google Auth successful!`, 'success');
+                log(`👤 User: ${user.email}`);
+                log(`🆔 UID: ${user.uid}`);
+                
+                updateUserInfo(user);
+                
+            } catch (error) {
+                log(`❌ Google Auth failed: ${error.message}`, 'error');
+                console.error('Google Auth error:', error);
+            }
+        }
+
+        async function testEmailAuth() {
+            const email = prompt('Enter test email (or use: test@profithive.com):') || 'test@profithive.com';
+            const password = prompt('Enter password (or use: test123456):') || 'test123456';
+            
+            log('🔄 Testing Email Authentication...');
+            
+            try {
+                // Try to sign in first
+                try {
+                    const result = await signInWithEmailAndPassword(auth, email, password);
+                    log(`✅ Email sign-in successful!`, 'success');
+                    log(`👤 User: ${result.user.email}`);
+                    updateUserInfo(result.user);
+                } catch (signInError) {
+                    if (signInError.code === 'auth/user-not-found') {
+                        // Try to create account
+                        log('👤 User not found, creating new account...');
+                        const result = await createUserWithEmailAndPassword(auth, email, password);
+                        log(`✅ Email account created successfully!`, 'success');
+                        log(`👤 New user: ${result.user.email}`);
+                        updateUserInfo(result.user);
+                    } else {
+                        throw signInError;
+                    }
+                }
+                
+            } catch (error) {
+                log(`❌ Email Auth failed: ${error.message}`, 'error');
+                console.error('Email Auth error:', error);
+            }
+        }
+
+        async function testFirestore() {
+            log('🔄 Testing Firestore connection...');
+            
+            if (!auth.currentUser) {
+                log('❌ Please sign in first before testing Firestore', 'error');
+                return;
+            }
+            
+            try {
+                const testData = {
+                    message: 'Hello from ProfitHive!',
+                    timestamp: serverTimestamp(),
+                    user: auth.currentUser.email,
+                    testId: Date.now()
+                };
+                
+                const docRef = doc(db, 'test', 'connection-test');
+                await setDoc(docRef, testData);
+                log('✅ Data written to Firestore successfully');
+                
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    log('✅ Data read from Firestore successfully');
+                    log(`📄 Document data: ${JSON.stringify(docSnap.data(), null, 2)}`);
+                    log('✅ Firestore connection test passed!', 'success');
+                } else {
+                    log('❌ Document not found after writing', 'error');
+                }
+                
+            } catch (error) {
+                log(`❌ Firestore test failed: ${error.message}`, 'error');
+                console.error('Firestore error:', error);
+            }
+        }
+
+        // Listen for auth state changes
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                log(`🔄 Auth state changed: User signed in (${user.email})`);
+                updateUserInfo(user);
+            } else {
+                log('🔄 Auth state changed: User signed out');
+                document.getElementById('user-info').style.display = 'none';
+            }
+        });
+
+        // Run initial connection test
+        setTimeout(testConnection, 1000);
+    </script>
+</body>
+</html>

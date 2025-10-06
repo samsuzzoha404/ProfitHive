@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
@@ -9,21 +9,25 @@ import {
   Info,
   Menu,
   X,
-  Zap
+  Zap,
+  LogIn
 } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
+import UserMenu from '@/components/auth/UserMenu';
 
-const Navigation = () => {
+const Navigation = memo(() => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isAuthenticated, setShowLoginModal } = useAuth();
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { path: '/', label: 'Home', icon: Building2 },
     { path: '/forecast', label: 'AI Forecast', icon: BarChart3 },
     { path: '/tokenization', label: 'Tokenization', icon: Zap },
     { path: '/wallet', label: 'Wallet', icon: Wallet },
     { path: '/dashboard', label: 'Dashboard', icon: Monitor },
     { path: '/about', label: 'About', icon: Info },
-  ];
+  ], []);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -63,8 +67,35 @@ const Navigation = () => {
             })}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Auth Section */}
+          <div className="hidden md:flex items-center space-x-4">
+            {isAuthenticated ? (
+              <UserMenu />
+            ) : (
+              <Button 
+                onClick={() => setShowLoginModal(true)}
+                className="bg-gradient-primary hover-glow text-primary-foreground px-4 py-2 font-medium"
+              >
+                <LogIn className="h-4 w-4 mr-2" />
+                Sign In
+              </Button>
+            )}
+          </div>
+
+          {/* Mobile Menu and Auth */}
+          <div className="md:hidden flex items-center space-x-2">
+            {isAuthenticated ? (
+              <UserMenu />
+            ) : (
+              <Button 
+                onClick={() => setShowLoginModal(true)}
+                size="sm"
+                className="bg-gradient-primary hover-glow text-primary-foreground px-3 py-1.5 text-sm font-medium"
+              >
+                <LogIn className="h-3 w-3 mr-1" />
+                Sign In
+              </Button>
+            )}
             <Button
               variant="ghost"
               size="icon"
@@ -102,6 +133,8 @@ const Navigation = () => {
       </div>
     </nav>
   );
-};
+});
+
+Navigation.displayName = 'Navigation';
 
 export default Navigation;

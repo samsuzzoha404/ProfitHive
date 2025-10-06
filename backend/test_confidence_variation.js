@@ -35,7 +35,7 @@ async function testMultipleRequests() {
     
     for (let i = 0; i < 5; i++) {
       try {
-        const response = await fetch('http://localhost:5000/api/forecast', {
+        const response = await fetch('https://profithive-backend-cdv8hvbta-samsuzzoha404s-projects.vercel.app/api/forecast', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(testData)

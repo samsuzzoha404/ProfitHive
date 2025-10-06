@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { useForecast } from '../hooks/use-forecast';
 import { ForecastRequest, SalesRecord } from '../services/api-service';
 
@@ -175,7 +175,8 @@ const Forecast = () => {
   useEffect(() => {
     const checkBackendStatus = async () => {
       try {
-        const response = await fetch('http://localhost:5000/health');
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+        const response = await fetch(`${apiBaseUrl}/health`);
         if (response.ok) {
           setBackendStatus('online');
         } else {

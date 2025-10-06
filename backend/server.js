@@ -1,10 +1,20 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+
+// Import services based on environment
+const isVercel = !!process.env.VERCEL;
+
+// Import services
 import ValidationService from './services/validation-service.js';
-import EnhancedAIForecastService from './services/enhanced-ai-service.js';
 import StorageService from './services/storage-service.js';
 import ExternalDataService from './services/external-data-service.js';
+import EnhancedAIForecastService from './services/enhanced-ai-service.js';
+
+// Vercel-compatible services
+import VercelStorageService from './services/vercel-storage-service.js';
+import VercelEnhancedAIService from './services/vercel-enhanced-ai-service.js';
+import VercelExternalDataService from './services/vercel-external-data-service.js';
 
 /**
  * Retail Smart Demand & Revenue Sharing Platform - Backend Server
@@ -17,15 +27,26 @@ import ExternalDataService from './services/external-data-service.js';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Initialize services
+// Initialize services based on environment
 const validationService = new ValidationService();
-const storageService = new StorageService();
-const enhancedAIService = new EnhancedAIForecastService();
-const externalDataService = new ExternalDataService();
+const storageService = isVercel ? new VercelStorageService() : new StorageService();
+const enhancedAIService = isVercel ? new VercelEnhancedAIService() : new EnhancedAIForecastService();
+const externalDataService = isVercel ? new VercelExternalDataService() : new ExternalDataService();
 
 // Middleware configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080', 'http://localhost:8081', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173', 'http://127.0.0.1:8080', 'http://127.0.0.1:8081'],
+  origin: [
+    'http://localhost:3000', 
+    'http://localhost:5173', 
+    'http://localhost:8080', 
+    'http://localhost:8081', 
+    'http://127.0.0.1:3000', 
+    'http://127.0.0.1:5173', 
+    'http://127.0.0.1:8080', 
+    'http://127.0.0.1:8081',
+    'https://profithive-frontend-aq14bhxny-samsuzzoha404s-projects.vercel.app',
+    'https://profithive-frontend.vercel.app'
+  ],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -45,19 +66,58 @@ app.use((req, res, next) => {
  * Verifies server status and service availability
  */
 app.get('/health', (req, res) => {
-  const health = {
-    status: 'healthy',
-    timestamp: new Date().toISOString(),
+  try {
+    const health = {
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      version: '1.0.0',
+      environment: isVercel ? 'vercel' : 'local',
+      services: {
+        validation: 'active',
+        storage: 'active',
+        enhanced_ai: 'active'
+      },
+      uptime: process.uptime()
+    };
+    
+    res.json(health);
+  } catch (error) {
+    console.error('Health check error:', error);
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
+/**
+ * Simple test endpoint for Vercel debugging
+ */
+app.get('/test', (req, res) => {
+  res.json({
+    message: 'Test endpoint working',
+    environment: process.env.NODE_ENV,
+    vercel: !!process.env.VERCEL,
+    timestamp: new Date().toISOString()
+  });
+});
+
+/**
+ * Root endpoint
+ * Welcome message for the ProfitHive API
+ */
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to ProfitHive API',
     version: '1.0.0',
-    services: {
-      validation: 'active',
-      storage: 'active',
-      enhanced_ai: 'active'
-    },
-    uptime: process.uptime()
-  };
-  
-  res.json(health);
+    status: 'running',
+    endpoints: {
+      health: '/health',
+      forecast: '/api/demand-forecast',
+      statistics: '/api/statistics'
+    }
+  });
 });
 
 /**
@@ -192,14 +252,25 @@ app.post('/api/forecast', async (req, res) => {
     if (shouldUseProphet) {
       console.log('Step 2: Generating Prophet-based forecast...');
       try {
-        forecastData = await EnhancedAIForecastService.getProphetForecast({
-          salesHistory,
-          weatherImpact,
-          transportImpact,
-          footTrafficImpact,
-          predictPeriods: predict_periods,
-          retailerId
-        });
+        if (isVercel) {
+          forecastData = await VercelEnhancedAIService.getProphetForecast({
+            salesHistory,
+            weatherImpact,
+            transportImpact,
+            footTrafficImpact,
+            predictPeriods: predict_periods,
+            retailerId
+          });
+        } else {
+          forecastData = await EnhancedAIForecastService.getProphetForecast({
+            salesHistory,
+            weatherImpact,
+            transportImpact,
+            footTrafficImpact,
+            predictPeriods: predict_periods,
+            retailerId
+          });
+        }
         
         // Convert Prophet format to match existing API structure
         forecastData = {
@@ -306,13 +377,13 @@ app.post('/api/forecast', async (req, res) => {
         console.warn('Prophet forecasting failed, falling back to enhanced AI:', prophetError.message);
         
         // Fallback to enhanced AI forecast
-        forecastData = await EnhancedAIForecastService.generateEnhancedForecast(store, city, records);
+        forecastData = await enhancedAIService.generateEnhancedForecast(store, city, records);
         method = 'enhanced_ai_fallback';
       }
     } else {
       // Use Enhanced AI Forecasting with external data integration
       console.log('Step 2: Generating Enhanced AI Forecast with external data...');
-      forecastData = await EnhancedAIForecastService.generateEnhancedForecast(store, city, records);
+      forecastData = await enhancedAIService.generateEnhancedForecast(store, city, records);
       method = 'enhanced_ai_with_external_data';
     }
     
@@ -541,42 +612,49 @@ app.use('*', (req, res) => {
 });
 
 /**
- * Start server
+ * Start server (only in development, not in Vercel serverless environment)
  */
-const server = app.listen(PORT, () => {
-  console.log('\n🚀 Retail Smart Demand Backend Server Started');
-  console.log(`📡 Server running on port ${PORT}`);
-  console.log(`🏥 Health check: http://localhost:${PORT}/health`);
-  console.log(`🔮 Forecast API: http://localhost:${PORT}/api/forecast`);
-  console.log(`📊 Statistics: http://localhost:${PORT}/api/stats`);
-  
-  console.log('\n📋 Available Services:');
-  console.log('  • Enhanced AI Statistical Algorithms (Advanced Pattern Recognition)');
-  console.log('  • Cyberjaya Market Analysis (Tech Worker Patterns)');
-  console.log('  • Request Validation (AJV Schema)');
-  console.log('  • Persistent Storage (JSON Files)');
-  console.log('  • CORS Support for Frontend Integration');
-  console.log('\n=== Server Ready ===\n');
-});
+let server;
+if (!process.env.VERCEL && process.env.NODE_ENV !== 'production') {
+  server = app.listen(PORT, () => {
+    console.log('\n🚀 Retail Smart Demand Backend Server Started');
+    console.log(`📡 Server running on port ${PORT}`);
+    console.log(`🏥 Health check: http://localhost:${PORT}/health`);
+    console.log(`🔮 Forecast API: http://localhost:${PORT}/api/forecast`);
+    console.log(`📊 Statistics: http://localhost:${PORT}/api/stats`);
+    
+    console.log('\n📋 Available Services:');
+    console.log('  • Enhanced AI Statistical Algorithms (Advanced Pattern Recognition)');
+    console.log('  • Cyberjaya Market Analysis (Tech Worker Patterns)');
+    console.log('  • Request Validation (AJV Schema)');
+    console.log('  • Persistent Storage (JSON Files)');
+    console.log('  • CORS Support for Frontend Integration');
+    console.log('\n=== Server Ready ===\n');
+  });
+} else if (process.env.VERCEL) {
+  console.log('🚀 Express app initialized for Vercel serverless deployment');
+}
 
 /**
- * Graceful shutdown handling
+ * Graceful shutdown handling (only for local server)
  */
-process.on('SIGTERM', () => {
-  console.log('\n🛑 Received SIGTERM, shutting down gracefully...');
-  server.close(() => {
-    console.log('✅ Server closed successfully');
-    process.exit(0);
+if (server) {
+  process.on('SIGTERM', () => {
+    console.log('\n🛑 Received SIGTERM, shutting down gracefully...');
+    server.close(() => {
+      console.log('✅ Server closed successfully');
+      process.exit(0);
+    });
   });
-});
 
-process.on('SIGINT', () => {
-  console.log('\n🛑 Received SIGINT (Ctrl+C), shutting down gracefully...');
-  server.close(() => {
-    console.log('✅ Server closed successfully');
-    process.exit(0);
+  process.on('SIGINT', () => {
+    console.log('\n🛑 Received SIGINT (Ctrl+C), shutting down gracefully...');
+    server.close(() => {
+      console.log('✅ Server closed successfully');
+      process.exit(0);
+    });
   });
-});
+}
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {

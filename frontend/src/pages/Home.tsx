@@ -14,9 +14,21 @@ import {
   Globe,
   MapPin
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthGuard } from '@/hooks/use-auth-guard';
 
 const Home = () => {
+  const { requireAuth } = useAuthGuard();
+  const navigate = useNavigate();
+
+  const handleStartForecasting = () => {
+    requireAuth(() => navigate('/forecast'));
+  };
+
+  const handleExploreTokenization = () => {
+    requireAuth(() => navigate('/tokenization'));
+  };
+
   return (
     <main className="min-h-screen overflow-x-hidden">
       <Hero />
@@ -198,15 +210,11 @@ const Home = () => {
               Join the revolution in smart city retail innovation. Start with AI forecasting or explore investment opportunities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
-              <Button asChild size="lg" className="bg-gradient-primary hover-glow text-primary-foreground px-6 md:px-8 w-full sm:w-auto">
-                <Link to="/forecast">
-                  Start Forecasting <BarChart3 className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                </Link>
+              <Button onClick={handleStartForecasting} size="lg" className="bg-gradient-primary hover-glow text-primary-foreground px-6 md:px-8 w-full sm:w-auto">
+                Start Forecasting <BarChart3 className="ml-2 h-4 w-4 md:h-5 md:w-5" />
               </Button>
-              <Button asChild variant="outline" size="lg" className="glass border-primary/30 hover:bg-primary/10 px-6 md:px-8 w-full sm:w-auto">
-                <Link to="/tokenization">
-                  Explore Tokenization <Coins className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                </Link>
+              <Button onClick={handleExploreTokenization} variant="outline" size="lg" className="glass border-primary/30 hover:bg-primary/10 px-6 md:px-8 w-full sm:w-auto">
+                Explore Tokenization <Coins className="ml-2 h-4 w-4 md:h-5 md:w-5" />
               </Button>
             </div>
           </div>

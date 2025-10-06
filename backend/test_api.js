@@ -4,7 +4,7 @@ async function testForecastAPI() {
   try {
     const testData = JSON.parse(fs.readFileSync('./test_request.json', 'utf8'));
     
-    const response = await fetch('http://localhost:5000/api/forecast', {
+    const response = await fetch('https://profithive-backend-cdv8hvbta-samsuzzoha404s-projects.vercel.app/api/forecast', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

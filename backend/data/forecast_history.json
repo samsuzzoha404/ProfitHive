@@ -2,6 +2,36 @@
   "created": "2025-09-26T10:06:52.740Z",
   "entries": [
     {
+      "id": "uploaded-data-2025-10-06-090656",
+      "timestamp": "2025-10-06T01:06:56.018Z",
+      "store": "Uploaded Data",
+      "method": "facebook_prophet",
+      "forecast_days": 14,
+      "input_records": 56,
+      "processing_time_ms": 8322,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-10-06-090618",
+      "timestamp": "2025-10-06T01:06:18.161Z",
+      "store": "Cafe Cyber",
+      "method": "facebook_prophet",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 10384,
+      "validation_passed": true
+    },
+    {
+      "id": "cafe-cyber-2025-10-06-082527",
+      "timestamp": "2025-10-06T00:25:27.629Z",
+      "store": "Cafe Cyber",
+      "method": "facebook_prophet",
+      "forecast_days": 14,
+      "input_records": 30,
+      "processing_time_ms": 16519,
+      "validation_passed": true
+    },
+    {
       "id": "cafe-cyber-2025-10-05-234427",
       "timestamp": "2025-10-05T15:44:27.456Z",
       "store": "Cafe Cyber",
@@ -1543,8 +1573,41 @@
       "confidence": 0,
       "total_predicted_revenue": 0,
       "timestamp": "2025-10-05T15:44:27.531Z"
+    },
+    {
+      "retailer_id": null,
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "method": "facebook_prophet",
+      "input_records": 30,
+      "forecast_periods": 14,
+      "confidence": 0,
+      "total_predicted_revenue": 0,
+      "timestamp": "2025-10-06T00:25:27.722Z"
+    },
+    {
+      "retailer_id": null,
+      "store": "Cafe Cyber",
+      "city": "Cyberjaya",
+      "method": "facebook_prophet",
+      "input_records": 30,
+      "forecast_periods": 14,
+      "confidence": 0,
+      "total_predicted_revenue": 0,
+      "timestamp": "2025-10-06T01:06:18.300Z"
+    },
+    {
+      "retailer_id": null,
+      "store": "Uploaded Data",
+      "city": "Cyberjaya",
+      "method": "facebook_prophet",
+      "input_records": 56,
+      "forecast_periods": 14,
+      "confidence": 0,
+      "total_predicted_revenue": 0,
+      "timestamp": "2025-10-06T01:06:56.095Z"
     }
   ],
-  "last_updated": "2025-10-05T15:44:27.532Z",
-  "total_entries": 151
+  "last_updated": "2025-10-06T01:06:56.096Z",
+  "total_entries": 157
 }
